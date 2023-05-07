@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2023 at 03:46 PM
+-- Generation Time: May 07, 2023 at 07:30 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,11 +24,11 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `all_code`
+-- Table structure for table `all_codes`
 --
 
-CREATE TABLE `all_code` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `all_codes` (
+  `id` int(11) NOT NULL,
   `type` varchar(255) DEFAULT NULL,
   `valueEn` varchar(255) DEFAULT NULL,
   `valueVn` varchar(255) DEFAULT NULL,
@@ -39,11 +39,11 @@ CREATE TABLE `all_code` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `answer`
+-- Table structure for table `answers`
 --
 
-CREATE TABLE `answer` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `answers` (
+  `id` int(11) NOT NULL,
   `userId` varchar(255) DEFAULT NULL,
   `examId` varchar(255) DEFAULT NULL,
   `answerContent` varchar(255) DEFAULT NULL,
@@ -55,11 +55,11 @@ CREATE TABLE `answer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `exam`
+-- Table structure for table `exams`
 --
 
-CREATE TABLE `exam` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `exams` (
+  `id` int(11) NOT NULL,
   `semesterId` varchar(255) DEFAULT NULL,
   `questionPackageId` varchar(255) DEFAULT NULL,
   `date` datetime DEFAULT NULL,
@@ -71,11 +71,11 @@ CREATE TABLE `exam` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question`
+-- Table structure for table `questions`
 --
 
-CREATE TABLE `question` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `questions` (
+  `id` int(11) NOT NULL,
   `questionContent` text DEFAULT NULL,
   `correctAnswer` varchar(255) DEFAULT NULL,
   `type` varchar(255) DEFAULT NULL,
@@ -89,11 +89,11 @@ CREATE TABLE `question` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question_design`
+-- Table structure for table `question_designs`
 --
 
-CREATE TABLE `question_design` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `question_designs` (
+  `id` int(11) NOT NULL,
   `startDate` datetime DEFAULT NULL,
   `endDate` datetime DEFAULT NULL,
   `duration` varchar(255) DEFAULT NULL,
@@ -107,11 +107,11 @@ CREATE TABLE `question_design` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question_package`
+-- Table structure for table `question_packages`
 --
 
-CREATE TABLE `question_package` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `question_packages` (
+  `id` int(11) NOT NULL,
   `userId` varchar(255) DEFAULT NULL,
   `questionDesignId` varchar(255) DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
@@ -122,11 +122,11 @@ CREATE TABLE `question_package` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `question_using`
+-- Table structure for table `question_usings`
 --
 
-CREATE TABLE `question_using` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `question_usings` (
+  `id` int(11) NOT NULL,
   `questionPackageId` varchar(255) DEFAULT NULL,
   `questionId` varchar(255) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
@@ -136,11 +136,11 @@ CREATE TABLE `question_using` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `semester`
+-- Table structure for table `semesters`
 --
 
-CREATE TABLE `semester` (
-  `id` varchar(255) NOT NULL,
+CREATE TABLE `semesters` (
+  `id` int(11) NOT NULL,
   `startDate` datetime DEFAULT NULL,
   `endDate` datetime DEFAULT NULL,
   `status` varchar(255) DEFAULT NULL,
@@ -180,7 +180,7 @@ INSERT INTO `sequelizemeta` (`name`) VALUES
 --
 
 CREATE TABLE `users` (
-  `id` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL,
   `firstName` varchar(255) DEFAULT NULL,
   `lastName` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
@@ -197,51 +197,51 @@ CREATE TABLE `users` (
 --
 
 --
--- Indexes for table `all_code`
+-- Indexes for table `all_codes`
 --
-ALTER TABLE `all_code`
+ALTER TABLE `all_codes`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `answer`
+-- Indexes for table `answers`
 --
-ALTER TABLE `answer`
+ALTER TABLE `answers`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `exam`
+-- Indexes for table `exams`
 --
-ALTER TABLE `exam`
+ALTER TABLE `exams`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `question`
+-- Indexes for table `questions`
 --
-ALTER TABLE `question`
+ALTER TABLE `questions`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `question_design`
+-- Indexes for table `question_designs`
 --
-ALTER TABLE `question_design`
+ALTER TABLE `question_designs`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `question_package`
+-- Indexes for table `question_packages`
 --
-ALTER TABLE `question_package`
+ALTER TABLE `question_packages`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `question_using`
+-- Indexes for table `question_usings`
 --
-ALTER TABLE `question_using`
+ALTER TABLE `question_usings`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `semester`
+-- Indexes for table `semesters`
 --
-ALTER TABLE `semester`
+ALTER TABLE `semesters`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -256,6 +256,64 @@ ALTER TABLE `sequelizemeta`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `all_codes`
+--
+ALTER TABLE `all_codes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `answers`
+--
+ALTER TABLE `answers`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `exams`
+--
+ALTER TABLE `exams`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `question_designs`
+--
+ALTER TABLE `question_designs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `question_packages`
+--
+ALTER TABLE `question_packages`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `question_usings`
+--
+ALTER TABLE `question_usings`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `semesters`
+--
+ALTER TABLE `semesters`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
