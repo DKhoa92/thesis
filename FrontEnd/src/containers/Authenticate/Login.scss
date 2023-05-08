@@ -1,0 +1,87 @@
+.login-background {
+    height: 100vh;
+    background: linear-gradient(135deg, #16A085, #F4D03F);
+
+    .login-container {
+        width: 400px;
+        height: 100%;
+        margin: 0 auto;
+        border-radius: 10px;
+        background-color: white;
+        position: absolute;
+        margin: auto;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        height: 450px;
+
+        .login-content {
+            padding: 10px;
+
+            .login-text {
+                font-weight: 600;
+                font-size: 24px;
+                padding-top: 10px;
+            }
+
+            .login-input {
+                margin: 7px 0;
+
+                .password-input-container {
+                    position: relative;
+
+                    i {
+                        position: absolute;
+                        right: 10px;
+                        top: 10px;
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .btn-login {
+                width: 100%;
+                margin: 10px 0;
+                height: 30px;
+                border-radius: 15px;
+                outline: none;
+                border: none;
+                color: white;
+                background: linear-gradient(135deg, #16A085, #F4D03F);
+            }
+
+            .forgot-password {
+                font-size: 12px;
+            }
+
+            .social-login {
+                display: flex;
+                text-align: center;
+                justify-content: center;
+                margin-top: 10px;
+
+                i {
+                    font-size: 30px;
+                    border-radius: 50%;
+                    height: 50px;
+                    width: 50px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    color: white;
+                    margin: 0 10px;
+                    cursor: pointer;
+                }
+
+                .google {
+                    background: #D0463B;
+                }
+
+                .facebook {
+                    background: #0A82ED;
+                }
+            }
+        }
+    }
+}
