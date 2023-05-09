@@ -47,6 +47,26 @@ let checkUserEmail = (email) => {
     })
 }
 
+let getUsers = (id = []) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let users;
+            if (id != []) {
+                users = await db.user.findAll({
+                    where: { email: { [Op.or]: id } },
+                    attributes: { exclude: ['password'] },
+                })
+            } else
+                users = await db.user.findAll({
+                    attributes: { exclude: ['password'] },
+                });
+            resolve(users);
+        } catch (error) {
+            reject(e);
+        }
+    })
+}
+
 let compareUserPassword = (password, hashpassword) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -60,4 +80,5 @@ let compareUserPassword = (password, hashpassword) => {
 
 module.exports = {
     handleUserLogin,
+    getUsers
 }

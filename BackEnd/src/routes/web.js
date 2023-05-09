@@ -12,7 +12,7 @@ let initWebRoutes = (app) => {
     router.get('/edit-crud', homeController.getEditCRUD);
 
     router.post('/api/login', userController.handleLogin);
-
+    router.get('/api/get-users', userController.handleGetUsers);
     return app.use("/", router);
 }
 
