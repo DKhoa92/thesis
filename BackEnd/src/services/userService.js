@@ -1,5 +1,6 @@
 import db from "../models/index";
 import bcrypt from 'bcrypt';
+import { Op } from "sequelize";
 
 let handleUserLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
@@ -47,13 +48,13 @@ let checkUserEmail = (email) => {
     })
 }
 
-let getUsers = (id = []) => {
+let getUsers = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             let users;
-            if (id != []) {
+            if (id) {
                 users = await db.user.findAll({
-                    where: { email: { [Op.or]: id } },
+                    where: { id: { [Op.or]: id } },
                     attributes: { exclude: ['password'] },
                 })
             } else
@@ -62,7 +63,7 @@ let getUsers = (id = []) => {
                 });
             resolve(users);
         } catch (error) {
-            reject(e);
+            reject(error);
         }
     })
 }

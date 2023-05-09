@@ -21,7 +21,7 @@ let handleLogin = async (req, res) => {
 }
 
 let handleGetUsers = async (req, res) => {
-    let id = req.body.type; // ALL, id
+    let id = req.query.id != 'undefined' ? [req.query.id] : null; // ALL, id
     let users = await userService.getUsers(id);
 
     return res.status(200).json({
