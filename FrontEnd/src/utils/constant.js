@@ -1,4 +1,4 @@
-export const path = {
+export const PATH = {
     HOME: '/',
     LOGIN: '/login',
     LOG_OUT: '/logout',
@@ -6,7 +6,7 @@ export const path = {
     HOME_PAGE: '/homePage'
 };
 
-export const languages = {
+export const LANGUAGES = {
     VI: 'vi',
     EN: 'en'
 };
@@ -17,7 +17,7 @@ export const manageActions = {
     DELETE: "DELETE"
 };
 
-export const dateFormat = {
+export const DATE_FORMAT = {
     SEND_TO_SERVER: 'DD/MM/YYYY'
 };
 
