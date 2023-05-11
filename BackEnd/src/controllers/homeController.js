@@ -21,8 +21,8 @@ let postCRUD = async (req, res) => {
     let testobj = {
         id: "A1",
         firstName: "nguyen",
-        lastName: "Khoa2",
-        email: "ndk@yh.com",
+        lastName: "Khoa3",
+        email: "ndk3@yh.com",
         password: "123456",
         address: "data.address",
         gender: 2,

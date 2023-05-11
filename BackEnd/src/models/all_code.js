@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     all_code.init({
         type: DataTypes.STRING,
-        key: DataTypes.STRING,
+        codeKey: DataTypes.STRING,
         valueEn: DataTypes.STRING,
         valueVn: DataTypes.STRING,
     }, {

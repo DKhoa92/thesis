@@ -79,7 +79,30 @@ let compareUserPassword = (password, hashpassword) => {
     })
 }
 
+let getAllCode = (type) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = {};
+            if (type) {
+                let data = await db.all_code.findAll(
+                    { where: { type: type } }
+                );
+                res.errCode = 0;
+                res.errMessage = "Get All Code sucessfully";
+                res.data = data;
+            } else {
+                res.errCode = 1;
+                res.errMessage = "Missing parameter!";
+            }
+            resolve(res);
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
+
 module.exports = {
     handleUserLogin,
-    getUsers
+    getUsers,
+    getAllCode
 }
