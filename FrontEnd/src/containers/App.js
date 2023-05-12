@@ -15,6 +15,7 @@ import Home from '../routes/Home';
 import Login from './Authenticate/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
+import Exam from './Exam/Exam';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
 import HomePage from './HomePage/HomePage';
@@ -52,6 +53,7 @@ class App extends Component {
                                 <Route path={PATH.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={PATH.SYSTEM} component={userIsAuthenticated(System)} />
                                 <Route path={PATH.HOME_PAGE} component={(HomePage)} />
+                                <Route path={PATH.EXAM} component={(Exam)} />
                             </Switch>
                         </span>
 

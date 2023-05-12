@@ -1,0 +1,53 @@
+.exam-header-background {
+    // background-color: black;
+    height: 64px;
+    padding: 12px 8px;
+    color: white;
+
+    .exam-header-container {
+
+        .exam-header-content {
+            justify-content: space-between;
+            align-items: center;
+
+            .left-content {
+
+                .exam-info {
+                    background: #F4D03F;
+                    border-radius: 10px;
+
+                    .exam-name {
+                        color: black;
+                        display: flex;
+                        align-items: center;
+                        padding: 16px;
+                    }
+                }
+            }
+
+            .right-content {
+                justify-content: end;
+                align-items: center;
+
+                .user-info {
+                    background: #F4D03F;
+                    border-radius: 10px;
+
+                    .user-name {
+                        color: black;
+                        display: flex;
+                        align-items: center;
+                        padding: 16px;
+                    }
+
+                    .user-class {
+                        color: black;
+                        display: flex;
+                        align-items: center;
+                        padding: 16px;
+                    }
+                }
+            }
+        }
+    }
+}

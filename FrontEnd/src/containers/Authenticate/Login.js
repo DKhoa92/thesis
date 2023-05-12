@@ -8,7 +8,7 @@ import { handleLoginApi } from '../../services/userService';
 class Login extends Component {
     constructor(props) {
         super(props);
-
+        console.log(props);
         this.state = {
             userName: 'ndk',
             password: '123456',
