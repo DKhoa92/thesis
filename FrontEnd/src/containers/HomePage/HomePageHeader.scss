@@ -46,47 +46,67 @@
                 background-image: url('../../assets/images/english.png');
             }
 
-            .btn-login {
-                justify-content: center;
-                width: 100px;
-                text-align: center;
-                border: none;
-                font-size: 16px;
-                padding: 8px;
-                color: #292a3a;
-                font-weight: 700;
-                background-color: #292a3a1a;
-                cursor: pointer;
-                border-radius: 4px;
-                line-height: 16px;
-                margin-right: 16px;
-            }
-
-            .btn-sign-up {
-                border: none;
-                width: 100px;
-                text-align: center;
-                font-size: 16px;
-                font-weight: 700;
-                color: #fff;
-                background: linear-gradient(135deg, #16A085, #F4D03F);
-                padding: 8px;
-                line-height: 16px;
-                border-radius: 4px;
-                cursor: pointer;
-                margin-right: 16px;
-            }
-
-            .btn-setting {
+            .login {
                 display: flex;
-                height: 32px;
-                width: 32px;
-                border-radius: 50%;
-                background: #292a3a1a;
                 justify-content: center;
                 align-items: center;
-                font-size: 16px;
-                color: #292a3a;
+
+                .btn-login {
+                    justify-content: center;
+                    width: 100px;
+                    text-align: center;
+                    border: none;
+                    font-size: 16px;
+                    padding: 8px;
+                    color: #292a3a;
+                    font-weight: 700;
+                    background-color: #292a3a1a;
+                    cursor: pointer;
+                    border-radius: 4px;
+                    line-height: 16px;
+                    margin-right: 16px;
+                }
+
+                .btn-sign-up {
+                    border: none;
+                    width: 100px;
+                    text-align: center;
+                    font-size: 16px;
+                    font-weight: 700;
+                    color: #fff;
+                    background: linear-gradient(135deg, #16A085, #F4D03F);
+                    padding: 8px;
+                    line-height: 16px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    margin-right: 16px;
+                }
+            }
+
+            .user-info {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                .welcome {
+                    margin-right: 16px;
+                }
+
+                .btn-setting {
+                    display: flex;
+                    height: 32px;
+                    width: 32px;
+                    border-radius: 50%;
+                    background: #292a3a1a;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 16px;
+                    color: #292a3a;
+                }
+            }
+
+            .hide {
+                display: none;
             }
         }
     }

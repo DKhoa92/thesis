@@ -6,6 +6,7 @@ import { LANGUAGES } from '../../utils';
 import { changeLanguage } from '../../store/actions';
 import { PATH } from '../../utils';
 import { Redirect } from 'react-router-dom/cjs/react-router-dom';
+import { withRouter } from 'react-router';
 
 class HomePageHeader extends Component {
 
@@ -18,25 +19,32 @@ class HomePageHeader extends Component {
 
     onClickLogin = () => {
         console.log("onClickLogin");
-        <Redirect to={PATH.LOGIN} />
+        this.props.history.push(PATH.LOGIN);
     }
 
     render() {
+        const { language, isLoggedIn, userInfo } = this.props;
         return (
             <div className='home-header-container col-12'>
                 <div className='home-header-content col-12'>
                     <div className='left-content col-3'>
                         <div className='logo'>LOGO</div>
                     </div>
-                    <div className='middle-content col-6'></div>
-                    <div className='right-content col-3'>
-                        <div className={'language ' + this.props.language} onClick={this.onClickLanguage}></div>
-                        <div className='btn-login' onClick={this.onClickLogin}><FormattedMessage id='login.login' /></div>
-                        <div className='btn-sign-up'><FormattedMessage id='login.signup' /></div>
-                        <div className='btn-setting'><i className="fas fa-bars"></i></div>
+                    <div className='middle-content col-5'></div>
+                    <div className='right-content col-4'>
+                        <div className={'language ' + (language ? language : LANGUAGES.VI)} onClick={this.onClickLanguage}></div>
+                        <div className=''></div>
+                        <div className={'login' + (isLoggedIn ? ' hide' : '')}>
+                            <div className='btn-login' onClick={this.onClickLogin}><FormattedMessage id='homeHeader.login' /></div>
+                            <div className='btn-sign-up'><FormattedMessage id='homeHeader.signup' /></div>
+                        </div>
+                        <div className={'user-info' + (isLoggedIn ? '' : ' hide')}>
+                            <div className='welcome'>{userInfo && userInfo.firstName ? userInfo.firstName : ''}</div>
+                            <div className='btn-setting'><i className="fas fa-bars"></i></div>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div >
         );
     }
 
@@ -56,4 +64,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomePageHeader);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(HomePageHeader));

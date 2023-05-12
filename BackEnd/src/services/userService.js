@@ -34,7 +34,6 @@ let checkUserEmail = (email) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.user.findOne({
-                attributes: ['email', 'roleId', 'password'],
                 where: { email: email },
                 raw: true,
             });

@@ -5,12 +5,14 @@ import * as actions from "../../store/actions";
 import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 import { handleLoginApi } from '../../services/userService';
+import { withRouter } from 'react-router';
+
 class Login extends Component {
     constructor(props) {
         super(props);
         console.log(props);
         this.state = {
-            userName: 'ndk',
+            userName: 'ndk@yh.com',
             password: '123456',
             isShowPassword: false,
             errMessage: ''
@@ -46,7 +48,6 @@ class Login extends Component {
                 })
             }
         }
-
     }
 
     handleShowHidePassword = () => {
@@ -121,4 +122,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));
