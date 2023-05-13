@@ -14,8 +14,8 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     answer.init({
-        userId: DataTypes.STRING,
-        examId: DataTypes.STRING,
+        userId: DataTypes.INTEGER,
+        examId: DataTypes.INTEGER,
         answerContent: DataTypes.STRING,
         status: DataTypes.STRING,
     }, {

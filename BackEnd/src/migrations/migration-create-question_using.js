@@ -10,10 +10,10 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             questionPackageId: {
-                type: Sequelize.STRING
+                type: Sequelize.INTEGER
             },
             questionId: {
-                type: Sequelize.STRING
+                type: Sequelize.INTEGER
             },
             createdAt: {
                 allowNull: false,

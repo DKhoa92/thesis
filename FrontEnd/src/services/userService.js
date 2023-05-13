@@ -9,4 +9,12 @@ const getUsers = (id) => {
     return axios.get(`/api/get-users?id=${id}`);
 }
 
-export { handleLoginApi, getUsers }
+const getAllCodeService = (type) => {
+    return axios.get(`/api/allcode?type=${type}`);
+}
+
+export {
+    handleLoginApi,
+    getUsers,
+    getAllCodeService
+}

@@ -1,4 +1,21 @@
 {
+    "system": {
+        "createUser": {
+            "createUser": "TẠO NGƯỜI DÙNG MỚI",
+            "userName": "Tên người dùng",
+            "password": "Mật khẩu",
+            "email": "Email",
+            "role": "Vai trò",
+            "firstName": "Tên",
+            "lastName": "Họ và tên lót",
+            "adress": "Địa chỉ",
+            "gender": "Giới tính",
+            "male": "Nam",
+            "female": "Nữ",
+            "others": "Khác",
+            "submit": "Lưu"
+        }
+    },
     "login": {
         "login": "Đăng nhập",
         "username": "Tên đăng nhập",

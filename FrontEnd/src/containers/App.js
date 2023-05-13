@@ -16,9 +16,11 @@ import Login from './Authenticate/Login';
 import Header from './Header/Header';
 import System from '../routes/System';
 import Exam from './Exam/Exam';
+import HomePage from './HomePage/HomePage';
+import UserCreate from './System/Admin/UserCreate';
 
 import { CustomToastCloseButton } from '../components/CustomToast';
-import HomePage from './HomePage/HomePage';
+
 
 class App extends Component {
 
@@ -49,11 +51,12 @@ class App extends Component {
 
                         <span className="content-container">
                             <Switch>
-                                <Route path={PATH.HOME} exact component={(Home)} />
+                                <Route path={PATH.HOME} exact component={Home} />
                                 <Route path={PATH.LOGIN} component={userIsNotAuthenticated(Login)} />
                                 <Route path={PATH.SYSTEM} component={userIsAuthenticated(System)} />
-                                <Route path={PATH.HOME_PAGE} component={(HomePage)} />
-                                <Route path={PATH.EXAM} component={(Exam)} />
+                                <Route path={PATH.HOME_PAGE} component={HomePage} />
+                                <Route path={PATH.EXAM} component={Exam} />
+                                <Route path={PATH.CREATE_USER} component={UserCreate} />
                             </Switch>
                         </span>
 

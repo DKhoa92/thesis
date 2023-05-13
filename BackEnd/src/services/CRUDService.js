@@ -7,6 +7,7 @@ let createNewUser = async (data = true) => {
             console.log(data.password);
             let hashPassword = await hashUserPassword(data.password);
             await db.user.create({
+                userName: data.userName,
                 firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
@@ -14,6 +15,22 @@ let createNewUser = async (data = true) => {
                 address: data.address,
                 gender: data.gender,
                 roleId: data.roleId,
+            })
+            resolve("Create user successfully");
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let createAllCode = async (data = true) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            await db.all_code.create({
+                type: data.type,
+                codeKey: data.codeKey,
+                valueEn: data.valueEn,
+                valueVi: data.valueVi,
             })
             resolve("Create user successfully");
         } catch (e) {
@@ -62,5 +79,6 @@ let hashUserPassword = async (password) => {
 module.exports = {
     createNewUser,
     getAllUser,
-    getUserInfoById
+    getUserInfoById,
+    createAllCode
 }

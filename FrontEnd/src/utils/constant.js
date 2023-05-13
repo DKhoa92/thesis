@@ -5,6 +5,7 @@ export const PATH = {
     SYSTEM: '/system',
     HOME_PAGE: '/homePage',
     EXAM: '/exam',
+    CREATE_USER: '/create-user',
 };
 
 export const LANGUAGES = {

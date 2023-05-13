@@ -10,10 +10,10 @@ module.exports = {
                 type: Sequelize.INTEGER
             },
             userId: {
-                type: Sequelize.STRING
+                type: Sequelize.INTEGER
             },
-            questionDesignId: {
-                type: Sequelize.STRING
+            questionSubmissionId: {
+                type: Sequelize.INTEGER
             },
             status: {
                 type: Sequelize.STRING

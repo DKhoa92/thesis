@@ -1,4 +1,21 @@
 {
+    "system": {
+        "createUser": {
+            "createUser": "CREATE NEW USER",
+            "userName": "User Name",
+            "password": "Password",
+            "email": "Email",
+            "role": "Role",
+            "firstName": "First Name",
+            "lastName": "Last Name",
+            "adress": "Adress",
+            "gender": "Gender",
+            "male": "Male",
+            "female": "Female",
+            "others": "Others",
+            "submit": "Submit"
+        }
+    },
     "login": {
         "login": "Login",
         "username": "Username",

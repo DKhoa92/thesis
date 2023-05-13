@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     }
     exam.init({
         semesterId: DataTypes.STRING,
-        questionPackageId: DataTypes.STRING,
+        questionPackageId: DataTypes.INTEGER,
         date: DataTypes.DATE,
         status: DataTypes.STRING,
     }, {

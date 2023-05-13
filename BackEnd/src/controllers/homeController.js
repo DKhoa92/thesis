@@ -19,18 +19,28 @@ let getCRUD = async (req, res) => {
 
 let postCRUD = async (req, res) => {
     let testobj = {
-        id: "A1",
+        userName: "dinhkhoa",
         firstName: "nguyen",
         lastName: "Khoa3",
-        email: "ndk3@yh.com",
+        email: "ndk@yh.com",
         password: "123456",
-        address: "data.address",
+        address: "1 Nguyễn Trãi",
         gender: 2,
-        roleId: "IT",
+        roleId: 0,
     }
     let message = await CRUDService.createNewUser(testobj);
-    console.log(req.body);
-    console.log(message);
+    return res.send('POST CRUD from Server');
+}
+
+let postAllCode = async (req, res) => {
+    let testobj = {
+        type: "gender",
+        codeKey: "G1",
+        valueEn: "Male",
+        valueVi: "Nam",
+    }
+    console.log(testobj);
+    let message = await CRUDService.createAllCode(testobj);
     return res.send('POST CRUD from Server');
 }
 
@@ -61,4 +71,5 @@ module.exports = {
     getDisplayCRUD,
     getEditCRUD,
     handleLogin,
+    postAllCode
 }
