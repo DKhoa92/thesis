@@ -35,7 +35,6 @@ let checkUserEmail = (email) => {
         try {
             let user = await db.user.findOne({
                 where: { email: email },
-                raw: true,
             });
             if (user)
                 resolve(user);
@@ -136,6 +135,34 @@ let createUser = (data) => {
     })
 }
 
+let editUser = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = {};
+            let success = await db.user.update({
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                address: data.address,
+                gender: data.gender,
+                roleId: data.roleId,
+            }, {
+                where: { id: data.id }
+            })
+            if (success) {
+                res.errCode = 0;
+                res.errMessage = "Edited user successfully";
+            } else {
+                res.errCode = 1;
+                res.errMessage = "Failed to edit the user from server";
+            }
+            resolve(res);
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let deleteUser = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -176,5 +203,6 @@ module.exports = {
     getUsers,
     getAllCode,
     createUser,
+    editUser,
     deleteUser
 }

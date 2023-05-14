@@ -4,6 +4,7 @@ const initialState = {
     genders: [],
     roles: [],
     users: [],
+    user: {},
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -22,6 +23,11 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: action.data
+            }
+        case actionTypes.CHANGE_EDIT_USER:
+            return {
+                ...state,
+                user: action.data
             }
         default:
             return state;

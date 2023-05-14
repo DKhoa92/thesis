@@ -12,8 +12,12 @@ const getAllCodeService = (type) => {
     return axios.get(`/api/allcode?type=${type}`);
 }
 
-const createUserService = (data) => {
-    return axios.post('api/create-user', data);
+const createUserService = (dataUser) => {
+    return axios.post('api/create-user', dataUser);
+}
+
+const editUserService = (dataUser) => {
+    return axios.post('api/edit-user', dataUser);
 }
 
 const deleteUserService = (userId) => {
@@ -27,5 +31,6 @@ export {
     getUsers,
     getAllCodeService,
     createUserService,
-    deleteUserService
+    deleteUserService,
+    editUserService
 }

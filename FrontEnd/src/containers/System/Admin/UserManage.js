@@ -5,6 +5,7 @@ import { getUsers } from '../../../services/userService';
 import * as actions from '../../../store/actions';
 import './UserManage.scss';
 import UserCreate from './UserCreate';
+import UserEdit from './UserEdit';
 
 
 class UserManage extends Component {
@@ -33,7 +34,8 @@ class UserManage extends Component {
         return (
             <div className='user-container container'>
                 <div className="text-center">Manage users</div>
-                <div className='col-12'><UserCreate /></div>
+                <div className='user-create col-12'><UserCreate /></div>
+                <div className='user-edit col-12'><UserEdit editFormForChildComponent={this.editFormForChildComponent} /></div>
                 <div className='user-table mt-3 mx-1'>
                     <table id="customers">
                         <thead>
@@ -60,7 +62,7 @@ class UserManage extends Component {
                                         <td>{item.gender}</td>
                                         <td>{item.address}</td>
                                         <td>
-                                            <button className='btn-edit'><i className="fas fa-edit"></i></button>
+                                            <button className='btn-edit' onClick={() => { this.onClickEdit(item) }}><i className="fas fa-edit"></i></button>
                                             <button className='btn-delete' onClick={() => { this.onClickDelete(item) }}><i className="fas fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
@@ -73,9 +75,15 @@ class UserManage extends Component {
         );
     }
 
-    onClickDelete = (item) => {
-        item && item.id && this.props.deleteUser && this.props.deleteUser(item.id);
+    onClickDelete = (user) => {
+        user && user.id && this.props.deleteUser && this.props.deleteUser(user.id);
     }
+
+    onClickEdit = (user) => {
+        user && this.props.changeEditUser && this.props.changeEditUser(user);
+    }
+
+    editFormForChildComponent = (user) => { }
 }
 
 const mapStateToProps = state => {
@@ -88,6 +96,7 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchAllUsers: () => dispatch(actions.fetchAllUsers()),
         deleteUser: (userId) => dispatch(actions.deleteUser(userId)),
+        changeEditUser: (user) => dispatch(actions.changeEditUser(user)),
     };
 };
 

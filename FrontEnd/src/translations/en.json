@@ -2,6 +2,7 @@
     "system": {
         "createUser": {
             "createUser": "CREATE NEW USER",
+            "editUser": "EDIT USER INFO",
             "userName": "User Name",
             "password": "Password",
             "email": "Email",
@@ -13,7 +14,8 @@
             "male": "Male",
             "female": "Female",
             "others": "Others",
-            "submit": "Submit"
+            "submit": "Submit",
+            "save": "Save"
         }
     },
     "login": {
