@@ -5,25 +5,25 @@ import { Op } from "sequelize";
 let handleUserLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let userData = {};
+            let res = {};
             let user = await checkUserEmail(email);
             if (user) {
                 let match = await compareUserPassword(password, user.password);
                 if (match) {
-                    userData.errCode = 0;
-                    userData.errMessage = "Login successfully";
+                    res.errCode = 0;
+                    res.errMessage = "Login successfully";
                     delete user.password;
-                    userData.user = user;
+                    res.user = user;
                 } else {
-                    userData.errCode = 1;
-                    userData.errMessage = "Wrong password!";
+                    res.errCode = 1;
+                    res.errMessage = "Wrong password!";
                 }
             }
             else {
-                userData.errCode = 1;
-                userData.errMessage = "Wrong email!"
+                res.errCode = 1;
+                res.errMessage = "Wrong email!"
             }
-            resolve(userData);
+            resolve(res);
         } catch (error) {
             reject(error);
         }
@@ -84,7 +84,10 @@ let getAllCode = (type) => {
             let res = {};
             if (type) {
                 let data = await db.all_code.findAll(
-                    { where: { type: type } }
+                    {
+                        where: { type: type },
+                        order: [['codeKey', 'ASC']]
+                    }
                 );
                 res.errCode = 0;
                 res.errMessage = "Get All Code sucessfully";
@@ -100,8 +103,46 @@ let getAllCode = (type) => {
     })
 }
 
+let createUser = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = {};
+            let hashPassword = await hashUserPassword(data.password);
+            await db.user.create({
+                userName: data.userName,
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                password: hashPassword,
+                address: data.address,
+                gender: data.gender,
+                roleId: data.roleId,
+            })
+            res.errCode = 0;
+            res.errMessage = "Create user successfully";
+            resolve(res);
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
+let hashUserPassword = async (password) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let saltRounds = 10;
+            bcrypt.hash(password, saltRounds).then(function (hash) {
+                resolve(hash);
+            });
+        } catch (e) {
+            reject(e);
+        }
+    });
+}
+
 module.exports = {
     handleUserLogin,
     getUsers,
-    getAllCode
+    getAllCode,
+    createUser
 }

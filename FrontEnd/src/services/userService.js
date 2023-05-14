@@ -13,8 +13,13 @@ const getAllCodeService = (type) => {
     return axios.get(`/api/allcode?type=${type}`);
 }
 
+const createUserService = (data) => {
+    return axios.post('api/create-user', data);
+}
+
 export {
     handleLoginApi,
     getUsers,
-    getAllCodeService
+    getAllCodeService,
+    createUserService
 }

@@ -37,14 +37,20 @@ let handleGetAllCode = async (req, res) => {
         return res.status(200).json(data);
     } catch (error) {
         return res.status(200).json({
-            errCode: -1,
-            errMessage: 'Error from server',
+            errCode: 1,
+            errMessage: 'Error while get allcode from server',
         })
     }
+}
+
+let handleCreateUser = async (req, res) => {
+    let response = await userService.createUser(req.body);
+    return res.status(200).json(response)
 }
 
 module.exports = {
     handleLogin,
     handleGetUsers,
     handleGetAllCode,
+    handleCreateUser,
 }

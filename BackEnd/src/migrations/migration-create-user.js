@@ -30,10 +30,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       gender: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       roleId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

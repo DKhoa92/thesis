@@ -1,14 +1,11 @@
 import actionTypes from "./actionTypes";
 
-export const fetchGenderStart = () => ({
-    type: actionTypes.FETCH_GENDER_START
+export const fetchGenders = (dataGender) => ({
+    type: actionTypes.FETCH_GENDERS,
+    data: dataGender
 })
 
-export const fetchGenderSuccess = () => ({
-    type: actionTypes.FETCH_GENDER_SUCCESS
-})
-
-
-export const fetchGenderFailed = () => ({
-    type: actionTypes.FETCH_GENDER_FAILED
+export const fetchRoles = (dataRole) => ({
+    type: actionTypes.FETCH_ROLES,
+    data: dataRole
 })

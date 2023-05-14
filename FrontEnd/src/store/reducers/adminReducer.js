@@ -7,18 +7,15 @@ const initialState = {
 
 const adminReducer = (state = initialState, action) => {
     switch (action.type) {
-        case actionTypes.FETCH_GENDER_START:
-
+        case actionTypes.FETCH_GENDERS:
             return {
                 ...state,
+                genders: action.data
             }
         case actionTypes.FETCH_GENDER_SUCCESS:
             return {
                 ...state,
-            }
-        case actionTypes.FETCH_GENDER_FAILED:
-            return {
-                ...state,
+                roles: action.data
             }
         default:
             return state;
