@@ -18,7 +18,7 @@ import System from '../routes/System';
 import Exam from './Exam/Exam';
 import HomePage from './HomePage/HomePage';
 import UserCreate from './System/Admin/UserCreate';
-
+import UserManage from './System/Admin/UserManage';
 import { CustomToastCloseButton } from '../components/CustomToast';
 
 
@@ -57,14 +57,21 @@ class App extends Component {
                                 <Route path={PATH.HOME_PAGE} component={HomePage} />
                                 <Route path={PATH.EXAM} component={Exam} />
                                 <Route path={PATH.CREATE_USER} component={UserCreate} />
+                                <Route path={PATH.MANAGE_USER} component={UserManage} />
                             </Switch>
                         </span>
 
                         <ToastContainer
-                            className="toast-container" toastClassName="toast-item" bodyClassName="toast-item-body"
-                            autoClose={false} hideProgressBar={true} pauseOnHover={false}
-                            pauseOnFocusLoss={true} closeOnClick={false} draggable={false}
-                            closeButton={<CustomToastCloseButton />}
+                            position="bottom-right"
+                            autoClose={5000}
+                            hideProgressBar={false}
+                            newestOnTop={false}
+                            closeOnClick
+                            rtl={false}
+                            pauseOnFocusLoss
+                            draggable
+                            pauseOnHover
+                            theme="dark"
                         />
                     </div>
                 </Router>

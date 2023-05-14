@@ -50,6 +50,7 @@ let checkUserEmail = (email) => {
 let getUsers = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
+            let res = {};
             let users;
             if (id) {
                 users = await db.user.findAll({
@@ -60,7 +61,15 @@ let getUsers = (id) => {
                 users = await db.user.findAll({
                     attributes: { exclude: ['password'] },
                 });
-            resolve(users);
+            if (users) {
+                res.errCode = 0;
+                res.errMessage = "Get users sucessfully";
+                res.data = users;
+            } else {
+                res.errCode = 1;
+                res.errMessage = "Error while get users on server";
+            }
+            resolve(res);
         } catch (error) {
             reject(error);
         }
@@ -127,6 +136,28 @@ let createUser = (data) => {
     })
 }
 
+let deleteUser = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = {};
+            let success = await db.user.destroy({
+                where: { id: id },
+            });
+
+            if (success) {
+                res.errCode = 0;
+                res.errMessage = "Deleted the user successfully";
+            } else {
+                res.errCode = 1;
+                res.errMessage = "Failed to delete the user from server";
+            }
+            resolve(res);
+        } catch (e) {
+            reject(e);
+        }
+    })
+}
+
 let hashUserPassword = async (password) => {
     return new Promise(async (resolve, reject) => {
         try {
@@ -144,5 +175,6 @@ module.exports = {
     handleUserLogin,
     getUsers,
     getAllCode,
-    createUser
+    createUser,
+    deleteUser
 }

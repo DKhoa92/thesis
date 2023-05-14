@@ -18,8 +18,8 @@ class UserCreate extends Component {
             email: '',
             firstName: '',
             lastName: '',
-            role: 'R1',
-            gender: 'G1',
+            role: '',
+            gender: '',
             address: '',
         }
     }
@@ -53,8 +53,8 @@ class UserCreate extends Component {
 
     render() {
         let genders = this.state.genders;
+        let roles = this.state.roles;
         let language = this.props.language;
-        let roles = this.props.roles;
         let { userName, password, email, firstName, lastName, role, gender, address } = this.state;
 
         return (
@@ -95,7 +95,7 @@ class UserCreate extends Component {
                         <div className='col-6'>
                             <label><FormattedMessage id='system.createUser.role' /></label>
                             <i className='requiredField'>*</i>
-                            <select className='form-control' id='role' defaultValue={role}
+                            <select className='form-control' id='role' value={role}
                                 onChange={(event) => { this.onchangeInput(event, 'role') }}>
                                 {roles && roles.length > 0 &&
                                     roles.map((item, index) => {
@@ -105,7 +105,7 @@ class UserCreate extends Component {
                         </div>
                         <div className='col-6'>
                             <label><FormattedMessage id='system.createUser.gender' /></label>
-                            <select className='form-control' id='gender' defaultValue={gender}
+                            <select className='form-control' id='gender' value={gender}
                                 onChange={(event) => { this.onchangeInput(event, 'gender') }}>
                                 {genders && genders.length > 0 &&
                                     genders.map((item, index) => {
@@ -158,7 +158,7 @@ class UserCreate extends Component {
         let { userName, password, email, firstName, lastName, role, gender, address } = this.state;
         let isValid = this.checkValidateInput();
         if (isValid === false) return;
-        this.createNewUser({
+        this.props.createUser({
             userName: userName,
             password: password,
             email: email,
@@ -167,20 +167,24 @@ class UserCreate extends Component {
             roleId: role,
             gender: gender,
             address: address,
-        });
+        }, this.resetForm);
 
     }
 
-    async createNewUser(data) {
-        try {
-            let res = await createUserService(data);
-            if (res && res.errCode == 0) {
-                console.log(res.errMessage);
-            } else
-                console.log("Create user error", res);
-        } catch (error) {
-            console.log("Create user error: ", error);
-        }
+    resetForm = () => {
+        let newState = { ...this.state }
+        newState.userName = '';
+        newState.password = '';
+        newState.email = '';
+        newState.firstName = '';
+        newState.lastName = '';
+        newState.role = this.state.role[0];;
+        newState.gender = this.state.gender[0];
+        newState.lastName = '';
+        newState.address = '';
+        this.setState({
+            ...newState
+        })
     }
 
     async loadDataGenders() {
@@ -223,6 +227,8 @@ const mapDispatchToProps = dispatch => {
     return {
         fetchGenders: (dataGender) => dispatch(actions.fetchGenders(dataGender)),
         fetchRoles: (dataRoles) => dispatch(actions.fetchRoles(dataRoles)),
+        fetchAllUsers: () => dispatch(actions.fetchAllUsers()),
+        createUser: (data, successCallback) => dispatch(actions.createUser(data, successCallback)),
     };
 };
 

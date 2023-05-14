@@ -26,7 +26,6 @@ class UserManage extends Component {
 
 
     render() {
-        console.log("AA", this.state.arrUsers);
         let arrUsers = this.state.arrUsers;
         return (
             <div className='users-container'>
