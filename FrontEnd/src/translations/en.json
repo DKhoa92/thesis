@@ -1,6 +1,6 @@
 {
     "system": {
-        "createUser": {
+        "user": {
             "createUser": "CREATE NEW USER",
             "editUser": "EDIT USER INFO",
             "userName": "User Name",
@@ -15,7 +15,20 @@
             "female": "Female",
             "others": "Others",
             "submit": "Submit",
-            "save": "Save"
+            "save": "Save",
+            "btnCreateUser": "Add new user",
+            "userManage": "Manage User"
+        },
+        "question": {
+            "createQuestion": "CREATE NEW QUESTION",
+            "editQuestion": "EDIT QUESTION",
+            "questionType": "Question type",
+            "question": "Question",
+            "choiceNumber": "Number of choice",
+            "submit": "Submit",
+            "save": "Save",
+            "btnCreateQuestion": "Add new question",
+            "userManage": "Manage Questions"
         }
     },
     "login": {

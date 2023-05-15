@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { getAllCodeService, createUserService } from '../../../services/userService';
-import { LANGUAGES } from '../../../utils';
-import * as actions from '../../../store/actions';
+import { getAllCodeService } from '../../../../services/userService';
+import { LANGUAGES } from '../../../../utils';
+import * as actions from '../../../../store/actions';
 import './UserCreate.scss';
 
 class UserCreate extends Component {
@@ -58,42 +58,42 @@ class UserCreate extends Component {
         let { userName, password, email, firstName, lastName, role, gender, address } = this.state;
 
         return (
-            <div className='CreateUserContainer'>
+            <div className='createUserContainer'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-12 my-3'>
-                            <h1><FormattedMessage id='system.createUser.createUser' /></h1>
+                        <div className='title col-12 my-3'>
+                            <h1><FormattedMessage id='system.user.createUser' /></h1>
                         </div>
                         <div className='col-12'>
-                            <label><FormattedMessage id='system.createUser.userName' /></label>
+                            <label><FormattedMessage id='system.user.userName' /></label>
                             <i className='requiredField'>*</i>
                             <input className='form-control' type="text" id='userName' value={userName}
                                 onChange={(event) => { this.onchangeInput(event, 'userName') }} />
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.password' /></label>
+                            <label><FormattedMessage id='system.user.password' /></label>
                             <i className='requiredField'>*</i>
                             <input className='form-control' type="password" id='password' value={password}
                                 onChange={(event) => { this.onchangeInput(event, 'password') }} />
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.email' /></label>
+                            <label><FormattedMessage id='system.user.email' /></label>
                             <input className='form-control' type="email" id='email' value={email}
                                 onChange={(event) => { this.onchangeInput(event, 'email') }} />
                         </div>
 
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.firstName' /></label>
+                            <label><FormattedMessage id='system.user.firstName' /></label>
                             <input className='form-control' type="text" id='firstName' value={firstName}
                                 onChange={(event) => { this.onchangeInput(event, 'firstName') }} />
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.lastName' /></label>
+                            <label><FormattedMessage id='system.user.lastName' /></label>
                             <input className='form-control' type="text" id='lastName' value={lastName}
                                 onChange={(event) => { this.onchangeInput(event, 'lastName') }} />
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.role' /></label>
+                            <label><FormattedMessage id='system.user.role' /></label>
                             <i className='requiredField'>*</i>
                             <select className='form-control' id='role' value={role}
                                 onChange={(event) => { this.onchangeInput(event, 'role') }}>
@@ -104,7 +104,7 @@ class UserCreate extends Component {
                             </select>
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.gender' /></label>
+                            <label><FormattedMessage id='system.user.gender' /></label>
                             <select className='form-control' id='gender' value={gender}
                                 onChange={(event) => { this.onchangeInput(event, 'gender') }}>
                                 {genders && genders.length > 0 &&
@@ -114,13 +114,13 @@ class UserCreate extends Component {
                             </select>
                         </div>
                         <div className='col-12'>
-                            <label><FormattedMessage id='system.createUser.adress' /></label>
+                            <label><FormattedMessage id='system.user.adress' /></label>
                             <input className='form-control' type="text" id='address' value={address}
                                 onChange={(event) => { this.onchangeInput(event, 'address') }} />
                         </div>
-                        <div className='col-12 mt-5'>
+                        <div className='col-12 mt-4'>
                             <button className='btn btn-primary' onClick={this.onClickSubmit}>
-                                <FormattedMessage id='system.createUser.submit' />
+                                <FormattedMessage id='system.user.submit' />
                             </button>
                         </div>
                     </div>
@@ -135,8 +135,6 @@ class UserCreate extends Component {
 
         this.setState({
             ...newState
-        }, () => {
-            console.log(this.state);
         })
     }
 

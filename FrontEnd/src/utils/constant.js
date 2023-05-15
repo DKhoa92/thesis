@@ -5,8 +5,8 @@ export const PATH = {
     SYSTEM: '/system',
     HOME_PAGE: '/homePage',
     EXAM: '/exam',
-    CREATE_USER: '/create-user',
     MANAGE_USER: '/manage-user',
+    CREATE_QUESTION: '/create-question',
 };
 
 export const LANGUAGES = {

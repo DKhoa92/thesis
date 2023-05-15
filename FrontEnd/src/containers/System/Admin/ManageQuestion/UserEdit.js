@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { getAllCodeService, createUserService } from '../../../services/userService';
-import { LANGUAGES } from '../../../utils';
-import * as actions from '../../../store/actions';
+import { getAllCodeService } from '../../../../services/userService';
+import { LANGUAGES } from '../../../../utils';
+import * as actions from '../../../../store/actions';
 import './UserEdit.scss';
 
 class UserEdit extends Component {
@@ -79,32 +79,32 @@ class UserEdit extends Component {
             <div className='CreateUserContainer'>
                 <div className='container'>
                     <div className='row'>
-                        <div className='col-12 my-3'>
-                            <h1><FormattedMessage id='system.createUser.createUser' /></h1>
+                        <div className='title col-12 my-3'>
+                            <h1><FormattedMessage id='system.user.editUser' /></h1>
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.userName' /></label>
+                            <label><FormattedMessage id='system.user.userName' /></label>
                             <input className='form-control' type="text" readOnly id='userName' value={userName}
                                 onChange={(event) => { this.onchangeInput(event, 'userName') }} />
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.email' /></label>
+                            <label><FormattedMessage id='system.user.email' /></label>
                             <input className='form-control' type="email" id='email' value={email}
                                 onChange={(event) => { this.onchangeInput(event, 'email') }} />
                         </div>
 
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.firstName' /></label>
+                            <label><FormattedMessage id='system.user.firstName' /></label>
                             <input className='form-control' type="text" id='firstName' value={firstName}
                                 onChange={(event) => { this.onchangeInput(event, 'firstName') }} />
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.lastName' /></label>
+                            <label><FormattedMessage id='system.user.lastName' /></label>
                             <input className='form-control' type="text" id='lastName' value={lastName}
                                 onChange={(event) => { this.onchangeInput(event, 'lastName') }} />
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.role' /></label>
+                            <label><FormattedMessage id='system.user.role' /></label>
                             <select className='form-control' id='role' value={role}
                                 onChange={(event) => { this.onchangeInput(event, 'role') }}>
                                 {roles && roles.length > 0 &&
@@ -114,7 +114,7 @@ class UserEdit extends Component {
                             </select>
                         </div>
                         <div className='col-6'>
-                            <label><FormattedMessage id='system.createUser.gender' /></label>
+                            <label><FormattedMessage id='system.user.gender' /></label>
                             <select className='form-control' id='gender' value={gender}
                                 onChange={(event) => { this.onchangeInput(event, 'gender') }}>
                                 {genders && genders.length > 0 &&
@@ -124,13 +124,13 @@ class UserEdit extends Component {
                             </select>
                         </div>
                         <div className='col-12'>
-                            <label><FormattedMessage id='system.createUser.adress' /></label>
+                            <label><FormattedMessage id='system.user.adress' /></label>
                             <input className='form-control' type="text" id='address' value={address}
                                 onChange={(event) => { this.onchangeInput(event, 'address') }} />
                         </div>
                         <div className='col-12 mt-5'>
                             <button className='btn btn-primary' onClick={this.onClickSubmit}>
-                                <FormattedMessage id='system.createUser.save' />
+                                <FormattedMessage id='system.user.save' />
                             </button>
                         </div>
                     </div>

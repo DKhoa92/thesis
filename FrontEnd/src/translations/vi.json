@@ -1,6 +1,6 @@
 {
     "system": {
-        "createUser": {
+        "user": {
             "createUser": "TẠO NGƯỜI DÙNG MỚI",
             "editUser": "SỬA THÔNG TIN NGƯỜI DÙNG",
             "userName": "Tên người dùng",
@@ -15,7 +15,20 @@
             "female": "Nữ",
             "others": "Khác",
             "submit": "Lưu",
-            "save": "Lưu"
+            "save": "Lưu",
+            "btnCreateUser": "Tạo người dùng mới",
+            "userManage": "Quản lý người dùng"
+        },
+        "question": {
+            "createQuestion": "TẠO CÂU HỎI MỚI",
+            "editQuestion": "SỬA CÂU HỎI",
+            "questionType": "Loại câu hỏi",
+            "question": "Nội dung câu hỏi",
+            "choiceNumber": "Số câu trả lời",
+            "submit": "Lưu",
+            "save": "Lưu",
+            "btnCreateQuestion": "Tạo câu hỏi mới",
+            "userManage": "Quản lý ngân hàng câu hỏi"
         }
     },
     "login": {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
-import { getUsers } from '../../../services/userService';
-import * as actions from '../../../store/actions';
+import { getUsers } from '../../../../services/userService';
+import * as actions from '../../../../store/actions';
 import './UserManage.scss';
 import UserCreate from './UserCreate';
 import UserEdit from './UserEdit';
@@ -13,7 +13,9 @@ class UserManage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            users: []
+            users: [],
+            isShowCreate: false,
+            isShowEdit: false
         }
     }
 
@@ -33,20 +35,29 @@ class UserManage extends Component {
         let users = this.state.users;
         return (
             <div className='user-container container'>
-                <div className="text-center">Manage users</div>
-                <div className='user-create col-12'><UserCreate /></div>
-                <div className='user-edit col-12'><UserEdit editFormForChildComponent={this.editFormForChildComponent} /></div>
-                <div className='user-table mt-3 mx-1'>
-                    <table id="customers">
+                <div className="title text-center">
+                    <h1><FormattedMessage id='system.user.userManage' /></h1>
+                </div>
+                <div id='user-create' className={'user-popup-background col-12' + (this.state.isShowCreate ? '' : ' hidden')} onClick={this.onClickCloseCreate}>
+                    <div className='user-create-container container'><UserCreate /></div>
+                </div>
+                <div id='user-edit' className={'user-popup-background col-12' + (this.state.isShowEdit ? '' : ' hidden')} onClick={this.onClickCloseEdit}>
+                    <div className='user-edit-container container'><UserEdit /></div>
+                </div>
+                <div className='btn btn-primary' onClick={this.onClickCreate}>
+                    <i className="fas fa-plus mx-2"></i><FormattedMessage id='system.user.btnCreateUser' />
+                </div>
+                <div className='user-table mt-3'>
+                    <table id='customers'>
                         <thead>
                             <tr>
-                                <th><FormattedMessage id='system.createUser.firstName' /></th>
-                                <th><FormattedMessage id='system.createUser.lastName' /></th>
-                                <th><FormattedMessage id='system.createUser.userName' /></th>
-                                <th><FormattedMessage id='system.createUser.email' /></th>
-                                <th><FormattedMessage id='system.createUser.role' /></th>
-                                <th><FormattedMessage id='system.createUser.gender' /></th>
-                                <th><FormattedMessage id='system.createUser.adress' /></th>
+                                <th><FormattedMessage id='system.user.firstName' /></th>
+                                <th><FormattedMessage id='system.user.lastName' /></th>
+                                <th><FormattedMessage id='system.user.userName' /></th>
+                                <th><FormattedMessage id='system.user.email' /></th>
+                                <th><FormattedMessage id='system.user.role' /></th>
+                                <th><FormattedMessage id='system.user.gender' /></th>
+                                <th><FormattedMessage id='system.user.adress' /></th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -81,9 +92,41 @@ class UserManage extends Component {
 
     onClickEdit = (user) => {
         user && this.props.changeEditUser && this.props.changeEditUser(user);
+
+        let newState = { ...this.state };
+        newState.isShowEdit = true;
+        this.setState({
+            ...newState
+        }, () => {
+            console.log(this.state);
+        })
     }
 
-    editFormForChildComponent = (user) => { }
+    onClickCreate = () => {
+        let newState = { ...this.state };
+        newState.isShowCreate = true;
+        this.setState({
+            ...newState
+        }, () => {
+            console.log(this.state);
+        })
+    }
+
+    onClickCloseCreate = (event) => {
+        if (!event.target.closest('.user-create-container')) {
+            this.setState({
+                isShowCreate: false
+            });
+        }
+    }
+
+    onClickCloseEdit = (event) => {
+        if (!event.target.closest('.user-edit-container')) {
+            this.setState({
+                isShowEdit: false
+            });
+        }
+    }
 }
 
 const mapStateToProps = state => {
