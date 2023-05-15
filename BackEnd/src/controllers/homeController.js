@@ -34,10 +34,10 @@ let postCRUD = async (req, res) => {
 
 let postAllCode = async (req, res) => {
     let testobj = {
-        type: "gender",
-        codeKey: "G1",
-        valueEn: "Male",
-        valueVi: "Nam",
+        type: "GRADE",
+        codeKey: "GR5",
+        valueEn: "Grade 5",
+        valueVi: "Lớp 5",
     }
     console.log(testobj);
     let message = await CRUDService.createAllCode(testobj);

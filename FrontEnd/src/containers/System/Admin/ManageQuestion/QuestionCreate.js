@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
-import { getAllCodeService } from '../../../../services/userService';
-import { LANGUAGES } from '../../../../utils';
+import { CONFIG, LANGUAGES } from '../../../../utils';
 import * as actions from '../../../../store/actions';
 import './QuestionCreate.scss';
 
@@ -10,39 +9,63 @@ class QuestionCreate extends Component {
 
     constructor(props) {
         super(props);
+
         this.state = {
+            types: [], subjects: [], grades: [], difficulties: [],
             type: '',
             question: '',
             choiceNumber: '4',
-            answers: [],
-            correctAnswers: [],
+            subject: '',
+            grade: '',
+            difficulty: '',
+            choice_0: false, choice_1: false, choice_2: false, choice_3: false, choice_4: false,
+            answer_0: '', answer_1: '', answer_2: '', answer_3: '', answer_4: '',
         }
     }
 
+
+
     async componentDidMount() {
-        // this.loadData();
+        this.props.fetchTypes();
+        this.props.fetchSubjects();
+        this.props.fetchGrades();
+        this.props.fetchDifficulties();
     }
 
-    // loadData() {
-    //     this.loadDataGenders();
-    //     this.loadDataRoles();
-    // }
-
     componentDidUpdate(prevProps, prevState, snapshot) {
-        // if (prevProps.genders !== this.props.genders) {
-        //     let genders = this.props.genders;
-        //     this.setState({
-        //         genders: genders,
-        //         gender: genders && genders.length > 0 ? genders[0].codeKey : ''
-        //     });
-        // }
+        if (prevProps.types !== this.props.types) {
+            let types = this.props.types;
+            this.setState({
+                types: types,
+                type: types && types.length > 0 ? types[0].codeKey : ''
+            });
+        }
+        if (prevProps.subjects !== this.props.subjects) {
+            let subjects = this.props.subjects;
+            this.setState({
+                subjects: subjects,
+                subject: subjects && subjects.length > 0 ? subjects[0].codeKey : ''
+            });
+        }
+        if (prevProps.grades !== this.props.grades) {
+            let grades = this.props.grades;
+            this.setState({
+                grades: grades,
+                grade: grades && grades.length > 0 ? grades[0].codeKey : ''
+            });
+        }
+        if (prevProps.difficulties !== this.props.difficulties) {
+            let difficulties = this.props.difficulties;
+            this.setState({
+                difficulties: difficulties,
+                difficulty: difficulties && difficulties.length > 0 ? difficulties[0].codeKey : ''
+            });
+        }
     }
 
     render() {
-        let genders = this.state.genders;
-        let roles = this.state.roles;
         let language = this.props.language;
-        let { type, question, choiceNumber, answers, correctAnswers, lastName, role, gender, address } = this.state;
+        let { types, subjects, grades, difficulties, type, question, choiceNumber, subject, grade, difficulty } = this.state;
 
         return (
             <div className='createQuestionContainer'>
@@ -55,82 +78,98 @@ class QuestionCreate extends Component {
                             <div className='col-4'>
                                 <label><FormattedMessage id='system.question.questionType' /></label>
                                 <select className='form-control' id='type' value={type}
-                                    onChange={(event) => { this.onchangeInput(event, 'type') }}>
-                                    {/* {roles && roles.length > 0 &&
-                                        roles.map((item, index) => {
+                                    onChange={(event) => { this.onChangeInput(event, 'type') }}>
+                                    {types && types.length > 0 &&
+                                        types.map((item, index) => {
                                             return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
-                                        })} */}
+                                        })}
+                                </select>
+                            </div>
+                        </div>
+                        <div className='row'>
+                            <div className='col-4'>
+                                <label><FormattedMessage id='system.question.subject' /></label>
+                                <select className='form-control' id='subject' value={subject}
+                                    onChange={(event) => { this.onChangeInput(event, 'subject') }}>
+                                    {subjects && subjects.length > 0 &&
+                                        subjects.map((item, index) => {
+                                            return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                        })}
+                                </select>
+                            </div>
+                            <div className='col-4'>
+                                <label><FormattedMessage id='system.question.grade' /></label>
+                                <select className='form-control' id='grade' value={grade}
+                                    onChange={(event) => { this.onChangeInput(event, 'grade') }}>
+                                    {grades && grades.length > 0 &&
+                                        grades.map((item, index) => {
+                                            return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                        })}
+                                </select>
+                            </div>
+                            <div className='col-4'>
+                                <label><FormattedMessage id='system.question.difficulty' /></label>
+                                <select className='form-control' id='difficulty' value={difficulty}
+                                    onChange={(event) => { this.onChangeInput(event, 'difficulty') }}>
+                                    {difficulties && difficulties.length > 0 &&
+                                        difficulties.map((item, index) => {
+                                            return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                        })}
                                 </select>
                             </div>
                         </div>
                         <div className='type-multiple-choice col-12'>
-                            <div className='col-12'>
+                            <div className='col-12 my-2'>
                                 <label><FormattedMessage id='system.question.question' /></label>
                                 <input className='form-control' type="text" id='question' value={question}
-                                    onChange={(event) => { this.onchangeInput(event, 'question') }} />
+                                    onChange={(event) => { this.onChangeInput(event, 'question') }} />
                             </div>
                             <div className='col-2'>
                                 <label><FormattedMessage id='system.question.choiceNumber' /></label>
                                 <input className='form-control' type="text" id='choiceNumber' value={choiceNumber}
-                                    onChange={(event) => { this.onchangeInput(event, 'choiceNumber') }} />
+                                    onChange={(event) => { this.onChangeInput(event, 'choiceNumber') }} />
                             </div>
-                            <div className='answers col-12'>
-                                <div className='answer col-6'>
-                                    <input type="radio" value={correctAnswers[i]} name='correctAnswers' onChange={(event) => { this.onchangeInput(event, `correctAnswer${i}`) }} />
-                                    <input type="text" value={answers[i]} onChange={(event) => { this.onchangeInput(event, `answer${i}`) }} />
-                                </div>
-
+                            <div className='answers col-12 my-4'>
+                                <label><FormattedMessage id='system.question.correctChoice' /></label>
+                                {(() => {
+                                    let div = [];
+                                    for (let i = 0; i < choiceNumber; i++) {
+                                        div.push(
+                                            <div className='col-6 my-2' key={i}>
+                                                <input type="checkbox" checked={this.state[`choice_${i}`]} onChange={(event) => { this.onChangeCheckBox(event, `choice_${i}`, true) }} />
+                                                <FormattedMessage id='system.question.answerPlaceHolder'>
+                                                    {(msg) => <input className='answer form-control mx-4' type="text" value={this.state[`answer_${i}`]} placeholder={msg + (i + 1)} id={`answer_${i}`}
+                                                        onChange={(event) => { this.onChangeInput(event, `answer_${i}`) }} />}
+                                                </FormattedMessage>
+                                            </div>
+                                        );
+                                    }
+                                    return div;
+                                })()}
                             </div>
-                        </div>
-
-
-                        {/* <div className='col-6'>
-                            <label><FormattedMessage id='system.question.email' /></label>
-                            <input className='form-control' type="email" id='email' value={email}
-                                onChange={(event) => { this.onchangeInput(event, 'email') }} />
-                        </div> */}
-
-                        {/* <div className='col-6'>
-                            <label><FormattedMessage id='system.question.firstName' /></label>
-                            <input className='form-control' type="text" id='firstName' value={firstName}
-                                onChange={(event) => { this.onchangeInput(event, 'firstName') }} />
-                        </div>
-                        <div className='col-6'>
-                            <label><FormattedMessage id='system.question.lastName' /></label>
-                            <input className='form-control' type="text" id='lastName' value={lastName}
-                                onChange={(event) => { this.onchangeInput(event, 'lastName') }} />
-                        </div> */}
-
-                        {/* <div className='col-6'>
-                            <label><FormattedMessage id='system.question.gender' /></label>
-                            <select className='form-control' id='gender' value={gender}
-                                onChange={(event) => { this.onchangeInput(event, 'gender') }}>
-                                {genders && genders.length > 0 &&
-                                    genders.map((item, index) => {
-                                        return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
-                                    })}
-                            </select>
-                        </div>
-                        <div className='col-12'>
-                            <label><FormattedMessage id='system.question.adress' /></label>
-                            <input className='form-control' type="text" id='address' value={address}
-                                onChange={(event) => { this.onchangeInput(event, 'address') }} />
                         </div>
                         <div className='col-12 mt-4'>
                             <button className='btn btn-primary' onClick={this.onClickSubmit}>
-                                <FormattedMessage id='system.question.submit' />
+                                <FormattedMessage id='system.common.submit' />
                             </button>
-                        </div> */}
+                        </div>
                     </div>
                 </div>
             </div >
         );
     }
 
-    onchangeInput(event, id) {
+    onChangeInput(event, id, isArray = false) {
         let newState = { ...this.state };
         newState[id] = event.target.value;
+        this.setState({
+            ...newState
+        })
+    }
 
+    onChangeCheckBox(event, id, isArray = false) {
+        let newState = { ...this.state };
+        newState[id] = event.target.checked;
         this.setState({
             ...newState
         })
@@ -138,7 +177,10 @@ class QuestionCreate extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        let arrCheck = ['userName', 'password']
+        let arrCheck = ['question']
+        for (let i = 0; i < this.state.choiceNumber; i++) {
+            arrCheck.push(`answer_${i}`);
+        }
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
@@ -147,66 +189,64 @@ class QuestionCreate extends Component {
                 break;
             }
         }
-        return isValid;
+        return isValid && this.checkValidateCheckBox();
+    }
+
+    checkValidateCheckBox = () => {
+        for (let i = 0; i < this.state.choiceNumber; i++) {
+            if (this.state[`choice_${i}`])
+                return true;
+        }
+        alert('Please check at least 1 correct answer');
+        return false;
     }
 
     onClickSubmit = () => {
-        let { userName, password, email, firstName, lastName, role, gender, address } = this.state;
+        let { type, question, choiceNumber, subject, grade, difficulty } = this.state;
         let isValid = this.checkValidateInput();
         if (isValid === false) return;
-        this.props.createUser({
-            userName: userName,
-            password: password,
-            email: email,
-            firstName: firstName,
-            lastName: lastName,
-            roleId: role,
-            gender: gender,
-            address: address,
-        }, this.resetForm);
 
+        let answers = [];
+        let correctChoices = [];
+        for (let i = 0; i < choiceNumber; i++) {
+            answers[i] = this.state[`answer_${i}`];
+            correctChoices[i] = this.state[`choice_${i}`];
+        }
+
+        this.props.createQuestion({
+            questionData: JSON.stringify({
+                data: {
+                    question: question,
+                    choiceNumber: choiceNumber,
+                    answers: answers,
+                }
+            }),
+            correctAnswer: JSON.stringify({
+                data: correctChoices
+            }),
+            type: type,
+            subject: subject,
+            grade: grade,
+            difficulty: difficulty
+        }, this.resetForm);
     }
 
     resetForm = () => {
         let newState = { ...this.state }
-        newState.userName = '';
-        newState.password = '';
-        newState.email = '';
-        newState.firstName = '';
-        newState.lastName = '';
-        newState.role = this.state.role[0];;
-        newState.gender = this.state.gender[0];
-        newState.lastName = '';
-        newState.address = '';
+        newState.type = this.state.types[0];
+        newState.question = '';
+        newState.choiceNumber = CONFIG.DEFAULT_MULTIPLE_CHOICES;
+        newState.subject = this.state.subjects[0];
+        newState.grade = this.state.grades[0];
+        newState.difficulty = this.state.difficulties[0];
+        for (let i = 0; i < CONFIG.MAX_MULTIPLE_CHOICES; i++) {
+            newState[`choice_${i}`] = false;
+            newState[`answer_${i}`] = '';
+        }
+
         this.setState({
             ...newState
         })
-    }
-
-    async loadDataGenders() {
-        const { fetchGenders } = this.props;
-        try {
-            let res = await getAllCodeService('gender');
-            if (res && res.errCode == 0) {
-                fetchGenders(res.data);
-            } else
-                console.log("Fetch data genders error");
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    async loadDataRoles() {
-        const { fetchRoles } = this.props;
-        try {
-            let res = await getAllCodeService('roles');
-            if (res && res.errCode == 0) {
-                fetchRoles(res.data);
-            } else
-                console.log("Fetch data roles error");
-        } catch (error) {
-            console.log(error);
-        }
     }
 }
 
@@ -214,17 +254,20 @@ const mapStateToProps = state => {
     return {
         language: state.app.language,
         isLoggedIn: state.user.isLoggedIn,
-        genders: state.admin.genders,
-        roles: state.admin.roles
+        types: state.admin.types,
+        subjects: state.admin.subjects,
+        grades: state.admin.grades,
+        difficulties: state.admin.difficulties,
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchGenders: (dataGender) => dispatch(actions.fetchGenders(dataGender)),
-        fetchRoles: (dataRoles) => dispatch(actions.fetchRoles(dataRoles)),
-        fetchAllUsers: () => dispatch(actions.fetchAllUsers()),
-        createUser: (data, successCallback) => dispatch(actions.createUser(data, successCallback)),
+        fetchTypes: (dataTypes) => dispatch(actions.fetchTypes(dataTypes)),
+        fetchSubjects: (dataSubjects) => dispatch(actions.fetchSubjects(dataSubjects)),
+        fetchGrades: (dataGrades) => dispatch(actions.fetchGrades(dataGrades)),
+        fetchDifficulties: (dataDifficulties) => dispatch(actions.fetchDifficulties(dataDifficulties)),
+        createQuestion: (data) => dispatch(actions.createQuestion(data)),
     };
 };
 

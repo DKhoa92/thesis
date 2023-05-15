@@ -28,3 +28,18 @@ export const YesNoObj = {
     YES: 'Y',
     NO: 'N'
 }
+
+export const CODE_TYPE = {
+    ROLE: 'ROLE',
+    GENDER: 'gender',
+    TYPE: 'TYPE',
+    SUBJECT: 'SUBJECT',
+    GRADE: 'GRADE',
+    DIFFICULTY: 'DIFFICULTY',
+    STATUS: 'STATUS'
+}
+
+export const CONFIG = {
+    DEFAULT_MULTIPLE_CHOICES: 4,
+    MAX_MULTIPLE_CHOICES: 5,
+}

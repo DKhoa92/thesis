@@ -9,11 +9,11 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
-            questionContent: {
-                type: Sequelize.TEXT
+            questionData: {
+                type: Sequelize.JSON
             },
             correctAnswer: {
-                type: Sequelize.STRING
+                type: Sequelize.JSON
             },
             type: {
                 type: Sequelize.STRING
@@ -22,6 +22,9 @@ module.exports = {
                 type: Sequelize.STRING
             },
             grade: {
+                type: Sequelize.STRING
+            },
+            difficulty: {
                 type: Sequelize.STRING
             },
             status: {

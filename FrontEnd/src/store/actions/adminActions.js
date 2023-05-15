@@ -1,6 +1,8 @@
 import actionTypes from "./actionTypes";
-import { getUsers, createUserService, editUserService, deleteUserService } from "../../services/userService";
+import { getUsers, createUserService, editUserService, deleteUserService, getAllCodeService } from "../../services/userService";
+import { CODE_TYPE } from "../../utils";
 import { toast } from "react-toastify";
+import { createQuestionService } from "../../services/questionService";
 
 export const fetchGenders = (dataGender) => ({
     type: actionTypes.FETCH_GENDERS,
@@ -10,6 +12,102 @@ export const fetchGenders = (dataGender) => ({
 export const fetchRoles = (dataRole) => ({
     type: actionTypes.FETCH_ROLES,
     data: dataRole
+})
+// =========================================================================================================
+export const fetchTypes = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService(CODE_TYPE.TYPE);
+            if (res && res.errCode == 0) {
+                dispatch(fetchTypesSuccess(res.data));
+            } else {
+                console.log(res.errMessage);
+                dispatch(fetchTypesFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(fetchTypesFailed());
+        }
+    }
+}
+export const fetchTypesSuccess = (typeData) => ({
+    type: actionTypes.FETCH_TYPES_SUCCESS,
+    data: typeData
+})
+export const fetchTypesFailed = () => ({
+    type: actionTypes.FETCH_TYPES_FAILED,
+})
+// =========================================================================================================
+export const fetchSubjects = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService(CODE_TYPE.SUBJECT);
+            if (res && res.errCode == 0) {
+                dispatch(fetchSubjectsSuccess(res.data));
+            } else {
+                console.log(res.errMessage);
+                dispatch(fetchSubjectsFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(fetchSubjectsFailed());
+        }
+    }
+}
+export const fetchSubjectsSuccess = (subjectData) => ({
+    type: actionTypes.FETCH_SUBJECTS_SUCCESS,
+    data: subjectData
+})
+export const fetchSubjectsFailed = () => ({
+    type: actionTypes.FETCH_SUBJECTS_FAILED,
+})
+// =========================================================================================================
+export const fetchGrades = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService(CODE_TYPE.GRADE);
+            if (res && res.errCode == 0) {
+                dispatch(fetchGradesSuccess(res.data));
+            } else {
+                console.log(res.errMessage);
+                dispatch(fetchGradesFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(fetchGradesFailed());
+        }
+    }
+}
+export const fetchGradesSuccess = (gradesData) => ({
+    type: actionTypes.FETCH_GRADES_SUCCESS,
+    data: gradesData
+})
+export const fetchGradesFailed = () => ({
+    type: actionTypes.FETCH_GRADES_FAILED,
+})
+// =========================================================================================================
+export const fetchDifficulties = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getAllCodeService(CODE_TYPE.DIFFICULTY);
+            if (res && res.errCode == 0) {
+                dispatch(fetchDifficultiesSuccess(res.data));
+            } else {
+                console.log(res.errMessage);
+                dispatch(fetchDifficultiesFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(fetchDifficultiesFailed());
+        }
+    }
+}
+export const fetchDifficultiesSuccess = (difficultiesData) => ({
+    type: actionTypes.FETCH_DIFFICULTIES_SUCCESS,
+    data: difficultiesData
+})
+export const fetchDifficultiesFailed = () => ({
+    type: actionTypes.FETCH_DIFFICULTIES_FAILED,
 })
 // =========================================================================================================
 export const createUser = (data, successCallback = null) => {
@@ -96,7 +194,6 @@ export const changeEditUser = (user) => ({
     type: actionTypes.CHANGE_EDIT_USER,
     data: user
 })
-
 export const saveEditUser = (data) => {
     return async (dispatch, getState) => {
         try {
@@ -122,4 +219,32 @@ export const saveEditUserSuccess = () => ({
 })
 export const saveEditUserFailed = () => ({
     type: actionTypes.EDIT_USER_FAILED,
+})
+// =========================================================================================================
+export const createQuestion = (data, successCallback = null) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createQuestionService(data);
+            if (res && res.errCode == 0) {
+                // dispatch(fetchAllUsers());
+                dispatch(createQuestionSuccess());
+                toast.success("Created new question succesfully");
+                successCallback && successCallback();
+            } else {
+                console.log(res.errMessage);
+                toast.error("Failed to create new question");
+                dispatch(createQuestionFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(createQuestionFailed());
+            toast.error("Failed to create new question");
+        }
+    }
+}
+export const createQuestionSuccess = () => ({
+    type: actionTypes.CREATE_QUESTION_SUCCESS,
+})
+export const createQuestionFailed = () => ({
+    type: actionTypes.CREATE_QUESTION_FAILED,
 })

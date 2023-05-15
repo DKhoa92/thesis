@@ -120,7 +120,7 @@ class UserCreate extends Component {
                         </div>
                         <div className='col-12 mt-4'>
                             <button className='btn btn-primary' onClick={this.onClickSubmit}>
-                                <FormattedMessage id='system.user.submit' />
+                                <FormattedMessage id='system.common.submit' />
                             </button>
                         </div>
                     </div>

@@ -1,10 +1,16 @@
-.createUserContainer {
+.createQuestionContainer {
     .container {
         .row {
-            .title {
-                align-items: center;
-                justify-content: center;
-                text-align: center;
+            .title {}
+
+            .type-multiple-choice {
+
+                .answers {
+                    .answer {
+                        display: inline-block;
+                        width: 80%;
+                    }
+                }
             }
         }
 

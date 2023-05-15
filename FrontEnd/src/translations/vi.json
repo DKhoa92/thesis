@@ -1,5 +1,9 @@
 {
     "system": {
+        "common": {
+            "submit": "Lưu",
+            "save": "Lưu"
+        },
         "user": {
             "createUser": "TẠO NGƯỜI DÙNG MỚI",
             "editUser": "SỬA THÔNG TIN NGƯỜI DÙNG",
@@ -14,8 +18,6 @@
             "male": "Nam",
             "female": "Nữ",
             "others": "Khác",
-            "submit": "Lưu",
-            "save": "Lưu",
             "btnCreateUser": "Tạo người dùng mới",
             "userManage": "Quản lý người dùng"
         },
@@ -25,10 +27,13 @@
             "questionType": "Loại câu hỏi",
             "question": "Nội dung câu hỏi",
             "choiceNumber": "Số câu trả lời",
-            "submit": "Lưu",
-            "save": "Lưu",
             "btnCreateQuestion": "Tạo câu hỏi mới",
-            "userManage": "Quản lý ngân hàng câu hỏi"
+            "userManage": "Quản lý ngân hàng câu hỏi",
+            "correctChoice": "Đánh dấu các đáp án đúng",
+            "answerPlaceHolder": "Điền đáp án ",
+            "subject": "Môn học",
+            "grade": "Khối lớp",
+            "difficulty": "Độ khó"
         }
     },
     "login": {

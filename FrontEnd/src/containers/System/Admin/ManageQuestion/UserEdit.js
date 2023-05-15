@@ -84,7 +84,7 @@ class UserEdit extends Component {
                         </div>
                         <div className='col-6'>
                             <label><FormattedMessage id='system.user.userName' /></label>
-                            <input className='form-control' type="text" readOnly id='userName' value={userName}
+                            <input className='form-control' type="text" id='userName' value={userName} disabled={true}
                                 onChange={(event) => { this.onchangeInput(event, 'userName') }} />
                         </div>
                         <div className='col-6'>
@@ -130,7 +130,7 @@ class UserEdit extends Component {
                         </div>
                         <div className='col-12 mt-5'>
                             <button className='btn btn-primary' onClick={this.onClickSubmit}>
-                                <FormattedMessage id='system.user.save' />
+                                <FormattedMessage id='system.common.save' />
                             </button>
                         </div>
                     </div>

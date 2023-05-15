@@ -1,6 +1,7 @@
 import express from "express";
 import homeController from "../controllers/homeController";
 import userController from "../controllers/userController";
+import questionController from "../controllers/questionController";
 
 let router = express.Router();
 
@@ -18,6 +19,7 @@ let initWebRoutes = (app) => {
     router.post('/api/create-user', userController.handleCreateUser);
     router.post('/api/edit-user', userController.handleEditUser);
     router.delete('/api/delete-user', userController.handleDeleteUser);
+    router.post('/api/create-question', questionController.handleCreateQuestion);
 
     return app.use("/", router);
 }

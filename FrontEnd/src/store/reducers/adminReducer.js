@@ -3,6 +3,10 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     genders: [],
     roles: [],
+    types: [],
+    subjects: [],
+    grades: [],
+    difficulties: [],
     users: [],
     user: {},
 }
@@ -18,6 +22,26 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 roles: action.data
+            }
+        case actionTypes.FETCH_TYPES_SUCCESS:
+            return {
+                ...state,
+                types: action.data
+            }
+        case actionTypes.FETCH_SUBJECTS_SUCCESS:
+            return {
+                ...state,
+                subjects: action.data
+            }
+        case actionTypes.FETCH_GRADES_SUCCESS:
+            return {
+                ...state,
+                grades: action.data
+            }
+        case actionTypes.FETCH_DIFFICULTIES_SUCCESS:
+            return {
+                ...state,
+                difficulties: action.data
             }
         case actionTypes.FETCH_ALL_USERS_SUCCESS:
             return {
