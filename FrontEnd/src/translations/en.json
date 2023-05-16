@@ -19,7 +19,7 @@
             "female": "Female",
             "others": "Others",
             "btnCreateUser": "Add new user",
-            "userManage": "Manage User"
+            "userManage": "Manage Users"
         },
         "question": {
             "createQuestion": "CREATE NEW QUESTION",
@@ -33,7 +33,8 @@
             "answerPlaceHolder": "Fill in answer no.",
             "subject": "Subject",
             "grade": "Grade",
-            "difficulty": "Difficulty"
+            "difficulty": "Difficulty",
+            "questionManage": "Manage Questions"
         }
     },
     "login": {

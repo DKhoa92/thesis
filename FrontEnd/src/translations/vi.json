@@ -33,7 +33,8 @@
             "answerPlaceHolder": "Điền đáp án ",
             "subject": "Môn học",
             "grade": "Khối lớp",
-            "difficulty": "Độ khó"
+            "difficulty": "Độ khó",
+            "questionManage": "Quản lý câu hỏi"
         }
     },
     "login": {

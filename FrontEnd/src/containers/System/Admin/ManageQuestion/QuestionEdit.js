@@ -3,9 +3,9 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { CONFIG, LANGUAGES } from '../../../../utils';
 import * as actions from '../../../../store/actions';
-import './QuestionCreate.scss';
+import './QuestionEdit.scss';
 
-class QuestionCreate extends Component {
+class QuestionEdit extends Component {
 
     constructor(props) {
         super(props);
@@ -21,15 +21,6 @@ class QuestionCreate extends Component {
             choice_0: false, choice_1: false, choice_2: false, choice_3: false, choice_4: false,
             answer_0: '', answer_1: '', answer_2: '', answer_3: '', answer_4: '',
         }
-    }
-
-
-
-    async componentDidMount() {
-        this.props.fetchTypes();
-        this.props.fetchSubjects();
-        this.props.fetchGrades();
-        this.props.fetchDifficulties();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -269,4 +260,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(QuestionEdit);

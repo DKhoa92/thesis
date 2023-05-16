@@ -9,6 +9,7 @@ const initialState = {
     difficulties: [],
     users: [],
     user: {},
+    questions: [],
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -47,6 +48,11 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 users: action.data
+            }
+        case actionTypes.FETCH_ALL_QUESTIONS_SUCCESS:
+            return {
+                ...state,
+                questions: action.data
             }
         case actionTypes.CHANGE_EDIT_USER:
             return {

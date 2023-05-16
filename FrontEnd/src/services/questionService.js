@@ -1,6 +1,6 @@
 import axios from "../axios";
 
-const getQuestions = (ids) => {
+const getQuestionsService = (ids) => {
     return axios.get(`/api/get-questions?id=${ids}`);
 }
 
@@ -20,7 +20,7 @@ const deleteQuestionService = (questionId) => {
 }
 
 export {
-    getQuestions,
+    getQuestionsService,
     createQuestionService,
     editQuestionService,
     deleteQuestionService
