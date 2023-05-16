@@ -32,7 +32,7 @@ module.exports = {
       gender: {
         type: Sequelize.STRING
       },
-      roleId: {
+      role: {
         type: Sequelize.STRING
       },
       createdAt: {
