@@ -2,18 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('exam_templates', {
+        await queryInterface.createTable('question_groups', {
             id: {
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
-            userId: {
+            name: {
+                type: Sequelize.STRING
+            },
+            creatorId: {
                 type: Sequelize.INTEGER
             },
             questionSubmissionId: {
                 type: Sequelize.INTEGER
+            },
+            approvedDate: {
+                type: Sequelize.DATE
             },
             status: {
                 type: Sequelize.STRING
@@ -29,6 +35,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('exam_templates');
+        await queryInterface.dropTable('question_groups');
     }
 };

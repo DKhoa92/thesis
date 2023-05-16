@@ -69,8 +69,8 @@ class UserManage extends Component {
                                         <td>{item.lastName}</td>
                                         <td>{item.userName}</td>
                                         <td>{item.email}</td>
-                                        <td>{item.roleId}</td>
-                                        <td>{item.gender}</td>
+                                        <td><FormattedMessage id={`allCode.${item.role}`} /></td>
+                                        <td><FormattedMessage id={`allCode.${item.gender}`} /></td>
                                         <td>{item.address}</td>
                                         <td>
                                             <button className='btn-edit' onClick={() => { this.onClickEdit(item) }}><i className="fas fa-edit"></i></button>

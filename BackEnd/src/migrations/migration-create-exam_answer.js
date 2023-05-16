@@ -2,18 +2,24 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('questions', {
+        await queryInterface.createTable('exam_answers', {
             id: {
                 allowNull: false,
                 primaryKey: true,
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
+            examParticipationId: {
+                type: Sequelize.INTEGER
+            },
             questionId: {
                 type: Sequelize.INTEGER
             },
-            media: {
-                type: Sequelize.BLOB
+            answer: {
+                type: Sequelize.JSON
+            },
+            isCorrect: {
+                type: Sequelize.BOOLEAN
             },
             createdAt: {
                 allowNull: false,
@@ -26,6 +32,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('questions');
+        await queryInterface.dropTable('exam_answers');
     }
 };

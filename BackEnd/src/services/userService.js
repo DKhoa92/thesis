@@ -6,7 +6,7 @@ let handleUserLogin = (email, password) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};
-            let user = await checkUserEmail(email);
+            let user = await checkUserName(userName);
             if (user) {
                 let match = await compareUserPassword(password, user.password);
                 if (match) {
@@ -30,11 +30,11 @@ let handleUserLogin = (email, password) => {
     })
 }
 
-let checkUserEmail = (email) => {
+let checkUserName = (email) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.user.findOne({
-                where: { email: email },
+                where: { userName: userName },
             });
             if (user)
                 resolve(user);
@@ -118,13 +118,14 @@ let createUser = (data) => {
             let hashPassword = await hashUserPassword(data.password);
             await db.user.create({
                 userName: data.userName,
+                password: hashPassword,
+                email: data.email,
                 firstName: data.firstName,
                 lastName: data.lastName,
-                email: data.email,
-                password: hashPassword,
                 address: data.address,
+                phoneNumber: data.phoneNumber,
                 gender: data.gender,
-                roleId: data.roleId,
+                role: data.role,
             })
             res.errCode = 0;
             res.errMessage = "Create user successfully";
@@ -140,12 +141,13 @@ let editUser = (data) => {
         try {
             let res = {};
             let success = await db.user.update({
+                email: data.email,
                 firstName: data.firstName,
                 lastName: data.lastName,
-                email: data.email,
                 address: data.address,
+                phoneNumber: data.phoneNumber,
                 gender: data.gender,
-                roleId: data.roleId,
+                role: data.role,
             }, {
                 where: { id: data.id }
             })

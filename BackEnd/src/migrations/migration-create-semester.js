@@ -9,6 +9,9 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
+            name: {
+                type: Sequelize.STRING
+            },
             startDate: {
                 type: Sequelize.DATE
             },

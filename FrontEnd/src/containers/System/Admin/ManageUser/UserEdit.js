@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { getAllCodeService } from '../../../../services/userService';
-import { LANGUAGES } from '../../../../utils';
+import { CODE_TYPE, LANGUAGES } from '../../../../utils';
 import * as actions from '../../../../store/actions';
 import './UserEdit.scss';
 
@@ -58,7 +58,7 @@ class UserEdit extends Component {
                 newState.email = user.email;
                 newState.firstName = user.firstName;
                 newState.lastName = user.lastName;
-                newState.role = user.roleId;
+                newState.role = user.role;
                 newState.gender = user.gender;
                 newState.lastName = user.lastName;
                 newState.address = user.address;
@@ -170,7 +170,7 @@ class UserEdit extends Component {
         newUser.email = email;
         newUser.firstName = firstName;
         newUser.lastName = lastName;
-        newUser.roleId = role;
+        newUser.role = role;
         newUser.gender = gender;
         newUser.address = address;
         this.props.saveEditUser(
@@ -182,7 +182,7 @@ class UserEdit extends Component {
     async loadDataGenders() {
         const { fetchGenders } = this.props;
         try {
-            let res = await getAllCodeService('gender');
+            let res = await getAllCodeService(CODE_TYPE.GENDER);
             if (res && res.errCode == 0) {
                 fetchGenders(res.data);
             } else
@@ -195,8 +195,9 @@ class UserEdit extends Component {
     async loadDataRoles() {
         const { fetchRoles } = this.props;
         try {
-            let res = await getAllCodeService('roles');
+            let res = await getAllCodeService(CODE_TYPE.ROLE);
             if (res && res.errCode == 0) {
+                console.log("BBB");
                 fetchRoles(res.data);
             } else
                 console.log("Fetch data roles error");

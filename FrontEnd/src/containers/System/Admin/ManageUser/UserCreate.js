@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { getAllCodeService } from '../../../../services/userService';
-import { LANGUAGES } from '../../../../utils';
+import { LANGUAGES, CODE_TYPE } from '../../../../utils';
 import * as actions from '../../../../store/actions';
 import './UserCreate.scss';
 
@@ -44,6 +44,7 @@ class UserCreate extends Component {
 
         if (prevProps.roles !== this.props.roles) {
             let roles = this.props.roles;
+            console.log(roles);
             this.setState({
                 roles: roles,
                 role: roles && roles.length > 0 ? roles[0].codeKey : ''
@@ -162,7 +163,7 @@ class UserCreate extends Component {
             email: email,
             firstName: firstName,
             lastName: lastName,
-            roleId: role,
+            role: role,
             gender: gender,
             address: address,
         }, this.resetForm);
@@ -188,7 +189,7 @@ class UserCreate extends Component {
     async loadDataGenders() {
         const { fetchGenders } = this.props;
         try {
-            let res = await getAllCodeService('gender');
+            let res = await getAllCodeService('GENDER');
             if (res && res.errCode == 0) {
                 fetchGenders(res.data);
             } else
@@ -201,7 +202,7 @@ class UserCreate extends Component {
     async loadDataRoles() {
         const { fetchRoles } = this.props;
         try {
-            let res = await getAllCodeService('roles');
+            let res = await getAllCodeService(CODE_TYPE.ROLE);
             if (res && res.errCode == 0) {
                 fetchRoles(res.data);
             } else

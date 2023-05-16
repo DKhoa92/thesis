@@ -226,7 +226,7 @@ export const createQuestion = (data, successCallback = null) => {
         try {
             let res = await createQuestionService(data);
             if (res && res.errCode == 0) {
-                // dispatch(fetchAllUsers());
+                dispatch(fetchAllQuestions());
                 dispatch(createQuestionSuccess());
                 toast.success("Created new question succesfully");
                 successCallback && successCallback();
@@ -282,7 +282,7 @@ export const saveEditQuestion = (data) => {
         try {
             let res = await editQuestionService(data);
             if (res && res.errCode == 0) {
-                // dispatch(fetchAllUsers());
+                dispatch(fetchAllQuestions());
                 dispatch(saveEditQuestionSuccess());
                 toast.success("Edited the question succesfully");
             } else {

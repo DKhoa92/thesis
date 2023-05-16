@@ -1,15 +1,19 @@
 import axios from "../axios";
 
 const getQuestionsService = (ids) => {
+    return axios.get(`/api/get-questions?id=${ids}&hasAnswer=true`);
+}
+
+const getQuestionsWithoutAnswer = (ids) => {
     return axios.get(`/api/get-questions?id=${ids}`);
 }
 
 const createQuestionService = (questionData) => {
-    console.log(questionData);
     return axios.post('api/create-question', questionData);
 }
 
 const editQuestionService = (questionData) => {
+    console.log(questionData);
     return axios.post('api/edit-question', questionData);
 }
 

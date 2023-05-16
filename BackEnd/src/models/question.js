@@ -14,12 +14,15 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     question.init({
-        questionData: DataTypes.JSON,
+        data: DataTypes.JSON,
         correctAnswer: DataTypes.JSON,
         type: DataTypes.STRING,
         subject: DataTypes.STRING,
         grade: DataTypes.STRING,
+        score: DataTypes.INTEGER,
         difficulty: DataTypes.STRING,
+        media: DataTypes.BLOB,
+        creatorId: DataTypes.INTEGER,
         status: DataTypes.STRING,
     }, {
         sequelize,

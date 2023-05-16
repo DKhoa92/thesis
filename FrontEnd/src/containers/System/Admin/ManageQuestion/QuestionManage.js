@@ -11,22 +11,9 @@ class QuestionManage extends Component {
 
     constructor(props) {
         super(props);
-        let test = {
-            questionData: JSON.stringify({
-                question: "aaa",
-                choiceNumber: 4,
-                answers: ["assd skaska dsadsd", "bsss ssss s", "csss ssss ", "dsssss ssss"],
-            }),
-            correctAnswer: JSON.stringify({
-                data: [true, false, false, false]
-            }),
-            type: 'T1',
-            subject: "Toan",
-            grade: '1',
-            difficulty: 'D1',
-        }
+
         this.state = {
-            questions: [test],
+            questions: [],
             isShowCreate: false,
             isShowEdit: false
         }
@@ -74,26 +61,24 @@ class QuestionManage extends Component {
                         </thead>
                         <tbody>
                             {questions && questions.map((item, index) => {
-                                let questionData = item && item.questionData ? JSON.parse(item.questionData) : null;
+                                let data = item && item.data ? JSON.parse(item.data) : null;
                                 let correctAnswers = item && item.correctAnswer ? JSON.parse(item.correctAnswer).data : null;
-                                console.log(correctAnswers);
                                 return (
                                     <tr key={index}>
-                                        <td>{item.type}</td>
-                                        <td>{item.subject}</td>
-                                        <td>{item.grade}</td>
+                                        <td><FormattedMessage id={`allCode.${item.type}`} /></td>
+                                        <td><FormattedMessage id={`allCode.${item.subject}`} /></td>
+                                        <td><FormattedMessage id={`allCode.${item.grade}`} /></td>
                                         <td>
-                                            <div className='question'>{questionData && questionData.question ? questionData.question : ''}</div>
+                                            <div className='question'>{data && data.question ? data.question : ''}</div>
                                             <div className='answers d-flex'>
                                                 {(() => {
                                                     let div = [];
-                                                    let answerCount = questionData && questionData.answers ? questionData.answers.length : 0;
-                                                    console.log(answerCount);
+                                                    let answerCount = data && data.answers ? data.answers.length : 0;
                                                     for (let i = 0; i < answerCount; i++) {
                                                         div.push(
                                                             <div className='answer' key={i}>
                                                                 <input type="checkbox" checked={correctAnswers[i]} disabled />
-                                                                <i>{questionData && questionData.answers ? questionData.answers[i] : ''}</i>
+                                                                <i>{data && data.answers ? data.answers[i] : ''}</i>
                                                             </div>
                                                         );
                                                     }
@@ -101,7 +86,7 @@ class QuestionManage extends Component {
                                                 })()}
                                             </div>
                                         </td>
-                                        <td>{item.difficulty}</td>
+                                        <td><FormattedMessage id={`allCode.${item.difficulty}`} /></td>
                                         <td>
                                             <button className='btn-edit' onClick={() => { this.onClickEdit(item) }}><i className="fas fa-edit"></i></button>
                                             <button className='btn-delete' onClick={() => { this.onClickDelete(item) }}><i className="fas fa-trash-alt"></i></button>

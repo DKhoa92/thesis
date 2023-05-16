@@ -9,7 +9,7 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
-            questionData: {
+            data: {
                 type: Sequelize.JSON
             },
             correctAnswer: {
@@ -24,8 +24,17 @@ module.exports = {
             grade: {
                 type: Sequelize.STRING
             },
+            score: {
+                type: Sequelize.INTEGER
+            },
             difficulty: {
                 type: Sequelize.STRING
+            },
+            media: {
+                type: Sequelize.BLOB
+            },
+            creatorId: {
+                type: Sequelize.INTEGER
             },
             status: {
                 type: Sequelize.STRING

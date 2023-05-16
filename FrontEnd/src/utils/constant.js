@@ -32,7 +32,7 @@ export const YesNoObj = {
 
 export const CODE_TYPE = {
     ROLE: 'ROLE',
-    GENDER: 'gender',
+    GENDER: 'GENDER',
     TYPE: 'TYPE',
     SUBJECT: 'SUBJECT',
     GRADE: 'GRADE',

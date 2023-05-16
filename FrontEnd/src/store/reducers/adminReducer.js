@@ -10,6 +10,7 @@ const initialState = {
     users: [],
     user: {},
     questions: [],
+    question: {},
 }
 
 const adminReducer = (state = initialState, action) => {
@@ -58,6 +59,11 @@ const adminReducer = (state = initialState, action) => {
             return {
                 ...state,
                 user: action.data
+            }
+        case actionTypes.CHANGE_EDIT_QUESTION:
+            return {
+                ...state,
+                question: action.data
             }
         default:
             return state;

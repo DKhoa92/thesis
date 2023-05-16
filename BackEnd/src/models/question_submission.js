@@ -14,10 +14,9 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     question_submission.init({
+        name: DataTypes.STRING,
         startDate: DataTypes.DATE,
         endDate: DataTypes.DATE,
-        grade: DataTypes.STRING,
-        subject: DataTypes.STRING,
         status: DataTypes.STRING,
     }, {
         sequelize,

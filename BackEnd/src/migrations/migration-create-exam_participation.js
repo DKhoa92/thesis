@@ -15,8 +15,8 @@ module.exports = {
             examId: {
                 type: Sequelize.INTEGER
             },
-            answerContent: {
-                type: Sequelize.STRING
+            score: {
+                type: Sequelize.INTEGER
             },
             status: {
                 type: Sequelize.STRING

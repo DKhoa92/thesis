@@ -12,6 +12,8 @@ module.exports = (sequelize, DataTypes) => {
   class_distribution.init({
     userId: DataTypes.INTEGER,
     classId: DataTypes.INTEGER,
+    startDate: DataTypes.DATE,
+    endDate: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'class_distribution',

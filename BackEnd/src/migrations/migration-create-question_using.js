@@ -9,10 +9,13 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
-            questionPackageId: {
+            questionGroupId: {
                 type: Sequelize.INTEGER
             },
             questionId: {
+                type: Sequelize.INTEGER
+            },
+            orderNumber: {
                 type: Sequelize.INTEGER
             },
             createdAt: {

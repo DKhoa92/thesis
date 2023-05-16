@@ -1,30 +1,58 @@
 import db from "../models/index";
 import { Op } from "sequelize";
 
-let getUsers = (id) => {
+let getQuestions = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};
-            let users;
+            let questions;
             if (id) {
-                users = await db.user.findAll({
+                questions = await db.question.findAll({
                     where: { id: { [Op.or]: id } },
-                    attributes: { exclude: ['password'] },
                 })
             } else
-                users = await db.user.findAll({
-                    attributes: { exclude: ['password'] },
-                });
-            if (users) {
+                questions = await db.question.findAll();
+            if (questions) {
                 res.errCode = 0;
-                res.errMessage = "Get users sucessfully";
-                res.data = users;
+                res.errMessage = "Get questions sucessfully";
+                res.data = questions;
             } else {
                 res.errCode = 1;
-                res.errMessage = "Error while get users on server";
+                res.errMessage = "Error while get questions on server";
             }
             resolve(res);
         } catch (error) {
+            console.log(error);
+            reject(error);
+        }
+    })
+}
+
+let getQuestionsWithoutAnswer = (id) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = {};
+            let questions;
+            if (id) {
+                questions = await db.question.findAll({
+                    where: { id: { [Op.or]: id } },
+                    attributes: { exclude: ['correctAnswer'] },
+                })
+            } else
+                questions = await db.question.findAll({
+                    attributes: { exclude: ['correctAnswer'] },
+                });
+            if (questions) {
+                res.errCode = 0;
+                res.errMessage = "Get questions sucessfully";
+                res.data = questions;
+            } else {
+                res.errCode = 1;
+                res.errMessage = "Error while get questions on server";
+            }
+            resolve(res);
+        } catch (error) {
+            console.log(error);
             reject(error);
         }
     })
@@ -36,12 +64,15 @@ let createQuestion = (data) => {
             console.log(data);
             let res = {};
             await db.question.create({
-                questionData: data.questionData,
+                data: data.data,
                 correctAnswer: data.correctAnswer,
                 type: data.type,
                 subject: data.subject,
                 grade: data.grade,
                 difficulty: data.difficulty,
+                score: data.score,
+                media: data.media,
+                creatorId: data.creatorId
             })
             res.errCode = 0;
             res.errMessage = "Create question successfully";
@@ -53,26 +84,29 @@ let createQuestion = (data) => {
     })
 }
 
-let editUser = (data) => {
+let editQuestion = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};
-            let success = await db.user.update({
-                firstName: data.firstName,
-                lastName: data.lastName,
-                email: data.email,
-                address: data.address,
-                gender: data.gender,
-                roleId: data.roleId,
+            let success = await db.question.update({
+                data: data.data,
+                correctAnswer: data.correctAnswer,
+                type: data.type,
+                subject: data.subject,
+                grade: data.grade,
+                difficulty: data.difficulty,
+                score: data.score,
+                media: data.media,
+                creatorId: data.creatorId
             }, {
                 where: { id: data.id }
             })
             if (success) {
                 res.errCode = 0;
-                res.errMessage = "Edited user successfully";
+                res.errMessage = "Edited question successfully";
             } else {
                 res.errCode = 1;
-                res.errMessage = "Failed to edit the user from server";
+                res.errMessage = "Failed to edit the question from server";
             }
             resolve(res);
         } catch (e) {
@@ -81,20 +115,20 @@ let editUser = (data) => {
     })
 }
 
-let deleteUser = (id) => {
+let deleteQuestion = (id) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};
-            let success = await db.user.destroy({
+            let success = await db.question.destroy({
                 where: { id: id },
             });
 
             if (success) {
                 res.errCode = 0;
-                res.errMessage = "Deleted the user successfully";
+                res.errMessage = "Deleted the question successfully";
             } else {
                 res.errCode = 1;
-                res.errMessage = "Failed to delete the user from server";
+                res.errMessage = "Failed to delete the question from server";
             }
             resolve(res);
         } catch (e) {
@@ -104,8 +138,9 @@ let deleteUser = (id) => {
 }
 
 module.exports = {
-    getUsers,
+    getQuestions,
+    getQuestionsWithoutAnswer,
     createQuestion,
-    editUser,
-    deleteUser
+    editQuestion,
+    deleteQuestion,
 }

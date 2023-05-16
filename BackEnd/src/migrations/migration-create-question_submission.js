@@ -9,17 +9,14 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
+            name: {
+                type: Sequelize.STRING
+            },
             startDate: {
                 type: Sequelize.DATE
             },
             endDate: {
                 type: Sequelize.DATE
-            },
-            grade: {
-                type: Sequelize.STRING
-            },
-            subject: {
-                type: Sequelize.STRING
             },
             status: {
                 type: Sequelize.STRING

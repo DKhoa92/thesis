@@ -23,6 +23,13 @@ class QuestionEdit extends Component {
         }
     }
 
+    async componentDidMount() {
+        this.props.fetchTypes();
+        this.props.fetchSubjects();
+        this.props.fetchGrades();
+        this.props.fetchDifficulties();
+    }
+
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.types !== this.props.types) {
             let types = this.props.types;
@@ -52,18 +59,41 @@ class QuestionEdit extends Component {
                 difficulty: difficulties && difficulties.length > 0 ? difficulties[0].codeKey : ''
             });
         }
+        if (prevProps.question !== this.props.question) {
+            let question = this.props.question;
+            let data = JSON.parse(question.data);
+            let correctChoice = JSON.parse(question.correctAnswer);
+            if (question) {
+                let newState = { ...this.state }
+                for (let i = 0; i < this.state.choiceNumber; i++) {
+                    newState[`choice_${i}`] = correctChoice.data[i];
+                    newState[`answer_${i}`] = data.answers[i];
+                }
+                newState.type = question.type;
+                newState.question = data.question;
+                newState.choiceNumber = data.choiceNumber;
+                newState.subject = question.subject;
+                newState.grade = question.grade;
+                newState.difficulty = question.difficulty;
+                newState.lastName = question.lastName;
+                newState.address = question.address;
+
+                this.setState({
+                    ...newState
+                })
+            }
+        }
     }
 
     render() {
         let language = this.props.language;
         let { types, subjects, grades, difficulties, type, question, choiceNumber, subject, grade, difficulty } = this.state;
-
         return (
-            <div className='createQuestionContainer'>
+            <div className='editQuestionContainer'>
                 <div className='container'>
                     <div className='row'>
                         <div className='title col-12 my-3'>
-                            <h1><FormattedMessage id='system.question.createQuestion' /></h1>
+                            <h1><FormattedMessage id='system.question.editQuestion' /></h1>
                         </div>
                         <div className='row'>
                             <div className='col-4'>
@@ -204,15 +234,16 @@ class QuestionEdit extends Component {
             correctChoices[i] = this.state[`choice_${i}`];
         }
 
-        this.props.createQuestion({
-            questionData: JSON.stringify({
+        this.props.saveEditQuestion({
+            ...this.props.question,
+            data: {
                 question: question,
                 choiceNumber: choiceNumber,
                 answers: answers,
-            }),
-            correctAnswer: JSON.stringify({
+            },
+            correctAnswer: {
                 data: correctChoices
-            }),
+            },
             type: type,
             subject: subject,
             grade: grade,
@@ -247,6 +278,7 @@ const mapStateToProps = state => {
         subjects: state.admin.subjects,
         grades: state.admin.grades,
         difficulties: state.admin.difficulties,
+        question: state.admin.question,
     };
 };
 
@@ -256,7 +288,7 @@ const mapDispatchToProps = dispatch => {
         fetchSubjects: (dataSubjects) => dispatch(actions.fetchSubjects(dataSubjects)),
         fetchGrades: (dataGrades) => dispatch(actions.fetchGrades(dataGrades)),
         fetchDifficulties: (dataDifficulties) => dispatch(actions.fetchDifficulties(dataDifficulties)),
-        createQuestion: (data) => dispatch(actions.createQuestion(data)),
+        saveEditQuestion: (data) => dispatch(actions.saveEditQuestion(data)),
     };
 };
 

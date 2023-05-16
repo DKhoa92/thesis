@@ -9,14 +9,23 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
-            semesterId: {
+            name: {
                 type: Sequelize.STRING
             },
-            questionPackageId: {
+            semesterId: {
+                type: Sequelize.INTEGER
+            },
+            questionGroupId: {
                 type: Sequelize.INTEGER
             },
             date: {
                 type: Sequelize.DATE
+            },
+            repeatTime: {
+                type: Sequelize.INTEGER
+            },
+            inspectorId: {
+                type: Sequelize.INTEGER
             },
             status: {
                 type: Sequelize.STRING

@@ -13,7 +13,7 @@ class QuestionCreate extends Component {
         this.state = {
             types: [], subjects: [], grades: [], difficulties: [],
             type: '',
-            question: '',
+            content: '',
             choiceNumber: '4',
             subject: '',
             grade: '',
@@ -22,8 +22,6 @@ class QuestionCreate extends Component {
             answer_0: '', answer_1: '', answer_2: '', answer_3: '', answer_4: '',
         }
     }
-
-
 
     async componentDidMount() {
         this.props.fetchTypes();
@@ -65,7 +63,7 @@ class QuestionCreate extends Component {
 
     render() {
         let language = this.props.language;
-        let { types, subjects, grades, difficulties, type, question, choiceNumber, subject, grade, difficulty } = this.state;
+        let { types, subjects, grades, difficulties, type, content, choiceNumber, subject, grade, difficulty } = this.state;
 
         return (
             <div className='createQuestionContainer'>
@@ -121,8 +119,8 @@ class QuestionCreate extends Component {
                         <div className='type-multiple-choice col-12'>
                             <div className='col-12 my-2'>
                                 <label><FormattedMessage id='system.question.question' /></label>
-                                <input className='form-control' type="text" id='question' value={question}
-                                    onChange={(event) => { this.onChangeInput(event, 'question') }} />
+                                <input className='form-control' type="text" id='content' value={content}
+                                    onChange={(event) => { this.onChangeInput(event, 'content') }} />
                             </div>
                             <div className='col-2'>
                                 <label><FormattedMessage id='system.question.choiceNumber' /></label>
@@ -177,7 +175,7 @@ class QuestionCreate extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        let arrCheck = ['question']
+        let arrCheck = ['content']
         for (let i = 0; i < this.state.choiceNumber; i++) {
             arrCheck.push(`answer_${i}`);
         }
@@ -202,7 +200,7 @@ class QuestionCreate extends Component {
     }
 
     onClickSubmit = () => {
-        let { type, question, choiceNumber, subject, grade, difficulty } = this.state;
+        let { type, content, choiceNumber, subject, grade, difficulty } = this.state;
         let isValid = this.checkValidateInput();
         if (isValid === false) return;
 
@@ -214,14 +212,14 @@ class QuestionCreate extends Component {
         }
 
         this.props.createQuestion({
-            questionData: JSON.stringify({
-                question: question,
+            data: {
+                content: content,
                 choiceNumber: choiceNumber,
                 answers: answers,
-            }),
-            correctAnswer: JSON.stringify({
+            },
+            correctAnswer: {
                 data: correctChoices
-            }),
+            },
             type: type,
             subject: subject,
             grade: grade,
@@ -230,9 +228,10 @@ class QuestionCreate extends Component {
     }
 
     resetForm = () => {
+        console.log("AAA");
         let newState = { ...this.state }
         newState.type = this.state.types[0];
-        newState.question = '';
+        newState.content = '';
         newState.choiceNumber = CONFIG.DEFAULT_MULTIPLE_CHOICES;
         newState.subject = this.state.subjects[0];
         newState.grade = this.state.grades[0];
@@ -265,7 +264,7 @@ const mapDispatchToProps = dispatch => {
         fetchSubjects: (dataSubjects) => dispatch(actions.fetchSubjects(dataSubjects)),
         fetchGrades: (dataGrades) => dispatch(actions.fetchGrades(dataGrades)),
         fetchDifficulties: (dataDifficulties) => dispatch(actions.fetchDifficulties(dataDifficulties)),
-        createQuestion: (data) => dispatch(actions.createQuestion(data)),
+        createQuestion: (data, successCallback) => dispatch(actions.createQuestion(data, successCallback)),
     };
 };
 

@@ -10,10 +10,8 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   class_room.init({
-    className: DataTypes.STRING,
+    name: DataTypes.STRING,
     grade: DataTypes.STRING,
-    startDate: DataTypes.DATE,
-    endDate: DataTypes.DATE,
     status: DataTypes.STRING,
   }, {
     sequelize,

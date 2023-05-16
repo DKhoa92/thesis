@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     semester.init({
+        name: DataTypes.STRING,
         startDate: DataTypes.DATE,
         endDate: DataTypes.DATE,
         status: DataTypes.STRING,
