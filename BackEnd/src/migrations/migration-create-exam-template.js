@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface, Sequelize) {
-        await queryInterface.createTable('question_packages', {
+        await queryInterface.createTable('exam_templates', {
             id: {
                 allowNull: false,
                 primaryKey: true,
@@ -29,6 +29,6 @@ module.exports = {
         });
     },
     async down(queryInterface, Sequelize) {
-        await queryInterface.dropTable('question_packages');
+        await queryInterface.dropTable('exam_templates');
     }
 };

@@ -4,6 +4,13 @@ import ExamHeader from './ExamHeader';
 import './Exam.scss';
 import { FormattedMessage } from 'react-intl';
 class Exam extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            questions: [],
+        }
+    }
 
     render() {
         return (
@@ -13,7 +20,9 @@ class Exam extends Component {
                     <div className='exam-content'>
                         <div className='question-section'>
                             <div className='media'></div>
-                            <div className='text'>What is this?</div>
+                            <div className='text'>
+                                {this.state.questions}
+                            </div>
                         </div>
                         <div className='answer-section'>
                             <div className='answer col-auto'>
@@ -39,7 +48,9 @@ class Exam extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoggedIn: state.user.isLoggedIn
+        isLoggedIn: state.user.isLoggedIn,
+        userInfo: state.user.userInfo,
+
     };
 };
 

@@ -7,6 +7,7 @@ export const PATH = {
     EXAM: '/exam',
     MANAGE_USER: '/manage-user',
     CREATE_QUESTION: '/create-question',
+    MANAGE_QUESTION: '/manage-question',
 };
 
 export const LANGUAGES = {

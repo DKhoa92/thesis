@@ -17,8 +17,9 @@ import Header from './Header/Header';
 import System from '../routes/System';
 import Exam from './Exam/Exam';
 import HomePage from './HomePage/HomePage';
-import QuestionCreate from './System/Admin/ManageQuestion/QuestionCreate';
 import UserManage from './System/Admin/ManageUser/UserManage';
+import QuestionCreate from './System/Admin/ManageQuestion/QuestionCreate';
+import ManageQuestion from './System/Admin/ManageQuestion/QuestionManage';
 import { CustomToastCloseButton } from '../components/CustomToast';
 
 
@@ -57,7 +58,7 @@ class App extends Component {
                                 <Route path={PATH.HOME_PAGE} component={HomePage} />
                                 <Route path={PATH.EXAM} component={Exam} />
                                 <Route path={PATH.MANAGE_USER} component={UserManage} />
-                                <Route path={PATH.CREATE_QUESTION} component={QuestionCreate} />
+                                <Route path={PATH.MANAGE_QUESTION} component={ManageQuestion} />
                             </Switch>
                         </span>
 

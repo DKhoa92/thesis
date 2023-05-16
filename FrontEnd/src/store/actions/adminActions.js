@@ -2,7 +2,7 @@ import actionTypes from "./actionTypes";
 import { getUsers, createUserService, editUserService, deleteUserService, getAllCodeService } from "../../services/userService";
 import { CODE_TYPE } from "../../utils";
 import { toast } from "react-toastify";
-import { createQuestionService } from "../../services/questionService";
+import { createQuestionService, getQuestionsService, editQuestionService, deleteQuestionService } from "../../services/questionService";
 
 export const fetchGenders = (dataGender) => ({
     type: actionTypes.FETCH_GENDERS,
@@ -247,4 +247,87 @@ export const createQuestionSuccess = () => ({
 })
 export const createQuestionFailed = () => ({
     type: actionTypes.CREATE_QUESTION_FAILED,
+})
+// =========================================================================================================
+export const fetchAllQuestions = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getQuestionsService();
+            if (res && res.errCode == 0) {
+                dispatch(fetchAllQuestionsSuccess(res.data));
+            } else {
+                console.log(res.errMessage);
+                dispatch(fetchAllQuestionsFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(fetchAllQuestionsFailed());
+        }
+    }
+}
+export const fetchAllQuestionsSuccess = (dataQuestions) => ({
+    type: actionTypes.FETCH_ALL_QUESTIONS_SUCCESS,
+    data: dataQuestions
+})
+export const fetchAllQuestionsFailed = () => ({
+    type: actionTypes.FETCH_ALL_QUESTIONS_FAILED,
+})
+// =========================================================================================================
+export const changeEditQuestion = (question) => ({
+    type: actionTypes.CHANGE_EDIT_QUESTION,
+    data: question
+})
+export const saveEditQuestion = (data) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await editQuestionService(data);
+            if (res && res.errCode == 0) {
+                // dispatch(fetchAllUsers());
+                dispatch(saveEditQuestionSuccess());
+                toast.success("Edited the question succesfully");
+            } else {
+                console.log(res.errMessage);
+                toast.error("Failed to edit the question");
+                dispatch(saveEditQuestionFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(saveEditQuestionFailed());
+            toast.error("Failed to edit the question");
+        }
+    }
+}
+export const saveEditQuestionSuccess = () => ({
+    type: actionTypes.EDIT_QUESTION_SUCCESS,
+})
+export const saveEditQuestionFailed = () => ({
+    type: actionTypes.EDIT_QUESTION_FAILED,
+})
+// =========================================================================================================
+export const deleteQuestion = (questionId, successCallback = null) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await deleteQuestionService(questionId);
+            if (res && res.errCode == 0) {
+                dispatch(fetchAllQuestions());
+                dispatch(deleteQuestionSuccess());
+                toast.success("Deleted the question succesfully");
+                successCallback && successCallback();
+            } else {
+                console.log(res.errMessage);
+                toast.error("Failed to delete the question");
+                dispatch(deleteQuestionFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(deleteQuestionFailed());
+            toast.error("Failed to delete the question");
+        }
+    }
+}
+export const deleteQuestionSuccess = () => ({
+    type: actionTypes.DELETE_QUESTION_SUCCESS,
+})
+export const deleteQuestionFailed = () => ({
+    type: actionTypes.DELETE_QUESTION_FAILED,
 })
