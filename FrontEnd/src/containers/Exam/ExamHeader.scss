@@ -1,7 +1,7 @@
 .exam-header-background {
     // background-color: black;
     height: 64px;
-    padding: 12px 8px;
+    padding: 0 0 12px 8px;
     color: white;
 
     .exam-header-container {
@@ -13,11 +13,11 @@
             .left-content {
 
                 .exam-info {
-                    background: #F4D03F;
+                    background: rgba(255, 255, 255, 0.1);
                     border-radius: 10px;
 
                     .exam-name {
-                        color: black;
+                        color: white;
                         display: flex;
                         align-items: center;
                         padding: 16px;
@@ -30,18 +30,19 @@
                 align-items: center;
 
                 .user-info {
-                    background: #F4D03F;
+                    background: rgba(255, 255, 255, 0.1);
+                    ;
                     border-radius: 10px;
 
                     .user-name {
-                        color: black;
+                        color: white;
                         display: flex;
                         align-items: center;
                         padding: 16px;
                     }
 
                     .user-class {
-                        color: black;
+                        color: white;
                         display: flex;
                         align-items: center;
                         padding: 16px;
