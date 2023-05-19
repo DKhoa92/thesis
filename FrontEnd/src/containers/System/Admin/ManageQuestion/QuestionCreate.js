@@ -157,7 +157,7 @@ class QuestionCreate extends Component {
         );
     }
 
-    onChangeInput(event, id, isArray = false) {
+    onChangeInput(event, id) {
         let newState = { ...this.state };
         newState[id] = event.target.value;
         this.setState({
@@ -165,7 +165,7 @@ class QuestionCreate extends Component {
         })
     }
 
-    onChangeCheckBox(event, id, isArray = false) {
+    onChangeCheckBox(event, id) {
         let newState = { ...this.state };
         newState[id] = event.target.checked;
         this.setState({

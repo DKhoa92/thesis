@@ -1,76 +1,10 @@
 .exam-background {
-    background: linear-gradient(135deg, #16A085, #F4D03F);
+    background: black;
     height: 100vh;
+    padding: 16px;
 
     .exam-container {
         height: calc(100% - 152px);
         // background: black;
-        padding: 0 8px;
-
-        .exam-content {
-            height: 100%;
-            width: 100%;
-            background: white;
-            border-radius: 10px;
-            padding: 16px 8px;
-
-            .question-section {
-                display: flex;
-                height: 50%;
-                flex-direction: row;
-                background: #a18207;
-                margin: 0 5px;
-                border-radius: 8px;
-                align-items: center;
-
-                .media {
-                    display: flex;
-                    width: 0;
-                    flex-grow: 1;
-                }
-
-                .text {
-                    flex-grow: 1;
-                    display: flex;
-                    text-align: center;
-                    color: white;
-                    font-size: 32px;
-                    font-weight: 500;
-                }
-            }
-
-            .answer-section {
-                display: flex;
-                height: 50%;
-                padding: 6px 0;
-
-                .answer {
-                    display: flex;
-                    flex-grow: 1;
-                    margin: 0 8px;
-                    background: #16A085;
-                    box-shadow: 3px 6px #1f6d74;
-                    border: 3px solid #2c9ca6;
-                    border-radius: 8px;
-
-                    padding: 5px;
-                    align-items: center;
-                    cursor: pointer;
-
-                    .answer-text {
-                        width: 100%;
-                        color: white;
-                        font-size: 32px;
-                        font-weight: 500;
-                        text-align: center;
-                    }
-                }
-
-                .answer:hover {
-                    background: #1ccca9;
-                }
-            }
-
-        }
     }
 }
