@@ -21,8 +21,8 @@ class Login extends Component {
 
     handleOnChangeInput = (event, inputField) => {
         this.setState({
-            userName: inputField == 'userName' ? event.target.value : this.state.userName,
-            password: inputField == 'password' ? event.target.value : this.state.password,
+            userName: inputField === 'userName' ? event.target.value : this.state.userName,
+            password: inputField === 'password' ? event.target.value : this.state.password,
         })
     }
 

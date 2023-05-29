@@ -18,7 +18,7 @@ export const fetchTypes = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllCodeService(CODE_TYPE.TYPE);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchTypesSuccess(res.data));
             } else {
                 console.log(res.errMessage);
@@ -42,7 +42,7 @@ export const fetchSubjects = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllCodeService(CODE_TYPE.SUBJECT);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchSubjectsSuccess(res.data));
             } else {
                 console.log(res.errMessage);
@@ -66,7 +66,7 @@ export const fetchGrades = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllCodeService(CODE_TYPE.GRADE);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchGradesSuccess(res.data));
             } else {
                 console.log(res.errMessage);
@@ -90,7 +90,7 @@ export const fetchDifficulties = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getAllCodeService(CODE_TYPE.DIFFICULTY);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchDifficultiesSuccess(res.data));
             } else {
                 console.log(res.errMessage);
@@ -114,7 +114,7 @@ export const createUser = (data, successCallback = null) => {
     return async (dispatch, getState) => {
         try {
             let res = await createUserService(data);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchAllUsers());
                 dispatch(createUserSuccess());
                 toast.success("Created new user succesfully");
@@ -142,7 +142,7 @@ export const fetchAllUsers = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getUsers();
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchAllUsersSuccess(res.data));
             } else {
                 console.log(res.errMessage);
@@ -166,7 +166,7 @@ export const deleteUser = (userId, successCallback = null) => {
     return async (dispatch, getState) => {
         try {
             let res = await deleteUserService(userId);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchAllUsers());
                 dispatch(deleteUserSuccess());
                 toast.success("Deleted the user succesfully");
@@ -198,7 +198,7 @@ export const saveEditUser = (data) => {
     return async (dispatch, getState) => {
         try {
             let res = await editUserService(data);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchAllUsers());
                 dispatch(saveEditUserSuccess());
                 toast.success("Edited the user succesfully");
@@ -225,7 +225,7 @@ export const createQuestion = (data, successCallback = null) => {
     return async (dispatch, getState) => {
         try {
             let res = await createQuestionService(data);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchAllQuestions());
                 dispatch(createQuestionSuccess());
                 toast.success("Created new question succesfully");
@@ -253,7 +253,7 @@ export const fetchAllQuestions = () => {
     return async (dispatch, getState) => {
         try {
             let res = await getQuestionsService();
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchAllQuestionsSuccess(res.data));
             } else {
                 console.log(res.errMessage);
@@ -281,7 +281,7 @@ export const saveEditQuestion = (data) => {
     return async (dispatch, getState) => {
         try {
             let res = await editQuestionService(data);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchAllQuestions());
                 dispatch(saveEditQuestionSuccess());
                 toast.success("Edited the question succesfully");
@@ -308,7 +308,7 @@ export const deleteQuestion = (questionId, successCallback = null) => {
     return async (dispatch, getState) => {
         try {
             let res = await deleteQuestionService(questionId);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 dispatch(fetchAllQuestions());
                 dispatch(deleteQuestionSuccess());
                 toast.success("Deleted the question succesfully");

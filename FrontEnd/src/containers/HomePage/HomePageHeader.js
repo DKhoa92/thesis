@@ -11,7 +11,7 @@ import { withRouter } from 'react-router';
 class HomePageHeader extends Component {
 
     onClickLanguage = () => {
-        if (this.props.language == LANGUAGES.VI)
+        if (this.props.language === LANGUAGES.VI)
             this.props.changeLanguageA(LANGUAGES.EN)
         else
             this.props.changeLanguageA(LANGUAGES.VI)

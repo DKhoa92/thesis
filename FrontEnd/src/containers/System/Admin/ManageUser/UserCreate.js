@@ -100,7 +100,7 @@ class UserCreate extends Component {
                                 onChange={(event) => { this.onchangeInput(event, 'role') }}>
                                 {roles && roles.length > 0 &&
                                     roles.map((item, index) => {
-                                        return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                        return (<option key={index} value={item.codeKey}>{language === LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
                                     })}
                             </select>
                         </div>
@@ -110,7 +110,7 @@ class UserCreate extends Component {
                                 onChange={(event) => { this.onchangeInput(event, 'gender') }}>
                                 {genders && genders.length > 0 &&
                                     genders.map((item, index) => {
-                                        return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                        return (<option key={index} value={item.codeKey}>{language === LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
                                     })}
                             </select>
                         </div>
@@ -190,7 +190,7 @@ class UserCreate extends Component {
         const { fetchGenders } = this.props;
         try {
             let res = await getAllCodeService('GENDER');
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 fetchGenders(res.data);
             } else
                 console.log("Fetch data genders error");
@@ -203,7 +203,7 @@ class UserCreate extends Component {
         const { fetchRoles } = this.props;
         try {
             let res = await getAllCodeService(CODE_TYPE.ROLE);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 fetchRoles(res.data);
             } else
                 console.log("Fetch data roles error");

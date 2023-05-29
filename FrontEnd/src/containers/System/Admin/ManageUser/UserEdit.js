@@ -109,7 +109,7 @@ class UserEdit extends Component {
                                 onChange={(event) => { this.onchangeInput(event, 'role') }}>
                                 {roles && roles.length > 0 &&
                                     roles.map((item, index) => {
-                                        return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                        return (<option key={index} value={item.codeKey}>{language === LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
                                     })}
                             </select>
                         </div>
@@ -119,7 +119,7 @@ class UserEdit extends Component {
                                 onChange={(event) => { this.onchangeInput(event, 'gender') }}>
                                 {genders && genders.length > 0 &&
                                     genders.map((item, index) => {
-                                        return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                        return (<option key={index} value={item.codeKey}>{language === LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
                                     })}
                             </select>
                         </div>
@@ -163,7 +163,7 @@ class UserEdit extends Component {
     }
 
     onClickSubmit = () => {
-        let { userName, password, email, firstName, lastName, role, gender, address } = this.state;
+        let { email, firstName, lastName, role, gender, address } = this.state;
         // let isValid = this.checkValidateInput();
         // if (isValid === false) return;
         let newUser = { ...this.props.user };
@@ -183,7 +183,7 @@ class UserEdit extends Component {
         const { fetchGenders } = this.props;
         try {
             let res = await getAllCodeService(CODE_TYPE.GENDER);
-            if (res && res.errCode == 0) {
+            if (res && res.errCode === 0) {
                 fetchGenders(res.data);
             } else
                 console.log("Fetch data genders error");
@@ -196,8 +196,7 @@ class UserEdit extends Component {
         const { fetchRoles } = this.props;
         try {
             let res = await getAllCodeService(CODE_TYPE.ROLE);
-            if (res && res.errCode == 0) {
-                console.log("BBB");
+            if (res && res.errCode === 0) {
                 fetchRoles(res.data);
             } else
                 console.log("Fetch data roles error");

@@ -37,7 +37,7 @@ class Exam extends Component {
                         let div = [];
                         for (let i = 0; i < this.state.number; i++) {
                             div.push(
-                                <i className={"fas fa-circle" + (currentIdx == i ? ' active' : '')} key={i}></i>
+                                <i className={"fas fa-circle" + (currentIdx === i ? ' active' : '')} key={i}></i>
                             );
                         }
                         return div;

@@ -102,7 +102,7 @@ class QuestionEdit extends Component {
                                     onChange={(event) => { this.onChangeInput(event, 'type') }}>
                                     {types && types.length > 0 &&
                                         types.map((item, index) => {
-                                            return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                            return (<option key={index} value={item.codeKey}>{language === LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
                                         })}
                                 </select>
                             </div>
@@ -114,7 +114,7 @@ class QuestionEdit extends Component {
                                     onChange={(event) => { this.onChangeInput(event, 'subject') }}>
                                     {subjects && subjects.length > 0 &&
                                         subjects.map((item, index) => {
-                                            return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                            return (<option key={index} value={item.codeKey}>{language === LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
                                         })}
                                 </select>
                             </div>
@@ -124,7 +124,7 @@ class QuestionEdit extends Component {
                                     onChange={(event) => { this.onChangeInput(event, 'grade') }}>
                                     {grades && grades.length > 0 &&
                                         grades.map((item, index) => {
-                                            return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                            return (<option key={index} value={item.codeKey}>{language === LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
                                         })}
                                 </select>
                             </div>
@@ -134,7 +134,7 @@ class QuestionEdit extends Component {
                                     onChange={(event) => { this.onChangeInput(event, 'difficulty') }}>
                                     {difficulties && difficulties.length > 0 &&
                                         difficulties.map((item, index) => {
-                                            return (<option key={index} value={item.codeKey}>{language == LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
+                                            return (<option key={index} value={item.codeKey}>{language === LANGUAGES.EN ? item.valueEn : item.valueVi}</option>)
                                         })}
                                 </select>
                             </div>
