@@ -68,7 +68,9 @@
             },
             "system-parameter": {
                 "header": "Tham số hệ thống"
-            }
+            },
+            "manage-user": "Quản lý người dùng",
+            "manage-question": "Quản lý câu hỏi"
         }
     },
     "allCode": {

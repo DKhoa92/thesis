@@ -68,7 +68,9 @@
             },
             "system-parameter": {
                 "header": "System-parameter"
-            }
+            },
+            "manage-user": "User manage",
+            "manage-question": "Question manage"
         }
     },
     "allCode": {
