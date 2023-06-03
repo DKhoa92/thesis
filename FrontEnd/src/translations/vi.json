@@ -35,6 +35,10 @@
             "grade": "Khối lớp",
             "difficulty": "Độ khó",
             "questionManage": "Quản lý câu hỏi"
+        },
+        "questionGroup": {
+            "createQuestionGroup": "TẠO BỘ ĐỀ",
+            "questionGroupName": "Tên bộ đề"
         }
     },
     "login": {
@@ -70,7 +74,8 @@
                 "header": "Tham số hệ thống"
             },
             "manage-user": "Quản lý người dùng",
-            "manage-question": "Quản lý câu hỏi"
+            "manage-question": "Quản lý câu hỏi",
+            "manage-question-group": "Quản lý bộ đề"
         }
     },
     "allCode": {

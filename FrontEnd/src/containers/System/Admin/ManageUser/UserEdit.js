@@ -74,7 +74,7 @@ class UserEdit extends Component {
         let roles = this.state.roles;
         let language = this.props.language;
         let { userName, password, email, firstName, lastName, role, gender, address } = this.state;
-        // console.log(this.props.user);
+
         return (
             <div className='CreateUserContainer'>
                 <div className='container'>

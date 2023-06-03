@@ -6,11 +6,12 @@ import './Login.scss';
 import { FormattedMessage } from 'react-intl';
 import { handleLoginApi } from '../../services/userService';
 import { withRouter } from 'react-router';
+import { GoogleLogin } from '@react-oauth/google';
+import jwtDecode from 'jwt-decode';
 
 class Login extends Component {
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = {
             userName: 'ndk@yh.com',
             password: '123456',
@@ -98,8 +99,17 @@ class Login extends Component {
                             <span className='text-other-login'>Or login with:</span>
                         </div>
                         <div className='col-12 social-login'>
-                            <i className="fab fa-google google"></i>
-                            <i className="fab fa-facebook-f facebook"></i>
+                            <GoogleLogin
+                                onSuccess={credentialResponse => {
+
+                                    let decoded = jwtDecode(credentialResponse.credential);
+                                    this.props.googleLogin(decoded.email);
+                                    this.props.userLoginSuccess(decoded.email);
+                                }}
+                                onError={() => {
+                                    console.log('Login Failed');
+                                }}
+                            />
                         </div>
                     </div>
                 </div>
@@ -119,6 +129,7 @@ const mapDispatchToProps = dispatch => {
         navigate: (path) => dispatch(push(path)),
         // userLoginFail: () => dispatch(actions.userLoginFail()),
         userLoginSuccess: (userInfo) => dispatch(actions.userLoginSuccess(userInfo)),
+        googleLogin: (email) => dispatch(actions.googleLogin(email)),
     };
 };
 

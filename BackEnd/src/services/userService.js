@@ -2,7 +2,7 @@ import db from "../models/index";
 import bcrypt from 'bcrypt';
 import { Op } from "sequelize";
 
-let handleUserLogin = (email, password) => {
+let handleUserLogin = (userName, password) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};
@@ -30,7 +30,7 @@ let handleUserLogin = (email, password) => {
     })
 }
 
-let checkUserName = (email) => {
+let checkUserName = (userName) => {
     return new Promise(async (resolve, reject) => {
         try {
             let user = await db.user.findOne({
@@ -67,6 +67,34 @@ let getUsers = (id) => {
             } else {
                 res.errCode = 1;
                 res.errMessage = "Error while get users on server";
+            }
+            resolve(res);
+        } catch (error) {
+            reject(error);
+        }
+    })
+}
+
+let getUsersByEmail = (data) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let email = data.email;
+            let res = {};
+            let user;
+            if (email) {
+                user = await db.user.findOne({
+                    where: { email: email },
+                    attributes: { exclude: ['password'] },
+                })
+            };
+            if (user) {
+                console.log(user);
+                res.errCode = 0;
+                res.errMessage = "Get user sucessfully";
+                res.data = user;
+            } else {
+                res.errCode = 1;
+                res.errMessage = "Error while get user on server";
             }
             resolve(res);
         } catch (error) {
@@ -114,8 +142,9 @@ let getAllCode = (type) => {
 let createUser = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
+            console.log(data);
             let res = {};
-            let hashPassword = await hashUserPassword(data.password);
+            let hashPassword = data.password && await hashUserPassword(data.password);
             await db.user.create({
                 userName: data.userName,
                 password: hashPassword,
@@ -124,8 +153,8 @@ let createUser = (data) => {
                 lastName: data.lastName,
                 address: data.address,
                 phoneNumber: data.phoneNumber,
-                gender: data.gender,
-                role: data.role,
+                gender: data.gender || 'G1',
+                role: data.role || 'R5',
             })
             res.errCode = 0;
             res.errMessage = "Create user successfully";
@@ -203,6 +232,7 @@ let hashUserPassword = async (password) => {
 module.exports = {
     handleUserLogin,
     getUsers,
+    getUsersByEmail,
     getAllCode,
     createUser,
     editUser,

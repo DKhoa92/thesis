@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     question_using.init({
-        questionPackageId: DataTypes.INTEGER,
+        questionGroupId: DataTypes.INTEGER,
         questionId: DataTypes.INTEGER,
         orderNumber: DataTypes.INTEGER,
     }, {

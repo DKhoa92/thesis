@@ -98,7 +98,7 @@ class UserManage extends Component {
         this.setState({
             ...newState
         }, () => {
-            console.log(this.state);
+
         })
     }
 
@@ -108,7 +108,7 @@ class UserManage extends Component {
         this.setState({
             ...newState
         }, () => {
-            console.log(this.state);
+
         })
     }
 

@@ -26,11 +26,19 @@ const deleteUserService = (userId) => {
     });
 }
 
+const googleLoginService = (email) => {
+    return axios.post('api/google-login', {
+        email: email
+    });
+}
+
+
 export {
     handleLoginApi,
     getUsers,
     getAllCodeService,
     createUserService,
     deleteUserService,
-    editUserService
+    editUserService,
+    googleLoginService
 }

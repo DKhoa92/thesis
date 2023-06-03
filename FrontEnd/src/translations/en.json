@@ -35,6 +35,10 @@
             "grade": "Grade",
             "difficulty": "Difficulty",
             "questionManage": "Manage Questions"
+        },
+        "questionGroup": {
+            "createQuestionGroup": "CREATE QUESTION GROUP",
+            "questionGroupName": "Question group name"
         }
     },
     "login": {
@@ -70,7 +74,8 @@
                 "header": "System-parameter"
             },
             "manage-user": "User manage",
-            "manage-question": "Question manage"
+            "manage-question": "Question manage",
+            "manage-question-group": "Question group manage"
         }
     },
     "allCode": {

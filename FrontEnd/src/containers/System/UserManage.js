@@ -19,7 +19,7 @@ class UserManage extends Component {
             this.setState({
                 arrUsers: response.users
             }, () => {
-                console.log("stat.arrUsers", this.state.arrUsers);
+
             })
         }
     }

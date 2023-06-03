@@ -13,7 +13,6 @@ const createQuestionService = (questionData) => {
 }
 
 const editQuestionService = (questionData) => {
-    console.log(questionData);
     return axios.post('api/edit-question', questionData);
 }
 

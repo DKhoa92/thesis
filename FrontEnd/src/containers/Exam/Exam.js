@@ -5,6 +5,8 @@ import './Exam.scss';
 import { FormattedMessage } from 'react-intl';
 import MultipleChoice from './QuestionTemplates/MultipleChoice';
 import ExamFooter from './ExamFooter';
+import { QUESTION_TYPE } from '../../utils';
+import ExamBody from './ExamBody';
 class Exam extends Component {
     constructor(props) {
         super(props);
@@ -14,18 +16,18 @@ class Exam extends Component {
         // }
         this.testQuestion = {
             data: JSON.stringify({
-                content: "content",
+                question: "question",
                 choiceNumber: 4,
                 answers: ["A", "B", "C", "D"],
             }),
-            type: "type",
+            type: QUESTION_TYPE.MULTIPLE_CHOICES,
             subject: "subject",
             grade: "grade",
             difficulty: "difficulty"
         };
-        console.log(JSON.stringify(this.testQuestion));
+
         this.state = {
-            questions: [],
+            questions: [this.testQuestion],
         }
     }
 
@@ -39,13 +41,14 @@ class Exam extends Component {
     }
 
     render() {
+        let { questions } = this.state;
         return (
             <div className='exam-background'>
                 <ExamHeader />
                 <div className='exam-container'>
-                    <MultipleChoice question={this.testQuestion} />
+                    <ExamBody></ExamBody>
                 </div>
-                <ExamFooter questionNumber={10} />
+                <ExamFooter showExamBtns={true} questionNumber={questions ? questions.length : 0} />
             </div>
         );
     }

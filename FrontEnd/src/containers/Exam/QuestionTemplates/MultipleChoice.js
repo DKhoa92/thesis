@@ -5,14 +5,14 @@ import { FormattedMessage } from 'react-intl';
 class MultipleChoice extends Component {
     constructor(props) {
         super(props);
-        let content, answers;
+        let question, answers;
         if (props.question && props.question.data) {
             this.questionData = JSON.parse(props.question.data);
-            content = this.questionData.content;
+            question = this.questionData.question;
             answers = this.questionData.answers
         }
         this.state = {
-            content: content ? content : '',
+            question: question ? question : '',
             answers: answers ? answers : '',
         }
 
@@ -26,12 +26,12 @@ class MultipleChoice extends Component {
     }
 
     render() {
-        let { content, answers } = this.state;
+        let { question, answers } = this.state;
         return (
             <div className='exam-content'>
                 <div className='question-section'>
                     <div className='media'></div>
-                    <div className='text'>{content}
+                    <div className='text'>{question}
                     </div>
                 </div>
                 <div className='answer-section'>
@@ -55,7 +55,6 @@ class MultipleChoice extends Component {
     }
 
     onChangeAnswer(event, id) {
-        console.log(event);
         let newState = { ...this.state };
         newState[id] = event.target.checked;
         this.setState({

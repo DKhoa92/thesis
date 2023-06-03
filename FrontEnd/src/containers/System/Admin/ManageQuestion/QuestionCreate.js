@@ -213,7 +213,7 @@ class QuestionCreate extends Component {
 
         this.props.createQuestion({
             data: {
-                content: content,
+                question: content,
                 choiceNumber: choiceNumber,
                 answers: answers,
             },
@@ -228,7 +228,6 @@ class QuestionCreate extends Component {
     }
 
     resetForm = () => {
-        console.log("AAA");
         let newState = { ...this.state }
         newState.type = this.state.types[0];
         newState.content = '';

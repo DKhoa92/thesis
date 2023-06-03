@@ -18,10 +18,8 @@ import System from '../routes/System';
 import Exam from './Exam/Exam';
 import HomePage from './HomePage/HomePage';
 import UserManage from './System/Admin/ManageUser/UserManage';
-import QuestionCreate from './System/Admin/ManageQuestion/QuestionCreate';
 import ManageQuestion from './System/Admin/ManageQuestion/QuestionManage';
-import { CustomToastCloseButton } from '../components/CustomToast';
-
+import QuestionGroupCreate from './System/Admin/ManageQuestionGroup/QuestionGroupCreate';
 
 class App extends Component {
 
@@ -59,6 +57,7 @@ class App extends Component {
                                 <Route path={PATH.EXAM} component={Exam} />
                                 <Route path={PATH.MANAGE_USER} component={UserManage} />
                                 <Route path={PATH.MANAGE_QUESTION} component={ManageQuestion} />
+                                <Route path={PATH.CREATE_QUESTION_GROUP} component={QuestionGroupCreate} />
                             </Switch>
                         </span>
 

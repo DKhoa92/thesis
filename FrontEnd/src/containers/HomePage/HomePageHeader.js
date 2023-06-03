@@ -18,7 +18,6 @@ class HomePageHeader extends Component {
     }
 
     onClickLogin = () => {
-        console.log("onClickLogin");
         this.props.history.push(PATH.LOGIN);
     }
 

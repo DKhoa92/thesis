@@ -1,5 +1,4 @@
 .exam-footer-container {
-    position: absolute;
     bottom: 0px;
     height: 88px;
     color: white;
@@ -24,7 +23,6 @@
 
     .exam-footer-content {
         height: calc(100% - 24px);
-        position: absolute;
         justify-content: space-between;
         align-items: center;
 
@@ -41,11 +39,21 @@
             .next {
                 margin-left: 16px;
             }
+
+            .page-number {
+                margin-left: 16px;
+                display: flex;
+                font-size: 32px;
+                font-weight: 600;
+                text-align: center;
+                align-items: center;
+            }
         }
 
         .right-content {
             justify-content: end;
             align-items: center;
+            display: flex;
 
             .btn {
                 display: flex;
@@ -60,5 +68,9 @@
                 margin-right: 16px;
             }
         }
+    }
+
+    .hidden {
+        display: none !important;
     }
 }

@@ -40,6 +40,10 @@ export const CODE_TYPE = {
     STATUS: 'STATUS'
 }
 
+export const QUESTION_TYPE = {
+    MULTIPLE_CHOICES: 'T1',
+}
+
 export const CONFIG = {
     DEFAULT_MULTIPLE_CHOICES: 4,
     MAX_MULTIPLE_CHOICES: 5,

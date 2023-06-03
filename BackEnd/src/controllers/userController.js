@@ -20,6 +20,16 @@ let handleLogin = async (req, res) => {
     })
 }
 
+let handleGoogleLogin = async (req, res) => {
+    let email = req.body.email;
+    console.log(email);
+    let response = await userService.getUsersByEmail(req.body);
+    if (response.errCode != 0)
+        response = await userService.createUser(req.body);
+
+    return res.status(200).json(response)
+}
+
 let handleGetUsers = async (req, res) => {
     let id = req.query.id != 'undefined' ? [req.query.id] : null;
     let response = await userService.getUsers(id);
@@ -56,10 +66,10 @@ let handleDeleteUser = async (req, res) => {
 
 module.exports = {
     handleLogin,
+    handleGoogleLogin,
     handleGetUsers,
     handleGetAllCode,
     handleCreateUser,
     handleEditUser,
     handleDeleteUser,
-
 }

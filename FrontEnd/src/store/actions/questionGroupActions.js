@@ -1,0 +1,74 @@
+import { toast } from "react-toastify";
+import { createQuestionGroupService, createQuestionUsingService } from "../../services/questionGroup";
+import actionTypes from "./actionTypes";
+
+export const addQuestion = (question) => ({
+    type: actionTypes.ADD_QUESTION,
+    data: question
+})
+
+export const changeQuestion = (index) => ({
+    type: actionTypes.CHANGE_QUESTION,
+    data: index
+})
+
+export const setQuestions = (questions) => ({
+    type: actionTypes.ADD_QUESTION,
+    data: questions
+})
+
+
+
+export const createQuestionGroup = (data, successCallback = null) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createQuestionGroupService(data);
+            if (res && res.errCode === 0) {
+                dispatch(createQuestionGroupSuccess());
+                toast.success("Created new question group succesfully");
+                successCallback && successCallback(res.questionGroupId);
+            } else {
+                console.log(res.errMessage);
+                toast.error("Failed to create new question group");
+                dispatch(createQuestionGroupFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(createQuestionGroupFailed());
+            toast.error("Failed to create new question group");
+        }
+    }
+}
+export const createQuestionGroupSuccess = () => ({
+    type: actionTypes.CREATE_QUESTION_GROUP_SUCCESS,
+})
+export const createQuestionGroupFailed = () => ({
+    type: actionTypes.CREATE_QUESTION_GROUP_FAILED,
+})
+
+export const createQuestionUsing = (data, successCallback = null) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await createQuestionUsingService(data);
+            if (res && res.errCode === 0) {
+                dispatch(createQuestionUsingSuccess());
+                toast.success("Created new question using succesfully");
+                successCallback && successCallback();
+            } else {
+                console.log(res.errMessage);
+                toast.error("Failed to create new question using");
+                dispatch(createQuestionUsingFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(createQuestionUsingFailed());
+            toast.error("Failed to create new question using");
+        }
+    }
+}
+export const createQuestionUsingSuccess = () => ({
+    type: actionTypes.CREATE_QUESTION_USING_SUCCESS,
+})
+export const createQuestionUsingFailed = () => ({
+    type: actionTypes.CREATE_QUESTION_GROUP_FAILED,
+})

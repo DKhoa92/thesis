@@ -9,6 +9,7 @@ import examReducer from "./examReducer";
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
+import questionGroupReducer from './questionGroupReducer';
 
 const persistCommonConfig = {
     storage: storage,
@@ -33,4 +34,5 @@ export default (history) => combineReducers({
     app: persistReducer(appPersistConfig, appReducer),
     admin: adminReducer,
     exam: examReducer,
+    questionGroup: questionGroupReducer,
 })

@@ -8,7 +8,7 @@ class HomePage extends Component {
         return (
             <>
                 <HomePageHeader />
-                <div><FormattedMessage id='login.login' /></div>
+                <div></div>
             </>
         );
     }

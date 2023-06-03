@@ -44,7 +44,7 @@ class UserCreate extends Component {
 
         if (prevProps.roles !== this.props.roles) {
             let roles = this.props.roles;
-            console.log(roles);
+
             this.setState({
                 roles: roles,
                 role: roles && roles.length > 0 ? roles[0].codeKey : ''
