@@ -13,7 +13,7 @@ export const changeQuestion = (index) => ({
 })
 
 export const setQuestions = (questions) => ({
-    type: actionTypes.ADD_QUESTION,
+    type: actionTypes.SET_QUESTIONS,
     data: questions
 })
 

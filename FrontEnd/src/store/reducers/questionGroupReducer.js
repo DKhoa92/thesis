@@ -24,6 +24,11 @@ const questionGroupReducer = (state = initialState, action) => {
                 ...state,
                 questions: action.data,
             }
+        case actionTypes.SET_QUESTIONS:
+            return {
+                ...state,
+                questions: action.data,
+            }
         default:
             return state;
     }
