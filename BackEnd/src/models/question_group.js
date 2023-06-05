@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
         }
     }
     question_group.init({
-        name: DataTypes.STRING,
+        title: DataTypes.STRING,
         creatorId: DataTypes.INTEGER,
         questionSubmissionId: DataTypes.INTEGER,
         approvedDate: DataTypes.DATE,

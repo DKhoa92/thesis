@@ -3,6 +3,7 @@ import { getUsers, createUserService, editUserService, deleteUserService, getAll
 import { CODE_TYPE } from "../../utils";
 import { toast } from "react-toastify";
 import { createQuestionService, getQuestionsService, editQuestionService, deleteQuestionService } from "../../services/questionService";
+import { createQuestionGroupService, getQuestionGroupsService, editQuestionGroupService, deleteQuestionGroupService } from "../../services/questionGroupService";
 
 export const fetchGenders = (dataGender) => ({
     type: actionTypes.FETCH_GENDERS,
@@ -331,3 +332,4 @@ export const deleteQuestionSuccess = () => ({
 export const deleteQuestionFailed = () => ({
     type: actionTypes.DELETE_QUESTION_FAILED,
 })
+// =========================================================================================================

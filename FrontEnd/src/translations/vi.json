@@ -38,7 +38,11 @@
         },
         "questionGroup": {
             "createQuestionGroup": "TẠO BỘ ĐỀ",
-            "questionGroupName": "Tên bộ đề"
+            "questionGroupName": "Tên bộ đề",
+            "title": "Tựa đề",
+            "status": "Status",
+            "approvedDate": "Approved Date",
+            "creator": "Creator"
         }
     },
     "login": {

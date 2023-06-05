@@ -9,7 +9,7 @@ module.exports = {
                 autoIncrement: true,
                 type: Sequelize.INTEGER
             },
-            name: {
+            title: {
                 type: Sequelize.STRING
             },
             creatorId: {

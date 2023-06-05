@@ -3,6 +3,7 @@ import actionTypes from '../actions/actionTypes';
 const initialState = {
     questions: [],
     currentQuestionIdx: 0,
+    questionGroups: [],
 }
 
 const questionGroupReducer = (state = initialState, action) => {

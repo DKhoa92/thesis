@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { createQuestionGroupService, createQuestionUsingService } from "../../services/questionGroup";
+import { createQuestionGroupService, createQuestionUsingService, getQuestionGroupsService } from "../../services/questionGroupService";
 import actionTypes from "./actionTypes";
 
 export const addQuestion = (question) => ({
@@ -17,7 +17,33 @@ export const setQuestions = (questions) => ({
     data: questions
 })
 
+// =========================================================================================================
 
+export const fetchAllQuestionGroups = () => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getQuestionGroupsService();
+            if (res && res.errCode === 0) {
+                dispatch(fetchAllQuestionGroupsSuccess(res.data));
+            } else {
+                console.log(res.errMessage);
+                dispatch(fetchAllQuestionGroupsFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(fetchAllQuestionGroupsFailed());
+        }
+    }
+}
+export const fetchAllQuestionGroupsSuccess = (dataQuestionGroups) => ({
+    type: actionTypes.FETCH_ALL_QUESTION_GROUPS_SUCCESS,
+    data: dataQuestionGroups
+})
+export const fetchAllQuestionGroupsFailed = () => ({
+    type: actionTypes.FETCH_ALL_QUESTION_GROUPS_FAILED,
+})
+
+// =========================================================================================================
 
 export const createQuestionGroup = (data, successCallback = null) => {
     return async (dispatch, getState) => {
@@ -72,3 +98,4 @@ export const createQuestionUsingSuccess = () => ({
 export const createQuestionUsingFailed = () => ({
     type: actionTypes.CREATE_QUESTION_GROUP_FAILED,
 })
+

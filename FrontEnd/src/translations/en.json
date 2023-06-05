@@ -38,7 +38,11 @@
         },
         "questionGroup": {
             "createQuestionGroup": "CREATE QUESTION GROUP",
-            "questionGroupName": "Question group name"
+            "questionGroupName": "Question group name",
+            "title": "Title",
+            "status": "Status",
+            "approvedDate": "Approved Date",
+            "creator": "Creator"
         }
     },
     "login": {
