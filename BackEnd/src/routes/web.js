@@ -28,7 +28,7 @@ let initWebRoutes = (app) => {
     router.delete('/api/delete-question', questionController.handleDeleteQuestion);
 
     router.post('/api/create-question-group', questionGroupController.handleCreateQuestionGroup);
-    router.get('/api/get-question-group', questionGroupController.handleGetQuestionGroups);
+    router.get('/api/get-question-groups', questionGroupController.handleGetQuestionGroups);
     router.post('/api/edit-question-group', questionGroupController.handleEditQuestionGroup);
     router.delete('/api/delete-question-group', questionGroupController.handleDeleteQuestionGroup);
 

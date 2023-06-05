@@ -7,6 +7,8 @@ module.exports = (sequelize, DataTypes) => {
 
     static associate(models) {
       // define association here
+
+      user.hasMany(models.question_group, { foreignKey: 'creatorId' });
     }
   }
   user.init({

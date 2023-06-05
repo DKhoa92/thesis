@@ -9,9 +9,17 @@ let getQuestionGroups = (id) => {
             if (id) {
                 questionGroups = await db.question_group.findAll({
                     where: { id: { [Op.or]: id } },
+                    include: { model: db.user, attributes: ['firstName', 'lastName'] },
+                    raw: true,
+                    nest: true,
                 })
-            } else
-                questionGroups = await db.question_groups.findAll();
+            } else {
+                questionGroups = await db.question_group.findAll({
+                    include: { model: db.user, attributes: ['firstName', 'lastName'] },
+                    raw: true,
+                    nest: true,
+                });
+            }
             if (questionGroups) {
                 res.errCode = 0;
                 res.errMessage = "Get questionGroups sucessfully";
@@ -32,8 +40,9 @@ let createQuestionGroup = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};
+            console.log(data);
             let questionGroup = await db.question_group.create({
-                name: data.name,
+                title: data.title,
                 creatorId: data.creatorId,
             })
             res.questionGroupId = questionGroup.id;

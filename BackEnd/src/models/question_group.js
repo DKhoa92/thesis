@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
          */
         static associate(models) {
             // define association here
+            question_group.hasMany(models.question_using, { foreignKey: 'questionGroupId' });
+            question_group.belongsTo(models.user, { foreignKey: 'creatorId' });
         }
     }
     question_group.init({
