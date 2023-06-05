@@ -3,19 +3,18 @@ import { connect } from 'react-redux';
 import { FormattedMessage } from 'react-intl';
 import { CONFIG, LANGUAGES } from '../../../../utils';
 import * as actions from '../../../../store/actions';
-import './QuestionGroupCreate.scss';
-import Exam from '../../../Exam/Exam';
+import './CreateQuestionGroup.scss';
 import ExamBody from '../../../Exam/ExamBody';
 import ExamFooter from '../../../Exam/ExamFooter';
 import QuestionTable from '../ManageQuestion/QuestionTable';
 
-class QuestionGroupCreate extends Component {
+class CreateQuestionGroup extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            name: "",
+            title: "",
         }
     }
 
@@ -23,39 +22,12 @@ class QuestionGroupCreate extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        //     if (prevProps.types !== this.props.types) {
-        //         let types = this.props.types;
-        //         this.setState({
-        //             types: types,
-        //             type: types && types.length > 0 ? types[0].codeKey : ''
-        //         });
-        //     }
-        //     if (prevProps.subjects !== this.props.subjects) {
-        //         let subjects = this.props.subjects;
-        //         this.setState({
-        //             subjects: subjects,
-        //             subject: subjects && subjects.length > 0 ? subjects[0].codeKey : ''
-        //         });
-        //     }
-        //     if (prevProps.grades !== this.props.grades) {
-        //         let grades = this.props.grades;
-        //         this.setState({
-        //             grades: grades,
-        //             grade: grades && grades.length > 0 ? grades[0].codeKey : ''
-        //         });
-        //     }
-        //     if (prevProps.difficulties !== this.props.difficulties) {
-        //         let difficulties = this.props.difficulties;
-        //         this.setState({
-        //             difficulties: difficulties,
-        //             difficulty: difficulties && difficulties.length > 0 ? difficulties[0].codeKey : ''
-        //         });
-        //     }
+
     }
 
     render() {
         let language = this.props.language;
-        let { name } = this.state;
+        let { title } = this.state;
 
         return (
             <div className='createQuestionGroupContainer'>
@@ -67,12 +39,12 @@ class QuestionGroupCreate extends Component {
 
                     <div className='col-12 my-2'>
                         <label><FormattedMessage id='system.questionGroup.questionGroupName' /></label>
-                        <input className='form-control' type="text" id='name' value={name}
-                            onChange={(event) => { this.onChangeInput(event, 'name') }} />
+                        <input className='form-control' type="text" id='title' value={title}
+                            onChange={(event) => { this.onChangeInput(event, 'title') }} />
                     </div>
                     <div className='show-questions'>
-                        <div className='exam-body'><ExamBody></ExamBody></div>
-                        <div className='exam-footer'><ExamFooter></ExamFooter></div>
+                        <div className='exam-body'><ExamBody /></div>
+                        <div className='exam-footer'><ExamFooter /></div>
                     </div>
                     <div className='question-table'><QuestionTable showAddGroupBtn={true}></QuestionTable></div>
 
@@ -98,7 +70,7 @@ class QuestionGroupCreate extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        let arrCheck = ['name']
+        let arrCheck = ['title'];
         for (let i = 0; i < arrCheck.length; i++) {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
@@ -111,12 +83,12 @@ class QuestionGroupCreate extends Component {
     }
 
     onClickSubmit = () => {
-        let { name } = this.state;
+        let { title } = this.state;
         let isValid = this.checkValidateInput();
         if (isValid === false) return;
 
         this.props.createQuestionGroup({
-            name: name,
+            title: title,
             creatorId: this.props.userInfo.id
         }, (questionGroupId) => {
             this.props.questions.forEach(question => {
@@ -131,7 +103,7 @@ class QuestionGroupCreate extends Component {
 
     resetForm = () => {
         let newState = { ...this.state }
-        newState.name = '';
+        newState.title = '';
         this.props.setQuestions([]);
         this.setState({
             ...newState
@@ -156,4 +128,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionGroupCreate);
+export default connect(mapStateToProps, mapDispatchToProps)(CreateQuestionGroup);

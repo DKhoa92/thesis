@@ -1,0 +1,33 @@
+.question-container {
+
+    .question-popup-background {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.4);
+
+        &.hidden {
+            display: none;
+        }
+
+        .question-create-container {
+            margin-top: 10%;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+
+        .question-edit-container {
+            margin-top: 10%;
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+        }
+    }
+
+    .question-edit-background {}
+
+    .question-table {}
+}

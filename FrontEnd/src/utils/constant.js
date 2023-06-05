@@ -8,6 +8,9 @@ export const PATH = {
     MANAGE_USER: '/manage-user',
     CREATE_QUESTION: '/create-question',
     MANAGE_QUESTION: '/manage-question',
+    CREATE_QUESTION_GROUP: '/create-question-group',
+    MANAGE_QUESTION_GROUP: '/manage-question-group',
+    TABLE_QUESTION_GROUP: '/table-question-group'
 };
 
 export const LANGUAGES = {

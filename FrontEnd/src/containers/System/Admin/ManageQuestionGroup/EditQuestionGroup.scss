@@ -1,0 +1,22 @@
+.editQuestionContainer {
+    .container {
+        .row {
+            .title {}
+
+            .type-multiple-choice {
+
+                .answers {
+                    .answer {
+                        display: inline-block;
+                        width: 80%;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.requiredField {
+    color: red
+}

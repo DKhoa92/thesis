@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ExamHeader from './ExamHeader';
 import './Exam.scss';
-import { FormattedMessage } from 'react-intl';
-import MultipleChoice from './QuestionTemplates/MultipleChoice';
 import ExamFooter from './ExamFooter';
 import { QUESTION_TYPE } from '../../utils';
 import ExamBody from './ExamBody';
+import * as actions from "../../store/actions";
 class Exam extends Component {
     constructor(props) {
         super(props);
@@ -27,8 +26,12 @@ class Exam extends Component {
         };
 
         this.state = {
-            questions: [this.testQuestion],
+            questions: [this.testQuestion, this.testQuestion, this.testQuestion, this.testQuestion],
         }
+    }
+
+    componentDidMount() {
+        this.props.setQuestions(this.state.questions);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -64,6 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        setQuestions: (questions) => dispatch(actions.setQuestions(questions)),
     };
 };
 

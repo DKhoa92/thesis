@@ -19,7 +19,9 @@ import Exam from './Exam/Exam';
 import HomePage from './HomePage/HomePage';
 import UserManage from './System/Admin/ManageUser/UserManage';
 import ManageQuestion from './System/Admin/ManageQuestion/QuestionManage';
-import QuestionGroupCreate from './System/Admin/ManageQuestionGroup/QuestionGroupCreate';
+import CreateQuestionGroup from './System/Admin/ManageQuestionGroup/CreateQuestionGroup';
+import ManageQuestionGroup from './System/Admin/ManageQuestionGroup/ManageQuestionGroup';
+import TableQuestionGroup from './System/Admin/ManageQuestionGroup/TableQuestionGroup';
 
 class App extends Component {
 
@@ -57,7 +59,9 @@ class App extends Component {
                                 <Route path={PATH.EXAM} component={Exam} />
                                 <Route path={PATH.MANAGE_USER} component={UserManage} />
                                 <Route path={PATH.MANAGE_QUESTION} component={ManageQuestion} />
-                                <Route path={PATH.CREATE_QUESTION_GROUP} component={QuestionGroupCreate} />
+                                <Route path={PATH.CREATE_QUESTION_GROUP} component={CreateQuestionGroup} />
+                                <Route path={PATH.MANAGE_QUESTION_GROUP} component={ManageQuestionGroup} />
+                                <Route path={PATH.TABLE_QUESTION_GROUP} component={TableQuestionGroup} />
                             </Switch>
                         </span>
 

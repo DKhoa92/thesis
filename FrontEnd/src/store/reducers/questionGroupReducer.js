@@ -8,6 +8,11 @@ const initialState = {
 
 const questionGroupReducer = (state = initialState, action) => {
     switch (action.type) {
+        case actionTypes.FETCH_ALL_QUESTION_GROUPS_SUCCESS:
+            return {
+                ...state,
+                questionGroups: action.data,
+            }
         case actionTypes.ADD_QUESTION:
             let newQuestions = [...state.questions];
             newQuestions.push(action.data);

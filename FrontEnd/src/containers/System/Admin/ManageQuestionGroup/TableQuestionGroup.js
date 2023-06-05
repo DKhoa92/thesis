@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { connect } from 'react-redux';
 import * as actions from '../../../../store/actions';
-import QuestionEdit from './QuestionEdit';
-import './QuestionTable.scss';
+import './TableQuestionGroup.scss';
+import EditQuestionGroup from './EditQuestionGroup';
 
-class QuestionGroupTable extends Component {
+class TableQuestionGroup extends Component {
 
     constructor(props) {
         super(props);
@@ -19,7 +19,7 @@ class QuestionGroupTable extends Component {
     }
 
     componentDidMount() {
-        this.props.fetchAllQuestions();
+        this.props.fetchAllQuestionGroups();
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -36,7 +36,7 @@ class QuestionGroupTable extends Component {
         return (
             <>
                 <div id='question-edit' className={'question-popup-background col-12' + (this.state.isShowEdit ? '' : ' hidden')} onClick={this.onClickCloseEdit}>
-                    <div className='question-edit-container container'><QuestionEdit /></div>
+                    <div className='question-edit-container container'><EditQuestionGroup /></div>
                 </div>
                 <table>
                     <thead>
@@ -113,4 +113,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(QuestionManage);
+export default connect(mapStateToProps, mapDispatchToProps)(TableQuestionGroup);
