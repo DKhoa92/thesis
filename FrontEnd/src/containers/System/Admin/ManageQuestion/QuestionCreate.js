@@ -229,12 +229,12 @@ class QuestionCreate extends Component {
 
     resetForm = () => {
         let newState = { ...this.state }
-        newState.type = this.state.types[0];
+        newState.type = this.state.types[0].codeKey;
         newState.content = '';
         newState.choiceNumber = CONFIG.DEFAULT_MULTIPLE_CHOICES;
-        newState.subject = this.state.subjects[0];
-        newState.grade = this.state.grades[0];
-        newState.difficulty = this.state.difficulties[0];
+        newState.subject = this.state.subjects[0].codeKey;
+        newState.grade = this.state.grades[0].codeKey;
+        newState.difficulty = this.state.difficulties[0].codeKey;
         for (let i = 0; i < CONFIG.MAX_MULTIPLE_CHOICES; i++) {
             newState[`choice_${i}`] = false;
             newState[`answer_${i}`] = '';
