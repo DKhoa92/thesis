@@ -12,7 +12,7 @@ export const adminMenu = [
             // { name: 'menu.system.system-parameter.header', link: '/system/system-parameter' },
             { name: 'menu.system.manage-user', link: '/manage-user' },
             { name: 'menu.system.manage-question', link: '/manage-question' },
-            { name: 'menu.system.manage-question-group', link: '/create-question-group' },
+            { name: 'menu.system.manage-question-group', link: '/manage-question-group' },
         ]
     },
 ];

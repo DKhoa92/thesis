@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../../../../store/actions';
 import QuestionEdit from './QuestionEdit';
 import './QuestionTable.scss';
+import draftToHtml from 'draftjs-to-html';
+import { EditorState, convertFromRaw } from 'draft-js';
 
 class QuestionTable extends Component {
 
@@ -55,6 +57,22 @@ class QuestionTable extends Component {
                         {questions && questions.map((item, index) => {
                             let data = item && item.data ? JSON.parse(item.data) : null;
                             let correctAnswers = item && item.correctAnswer ? JSON.parse(item.correctAnswer).data : null;
+
+
+                            console.log(data.question);
+                            let answersData, questionData;
+                            if (data) {
+                                questionData = data.question ? data.question : null;
+                                answersData = data.answers ? data.answers : [];
+
+                                if (typeof questionData == "object" && questionData != "") {
+                                    // console.log(data.question);
+                                    console.log(questionData);
+                                    questionData = draftToHtml(convertFromRaw(questionData));
+                                    console.log(questionData);
+                                    // questionData = EditorState.createWithContent(convertedState);
+                                }
+                            }
                             return (
                                 <tr key={index}>
                                     <td className={((!showAddGroupBtn) ? "hidden" : "")}>
@@ -66,16 +84,16 @@ class QuestionTable extends Component {
                                     <td><FormattedMessage id={`allCode.${item.subject}`} /></td>
                                     <td><FormattedMessage id={`allCode.${item.grade}`} /></td>
                                     <td>
-                                        <div className='question'>{data && data.question ? data.question : ''}</div>
+                                        <div className='question'>{questionData}</div>
                                         <div className='answers d-flex'>
                                             {(() => {
                                                 let div = [];
-                                                let answerCount = data && data.answers ? data.answers.length : 0;
+                                                let answerCount = answersData.length;
                                                 for (let i = 0; i < answerCount; i++) {
                                                     div.push(
                                                         <div className='answer' key={i}>
                                                             <input type="checkbox" checked={correctAnswers[i]} disabled />
-                                                            <i>{data && data.answers ? data.answers[i] : ''}</i>
+                                                            <i>{answersData[i]}</i>
                                                         </div>
                                                     );
                                                 }

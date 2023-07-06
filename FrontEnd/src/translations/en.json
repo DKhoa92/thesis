@@ -37,12 +37,14 @@
             "questionManage": "Manage Questions"
         },
         "questionGroup": {
+            "manageQuestionGroup": "MANAGE QUESTION GROUP",
             "createQuestionGroup": "CREATE QUESTION GROUP",
             "questionGroupName": "Question group name",
             "title": "Title",
             "status": "Status",
             "approvedDate": "Approved Date",
-            "creator": "Creator"
+            "creator": "Creator",
+            "btnCreateQuestionGroup": "Create new question group"
         }
     },
     "login": {
@@ -83,6 +85,7 @@
         }
     },
     "allCode": {
+        "": "",
         "R1": "Admin",
         "R2": "Principle",
         "R3": "Vice Principle",

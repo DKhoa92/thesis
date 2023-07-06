@@ -4,6 +4,9 @@ import { FormattedMessage } from 'react-intl';
 import { CONFIG, LANGUAGES } from '../../../../utils';
 import * as actions from '../../../../store/actions';
 import './QuestionCreate.scss';
+import { Editor } from "react-draft-wysiwyg";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
+import { EditorState, convertToRaw } from 'draft-js';
 
 class QuestionCreate extends Component {
 
@@ -11,6 +14,7 @@ class QuestionCreate extends Component {
         super(props);
 
         this.state = {
+            editorState: EditorState.createEmpty(),
             types: [], subjects: [], grades: [], difficulties: [],
             type: '',
             content: '',
@@ -63,7 +67,7 @@ class QuestionCreate extends Component {
 
     render() {
         let language = this.props.language;
-        let { types, subjects, grades, difficulties, type, content, choiceNumber, subject, grade, difficulty } = this.state;
+        let { types, subjects, grades, difficulties, type, content, choiceNumber, subject, grade, difficulty, editorState } = this.state;
 
         return (
             <div className='createQuestionContainer'>
@@ -119,8 +123,24 @@ class QuestionCreate extends Component {
                         <div className='type-multiple-choice col-12'>
                             <div className='col-12 my-2'>
                                 <label><FormattedMessage id='system.question.question' /></label>
-                                <input className='form-control' type="text" id='content' value={content}
-                                    onChange={(event) => { this.onChangeInput(event, 'content') }} />
+                                {/* <input className='form-control' type="text" id='content' value={content}
+                                    onChange={(event) => { this.onChangeInput(event, 'content') }} /> */}
+                                <Editor
+                                    id='content'
+                                    editorState={editorState}
+                                    toolbarClassName="tool-bar"
+                                    wrapperClassName="wrapper"
+                                    editorClassName="editor"
+                                    onEditorStateChange={this.onEditorStateChange}
+                                    toolbar={{
+                                        colorPicker: { className: 'hidden' },
+                                        emoji: { className: 'hidden' },
+                                        image: { className: 'hidden' },
+                                        link: { className: 'hidden' },
+                                        embedded: { className: 'hidden' },
+                                        remove: { className: 'hidden' }
+                                    }}
+                                />
                             </div>
                             <div className='col-2'>
                                 <label><FormattedMessage id='system.question.choiceNumber' /></label>
@@ -157,7 +177,16 @@ class QuestionCreate extends Component {
         );
     }
 
-    onChangeInput(event, id) {
+    onEditorStateChange = (editorState) => {
+        let newState = { ...this.state };
+        newState.editorState = editorState;
+        console.log(convertToRaw(editorState.getCurrentContent()));
+        this.setState({
+            ...newState,
+        });
+    }
+
+    onChangeInput = (event, id) => {
         let newState = { ...this.state };
         newState[id] = event.target.value;
         this.setState({
@@ -165,7 +194,7 @@ class QuestionCreate extends Component {
         })
     }
 
-    onChangeCheckBox(event, id) {
+    onChangeCheckBox = (event, id) => {
         let newState = { ...this.state };
         newState[id] = event.target.checked;
         this.setState({
@@ -175,7 +204,7 @@ class QuestionCreate extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        let arrCheck = ['content']
+        let arrCheck = []
         for (let i = 0; i < this.state.choiceNumber; i++) {
             arrCheck.push(`answer_${i}`);
         }
@@ -200,7 +229,8 @@ class QuestionCreate extends Component {
     }
 
     onClickSubmit = () => {
-        let { type, content, choiceNumber, subject, grade, difficulty } = this.state;
+        let { type, editorState, choiceNumber, subject, grade, difficulty } = this.state;
+
         let isValid = this.checkValidateInput();
         if (isValid === false) return;
 
@@ -213,7 +243,7 @@ class QuestionCreate extends Component {
 
         this.props.createQuestion({
             data: {
-                question: content,
+                question: convertToRaw(editorState.getCurrentContent()),
                 choiceNumber: choiceNumber,
                 answers: answers,
             },

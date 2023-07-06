@@ -1,6 +1,6 @@
-.question-container {
+.question-group-container {
 
-    .question-popup-background {
+    .question-group-popup-background {
         position: absolute;
         top: 0;
         right: 0;
@@ -12,14 +12,14 @@
             display: none;
         }
 
-        .question-create-container {
+        .question-group-create-container {
             margin-top: 10%;
             background: white;
             border-radius: 10px;
             padding: 20px;
         }
 
-        .question-edit-container {
+        .question-group-edit-container {
             margin-top: 10%;
             background: white;
             border-radius: 10px;
@@ -27,7 +27,7 @@
         }
     }
 
-    .question-edit-background {}
+    .question-group-edit-background {}
 
-    .question-table {}
+    .question-group-table {}
 }

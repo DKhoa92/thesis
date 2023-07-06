@@ -37,12 +37,14 @@
             "questionManage": "Quản lý câu hỏi"
         },
         "questionGroup": {
+            "manageQuestionGroup": "QUẢN LÝ BỘ ĐỀ",
             "createQuestionGroup": "TẠO BỘ ĐỀ",
             "questionGroupName": "Tên bộ đề",
             "title": "Tựa đề",
-            "status": "Status",
-            "approvedDate": "Approved Date",
-            "creator": "Creator"
+            "status": "Tình trạng",
+            "approvedDate": "Ngày được duyệt",
+            "creator": "Người soạn đề",
+            "btnCreateQuestionGroup": "Tạo bộ đề mới"
         }
     },
     "login": {
@@ -83,6 +85,7 @@
         }
     },
     "allCode": {
+        "": "",
         "R1": "Admin",
         "R2": "Hiệu trưởng",
         "R3": "Phó hiệu trưởng",

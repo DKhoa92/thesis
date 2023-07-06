@@ -24,6 +24,7 @@ class TableQuestionGroup extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.questionGroups !== this.props.questionGroups) {
+            console.log(this.props.questionGroups);
             this.setState({
                 questionGroups: this.props.questionGroups,
             });

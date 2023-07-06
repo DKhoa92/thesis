@@ -17,19 +17,19 @@ class ManageQuestionGroup extends Component {
     }
 
     render() {
-        let questions = this.state.questions;
+        let questionGroups = this.state.questionGroups;
         return (
-            <div className='question-container container'>
+            <div className='question-group-container container'>
                 <div className="title text-center">
-                    <h1><FormattedMessage id='system.question.questionManage' /></h1>
+                    <h1><FormattedMessage id='system.questionGroup.manageQuestionGroup' /></h1>
                 </div>
-                <div id='question-create' className={'question-popup-background col-12' + (this.state.isShowCreate ? '' : ' hidden')} onClick={this.onClickCloseCreate}>
-                    <div className='question-create-container container'><CreateQuestionGroup /></div>
+                <div id='question-group-create' className={'question-group-popup-background col-12' + (this.state.isShowCreate ? '' : ' hidden')} onClick={this.onClickCloseCreate}>
+                    <div className='question-group-create-container container'><CreateQuestionGroup /></div>
                 </div>
                 <div className='btn btn-primary' onClick={this.onClickCreate}>
-                    <i className="fas fa-plus mx-2"></i><FormattedMessage id='system.question.btnCreateQuestion' />
+                    <i className="fas fa-plus mx-2"></i><FormattedMessage id='system.questionGroup.btnCreateQuestionGroup' />
                 </div>
-                <div className='question-table mt-3'>
+                <div className='question-group-table mt-3'>
                     <TableQuestionGroup showEditBtn={true} showDeleteBtn={true}></TableQuestionGroup>
                 </div>
             </div>
@@ -47,7 +47,7 @@ class ManageQuestionGroup extends Component {
     }
 
     onClickCloseCreate = (event) => {
-        if (!event.target.closest('.question-create-container')) {
+        if (!event.target.closest('.question-group-create-container')) {
             this.setState({
                 isShowCreate: false
             });
@@ -64,7 +64,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        fetchAllQuestions: () => dispatch(actions.fetchAllQuestions()),
+        fetchAllQuestionGroups: () => dispatch(actions.fetchAllQuestionGroups()),
     };
 };
 
