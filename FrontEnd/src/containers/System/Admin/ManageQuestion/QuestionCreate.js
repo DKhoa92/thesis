@@ -7,6 +7,7 @@ import './QuestionCreate.scss';
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { EditorState, convertToRaw } from 'draft-js';
+import EquationEditor from "equation-editor-react";
 
 class QuestionCreate extends Component {
 
@@ -14,6 +15,7 @@ class QuestionCreate extends Component {
         super(props);
 
         this.state = {
+            equation: '',
             editorState: EditorState.createEmpty(),
             types: [], subjects: [], grades: [], difficulties: [],
             type: '',
@@ -67,7 +69,7 @@ class QuestionCreate extends Component {
 
     render() {
         let language = this.props.language;
-        let { types, subjects, grades, difficulties, type, content, choiceNumber, subject, grade, difficulty, editorState } = this.state;
+        let { types, subjects, grades, difficulties, type, content, choiceNumber, subject, grade, difficulty, editorState, equation } = this.state;
 
         return (
             <div className='createQuestionContainer'>
@@ -139,8 +141,20 @@ class QuestionCreate extends Component {
                                         link: { className: 'hidden' },
                                         embedded: { className: 'hidden' },
                                         remove: { className: 'hidden' }
-                                    }}
-                                />
+                                    }}>
+                                    <EquationEditor
+                                        value={equation}
+                                        onChange={() => { this.onEquationChange(equation) }}
+                                        autoCommands="bar overline sqrt sum prod int alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omikron pi rho sigma tau upsilon phi chi psi omega Alpha Beta Gamma Aelta Epsilon Zeta Eta Theta Iota Kappa Lambda Mu Nu Xi Omikron Pi Rho Sigma Tau Upsilon Phi Chi Psi Omega"
+                                        autoOperatorNames="sin cos tan log">
+                                    </EquationEditor>
+                                </Editor>
+                                <EquationEditor
+                                    value={equation}
+                                    onChange={() => { this.onEquationChange(equation) }}
+                                    autoCommands="bar overline sqrt sum prod int alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omikron pi rho sigma tau upsilon phi chi psi omega Alpha Beta Gamma Aelta Epsilon Zeta Eta Theta Iota Kappa Lambda Mu Nu Xi Omikron Pi Rho Sigma Tau Upsilon Phi Chi Psi Omega"
+                                    autoOperatorNames="sin cos tan log">
+                                </EquationEditor>
                             </div>
                             <div className='col-2'>
                                 <label><FormattedMessage id='system.question.choiceNumber' /></label>
@@ -175,6 +189,15 @@ class QuestionCreate extends Component {
                 </div>
             </div >
         );
+    }
+
+    onEquationChange = (equation) => {
+        console.log("AA");
+        let newState = { ...this.state };
+        newState.equation = equation;
+        this.setState({
+            ...newState
+        })
     }
 
     onEditorStateChange = (editorState) => {

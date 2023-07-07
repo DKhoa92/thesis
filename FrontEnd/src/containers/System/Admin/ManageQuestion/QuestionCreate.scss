@@ -1,5 +1,7 @@
 .createQuestionContainer {
     .container {
+        padding: 0 100px;
+
         .row {
             .title {}
 
@@ -10,6 +12,17 @@
                         display: inline-block;
                         width: 80%;
                     }
+                }
+
+                .tool-bar {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+
+                .editor {
+                    border: solid #f1f1f1 1px;
+                    border-radius: 5px;
                 }
             }
         }

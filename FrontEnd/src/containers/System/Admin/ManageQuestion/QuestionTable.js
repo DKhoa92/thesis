@@ -5,7 +5,7 @@ import * as actions from '../../../../store/actions';
 import QuestionEdit from './QuestionEdit';
 import './QuestionTable.scss';
 import draftToHtml from 'draftjs-to-html';
-import { EditorState, convertFromRaw } from 'draft-js';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 class QuestionTable extends Component {
 
@@ -63,15 +63,8 @@ class QuestionTable extends Component {
                             let answersData, questionData;
                             if (data) {
                                 questionData = data.question ? data.question : null;
+                                questionData = { __html: draftToHtml(questionData) };
                                 answersData = data.answers ? data.answers : [];
-
-                                if (typeof questionData == "object" && questionData != "") {
-                                    // console.log(data.question);
-                                    console.log(questionData);
-                                    questionData = draftToHtml(convertFromRaw(questionData));
-                                    console.log(questionData);
-                                    // questionData = EditorState.createWithContent(convertedState);
-                                }
                             }
                             return (
                                 <tr key={index}>
@@ -84,7 +77,8 @@ class QuestionTable extends Component {
                                     <td><FormattedMessage id={`allCode.${item.subject}`} /></td>
                                     <td><FormattedMessage id={`allCode.${item.grade}`} /></td>
                                     <td>
-                                        <div className='question'>{questionData}</div>
+                                        <div className='question' dangerouslySetInnerHTML={questionData}></div>
+
                                         <div className='answers d-flex'>
                                             {(() => {
                                                 let div = [];
