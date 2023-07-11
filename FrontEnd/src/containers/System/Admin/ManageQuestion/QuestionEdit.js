@@ -4,6 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { CONFIG, LANGUAGES } from '../../../../utils';
 import * as actions from '../../../../store/actions';
 import './QuestionEdit.scss';
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "ckeditor5-build-classic-mathtype";
 
 class QuestionEdit extends Component {
 
@@ -142,8 +144,40 @@ class QuestionEdit extends Component {
                         <div className='type-multiple-choice col-12'>
                             <div className='col-12 my-2'>
                                 <label><FormattedMessage id='system.question.question' /></label>
-                                <input className='form-control' type="text" id='question' value={question}
-                                    onChange={(event) => { this.onChangeInput(event, 'question') }} />
+                                <CKEditor
+                                    id='question'
+                                    editor={ClassicEditor}
+                                    config={{
+                                        toolbar: {
+                                            shouldNotGroupWhenFull: true,
+                                            items: [
+                                                "heading", '|',
+                                                "alignment",
+                                                'bold',
+                                                "italic",
+                                                'underline',
+                                                'strikethrough', '|',
+                                                'bulletedList',
+                                                'numberedList',
+                                                'outdent',
+                                                'indent', '|',
+                                                "insertTable", '|',
+                                                "blockQuote", '|',
+                                                "undo",
+                                                "redo", "|",
+                                                "MathType",
+                                                "ChemType", '|',
+                                            ]
+                                        }
+                                    }}
+                                    data={question}
+                                    onReady={(editor) => {
+                                    }}
+                                    onChange={(event, editor) => {
+                                        const data = editor.getData();
+                                        this.onEditorStateChange(data);
+                                    }}
+                                />
                             </div>
                             <div className='col-2'>
                                 <label><FormattedMessage id='system.question.choiceNumber' /></label>

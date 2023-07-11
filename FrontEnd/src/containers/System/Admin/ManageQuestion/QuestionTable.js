@@ -62,8 +62,7 @@ class QuestionTable extends Component {
                             console.log(data.question);
                             let answersData, questionData;
                             if (data) {
-                                questionData = data.question ? data.question : null;
-                                questionData = { __html: draftToHtml(questionData) };
+                                questionData = data.question ? data.question : '';
                                 answersData = data.answers ? data.answers : [];
                             }
                             return (
@@ -77,7 +76,7 @@ class QuestionTable extends Component {
                                     <td><FormattedMessage id={`allCode.${item.subject}`} /></td>
                                     <td><FormattedMessage id={`allCode.${item.grade}`} /></td>
                                     <td>
-                                        <div className='question' dangerouslySetInnerHTML={questionData}></div>
+                                        <div className='question'>{questionData}</div>
 
                                         <div className='answers d-flex'>
                                             {(() => {

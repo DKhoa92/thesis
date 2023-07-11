@@ -4,10 +4,8 @@ import { FormattedMessage } from 'react-intl';
 import { CONFIG, LANGUAGES } from '../../../../utils';
 import * as actions from '../../../../store/actions';
 import './QuestionCreate.scss';
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { EditorState, convertToRaw } from 'draft-js';
-import EquationEditor from "equation-editor-react";
+import { CKEditor } from "@ckeditor/ckeditor5-react";
+import ClassicEditor from "ckeditor5-build-classic-mathtype";
 
 class QuestionCreate extends Component {
 
@@ -15,8 +13,7 @@ class QuestionCreate extends Component {
         super(props);
 
         this.state = {
-            equation: '',
-            editorState: EditorState.createEmpty(),
+            question: '',
             types: [], subjects: [], grades: [], difficulties: [],
             type: '',
             content: '',
@@ -69,7 +66,7 @@ class QuestionCreate extends Component {
 
     render() {
         let language = this.props.language;
-        let { types, subjects, grades, difficulties, type, content, choiceNumber, subject, grade, difficulty, editorState, equation } = this.state;
+        let { types, subjects, grades, difficulties, type, content, choiceNumber, subject, grade, difficulty, question } = this.state;
 
         return (
             <div className='createQuestionContainer'>
@@ -125,36 +122,41 @@ class QuestionCreate extends Component {
                         <div className='type-multiple-choice col-12'>
                             <div className='col-12 my-2'>
                                 <label><FormattedMessage id='system.question.question' /></label>
-                                {/* <input className='form-control' type="text" id='content' value={content}
-                                    onChange={(event) => { this.onChangeInput(event, 'content') }} /> */}
-                                <Editor
-                                    id='content'
-                                    editorState={editorState}
-                                    toolbarClassName="tool-bar"
-                                    wrapperClassName="wrapper"
-                                    editorClassName="editor"
-                                    onEditorStateChange={this.onEditorStateChange}
-                                    toolbar={{
-                                        colorPicker: { className: 'hidden' },
-                                        emoji: { className: 'hidden' },
-                                        image: { className: 'hidden' },
-                                        link: { className: 'hidden' },
-                                        embedded: { className: 'hidden' },
-                                        remove: { className: 'hidden' }
-                                    }}>
-                                    <EquationEditor
-                                        value={equation}
-                                        onChange={() => { this.onEquationChange(equation) }}
-                                        autoCommands="bar overline sqrt sum prod int alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omikron pi rho sigma tau upsilon phi chi psi omega Alpha Beta Gamma Aelta Epsilon Zeta Eta Theta Iota Kappa Lambda Mu Nu Xi Omikron Pi Rho Sigma Tau Upsilon Phi Chi Psi Omega"
-                                        autoOperatorNames="sin cos tan log">
-                                    </EquationEditor>
-                                </Editor>
-                                <EquationEditor
-                                    value={equation}
-                                    onChange={() => { this.onEquationChange(equation) }}
-                                    autoCommands="bar overline sqrt sum prod int alpha beta gamma delta epsilon zeta eta theta iota kappa lambda mu nu xi omikron pi rho sigma tau upsilon phi chi psi omega Alpha Beta Gamma Aelta Epsilon Zeta Eta Theta Iota Kappa Lambda Mu Nu Xi Omikron Pi Rho Sigma Tau Upsilon Phi Chi Psi Omega"
-                                    autoOperatorNames="sin cos tan log">
-                                </EquationEditor>
+                                <div id='question'>
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        config={{
+                                            toolbar: {
+                                                shouldNotGroupWhenFull: true,
+                                                items: [
+                                                    "heading", '|',
+                                                    "alignment",
+                                                    'bold',
+                                                    "italic",
+                                                    'underline',
+                                                    'strikethrough', '|',
+                                                    'bulletedList',
+                                                    'numberedList',
+                                                    'outdent',
+                                                    'indent', '|',
+                                                    "insertTable", '|',
+                                                    "blockQuote", '|',
+                                                    "undo",
+                                                    "redo", "|",
+                                                    "MathType",
+                                                    "ChemType", '|',
+                                                ]
+                                            }
+                                        }}
+                                        data={question}
+                                        onReady={(editor) => {
+                                        }}
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            this.onEditorStateChange(data);
+                                        }}
+                                    />
+                                </div>
                             </div>
                             <div className='col-2'>
                                 <label><FormattedMessage id='system.question.choiceNumber' /></label>
@@ -170,8 +172,46 @@ class QuestionCreate extends Component {
                                             <div className='col-6 my-2' key={i}>
                                                 <input type="checkbox" checked={this.state[`choice_${i}`]} onChange={(event) => { this.onChangeCheckBox(event, `choice_${i}`, true) }} />
                                                 <FormattedMessage id='system.question.answerPlaceHolder'>
-                                                    {(msg) => <input className='answer form-control mx-4' type="text" value={this.state[`answer_${i}`]} placeholder={msg + (i + 1)} id={`answer_${i}`}
-                                                        onChange={(event) => { this.onChangeInput(event, `answer_${i}`) }} />}
+                                                    {(msg) =>
+                                                        // <input className='answer form-control mx-4' type="text" value={this.state[`answer_${i}`]} placeholder={msg + (i + 1)} id={`answer_${i}`}
+                                                        //     onChange={(event) => { this.onChangeInput(event, `answer_${i}`) }} />
+                                                        <div id={`answer_${i}`}>
+                                                            <CKEditor
+                                                                editor={ClassicEditor}
+                                                                config={{
+                                                                    toolbar: {
+                                                                        shouldNotGroupWhenFull: true,
+                                                                        items: [
+                                                                            "heading", '|',
+                                                                            "alignment",
+                                                                            'bold',
+                                                                            "italic",
+                                                                            'underline',
+                                                                            'strikethrough', '|',
+                                                                            'bulletedList',
+                                                                            'numberedList',
+                                                                            'outdent',
+                                                                            'indent', '|',
+                                                                            "insertTable", '|',
+                                                                            "blockQuote", '|',
+                                                                            "undo",
+                                                                            "redo", "|",
+                                                                            "MathType",
+                                                                            "ChemType", '|',
+                                                                        ]
+                                                                    },
+                                                                    placeholder: `${msg + (i + 1)}`
+                                                                }}
+                                                                data={question}
+                                                                onReady={(editor) => {
+                                                                }}
+                                                                onChange={(event, editor) => {
+                                                                    const data = editor.getData();
+                                                                    this.onEditorStateChange(data, `answer_${i}`);
+                                                                }}
+                                                            />
+                                                        </div>
+                                                    }
                                                 </FormattedMessage>
                                             </div>
                                         );
@@ -191,22 +231,12 @@ class QuestionCreate extends Component {
         );
     }
 
-    onEquationChange = (equation) => {
-        console.log("AA");
+    onEditorStateChange = (newValue, id) => {
         let newState = { ...this.state };
-        newState.equation = equation;
-        this.setState({
-            ...newState
-        })
-    }
-
-    onEditorStateChange = (editorState) => {
-        let newState = { ...this.state };
-        newState.editorState = editorState;
-        console.log(convertToRaw(editorState.getCurrentContent()));
+        newState[id] = newValue;
         this.setState({
             ...newState,
-        });
+        }, () => { console.log(this.state.question); });
     }
 
     onChangeInput = (event, id) => {
@@ -227,7 +257,7 @@ class QuestionCreate extends Component {
 
     checkValidateInput = () => {
         let isValid = true;
-        let arrCheck = []
+        let arrCheck = ['question']
         for (let i = 0; i < this.state.choiceNumber; i++) {
             arrCheck.push(`answer_${i}`);
         }
@@ -235,7 +265,10 @@ class QuestionCreate extends Component {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
                 alert('This input is required');
-                document.getElementById(arrCheck[i]).focus();
+                console.log(document.getElementById(arrCheck[i]));
+                console.log(document.getElementById(arrCheck[i]).getElementsByClassName('ck-content'));
+                document.getElementById(arrCheck[i]).getElementsByClassName('ck-content')[0].focus();
+
                 break;
             }
         }
@@ -252,7 +285,7 @@ class QuestionCreate extends Component {
     }
 
     onClickSubmit = () => {
-        let { type, editorState, choiceNumber, subject, grade, difficulty } = this.state;
+        let { type, question, choiceNumber, subject, grade, difficulty } = this.state;
 
         let isValid = this.checkValidateInput();
         if (isValid === false) return;
@@ -266,7 +299,7 @@ class QuestionCreate extends Component {
 
         this.props.createQuestion({
             data: {
-                question: convertToRaw(editorState.getCurrentContent()),
+                question: question,
                 choiceNumber: choiceNumber,
                 answers: answers,
             },

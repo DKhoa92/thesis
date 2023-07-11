@@ -20,10 +20,27 @@
                     align-items: center;
                 }
 
-                .editor {
-                    border: solid #f1f1f1 1px;
-                    border-radius: 5px;
+                .ck-editor__top {
+                    position: fixed;
+                    top: 40px;
+                    left: 0px;
+                    background-color: transparent;
+
+                    .ck-toolbar {
+                        background-color: transparent;
+                        border: 0px;
+                    }
+
+                    .ck-icon {
+                        color: white;
+                    }
+
+                    .ck-button__label {
+                        color: white
+                    }
                 }
+
+
             }
         }
 
