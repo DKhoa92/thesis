@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import * as actions from '../../../../store/actions';
 import QuestionEdit from './QuestionEdit';
 import './QuestionTable.scss';
-import draftToHtml from 'draftjs-to-html';
-import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 class QuestionTable extends Component {
 
@@ -57,14 +55,15 @@ class QuestionTable extends Component {
                         {questions && questions.map((item, index) => {
                             let data = item && item.data ? JSON.parse(item.data) : null;
                             let correctAnswers = item && item.correctAnswer ? JSON.parse(item.correctAnswer).data : null;
-
-
-                            console.log(data.question);
                             let answersData, questionData;
                             if (data) {
                                 questionData = data.question ? data.question : '';
+                                questionData = { __html: data.question };
                                 answersData = data.answers ? data.answers : [];
+                                for (let index = 0; index < answersData.length; index++)
+                                    answersData[index] = { __html: answersData[index] };
                             }
+
                             return (
                                 <tr key={index}>
                                     <td className={((!showAddGroupBtn) ? "hidden" : "")}>
@@ -76,7 +75,7 @@ class QuestionTable extends Component {
                                     <td><FormattedMessage id={`allCode.${item.subject}`} /></td>
                                     <td><FormattedMessage id={`allCode.${item.grade}`} /></td>
                                     <td>
-                                        <div className='question'>{questionData}</div>
+                                        <div className='question text-ellipsis' dangerouslySetInnerHTML={questionData}></div>
 
                                         <div className='answers d-flex'>
                                             {(() => {
@@ -86,7 +85,7 @@ class QuestionTable extends Component {
                                                     div.push(
                                                         <div className='answer' key={i}>
                                                             <input type="checkbox" checked={correctAnswers[i]} disabled />
-                                                            <i>{answersData[i]}</i>
+                                                            <div className='text-ellipsis' dangerouslySetInnerHTML={answersData[i]}></div>
                                                         </div>
                                                     );
                                                 }

@@ -15,12 +15,20 @@ table {
         border: 1px solid #ddd;
         padding: 8px;
 
+        .question {
+            width: 100%;
+            max-width: 700px;
+        }
+
         .answers {
 
             .answer {
+                display: flex;
+                align-items: center;
                 margin-top: 10px;
                 margin-right: 15px;
-                word-wrap: break-word;
+                width: 20%;
+                max-width: 150px;
 
                 input {
                     margin-right: 5px;
@@ -88,4 +96,21 @@ table {
 
 .hidden {
     display: none;
+}
+
+.text-ellipsis {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    p:not(:first-child) {
+        display: none;
+    }
+
+    p:first-child {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        margin: auto 0;
+    }
 }
