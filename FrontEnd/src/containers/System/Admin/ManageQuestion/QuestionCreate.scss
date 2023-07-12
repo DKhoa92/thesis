@@ -3,14 +3,17 @@
         padding: 0 100px;
 
         .row {
-            .title {}
 
             .type-multiple-choice {
 
                 .answers {
+                    margin: 5px 0 10px;
+
                     .answer {
+                        margin-left: 10px;
                         display: inline-block;
-                        width: 80%;
+                        width: 100%;
+                        align-items: center;
                     }
                 }
 
@@ -24,23 +27,20 @@
                     position: fixed;
                     top: 40px;
                     left: 0px;
-                    background-color: transparent;
 
                     .ck-toolbar {
-                        background-color: transparent;
+                        // background-color: transparent;
                         border: 0px;
                     }
 
                     .ck-icon {
-                        color: white;
+                        color: black;
                     }
 
                     .ck-button__label {
-                        color: white
+                        color: black;
                     }
                 }
-
-
             }
         }
 

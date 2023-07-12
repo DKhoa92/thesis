@@ -16,14 +16,15 @@ class QuestionCreate extends Component {
             question: '',
             types: [], subjects: [], grades: [], difficulties: [],
             type: '',
-            content: '',
             choiceNumber: '4',
             subject: '',
             grade: '',
             difficulty: '',
             choice_0: false, choice_1: false, choice_2: false, choice_3: false, choice_4: false,
             answer_0: '', answer_1: '', answer_2: '', answer_3: '', answer_4: '',
+            focus: 'question',
         }
+        this.editorList = [];
     }
 
     async componentDidMount() {
@@ -66,7 +67,7 @@ class QuestionCreate extends Component {
 
     render() {
         let language = this.props.language;
-        let { types, subjects, grades, difficulties, type, content, choiceNumber, subject, grade, difficulty, question } = this.state;
+        let { types, subjects, grades, difficulties, type, choiceNumber, subject, grade, difficulty, question } = this.state;
 
         return (
             <div className='createQuestionContainer'>
@@ -129,7 +130,6 @@ class QuestionCreate extends Component {
                                             toolbar: {
                                                 shouldNotGroupWhenFull: true,
                                                 items: [
-                                                    "heading", '|',
                                                     "alignment",
                                                     'bold',
                                                     "italic",
@@ -150,10 +150,14 @@ class QuestionCreate extends Component {
                                         }}
                                         data={question}
                                         onReady={(editor) => {
+                                            this.onEditorReady(editor, 'question', false)
                                         }}
                                         onChange={(event, editor) => {
                                             const data = editor.getData();
                                             this.onEditorStateChange(data, 'question');
+                                        }}
+                                        onFocus={(event, editor) => {
+                                            this.onEditorFocus(event, editor, 'question')
                                         }}
                                     />
                                 </div>
@@ -163,26 +167,26 @@ class QuestionCreate extends Component {
                                 <input className='form-control' type="text" id='choiceNumber' value={choiceNumber}
                                     onChange={(event) => { this.onChangeInput(event, 'choiceNumber') }} />
                             </div>
-                            <div className='answers col-12 my-4'>
-                                <label><FormattedMessage id='system.question.correctChoice' /></label>
+                            <label className='mt-4'><FormattedMessage id='system.question.correctChoice' /></label>
+                            <div className='answers col-12 row'>
+
                                 {(() => {
                                     let div = [];
                                     for (let i = 0; i < choiceNumber; i++) {
                                         div.push(
-                                            <div className='col-6 my-2' key={i}>
+                                            <div className='col-6 my-2 d-flex' key={i}>
                                                 <input type="checkbox" checked={this.state[`choice_${i}`]} onChange={(event) => { this.onChangeCheckBox(event, `choice_${i}`, true) }} />
                                                 <FormattedMessage id='system.question.answerPlaceHolder'>
                                                     {(msg) =>
                                                         // <input className='answer form-control mx-4' type="text" value={this.state[`answer_${i}`]} placeholder={msg + (i + 1)} id={`answer_${i}`}
                                                         //     onChange={(event) => { this.onChangeInput(event, `answer_${i}`) }} />
-                                                        <div id={`answer_${i}`}>
+                                                        <div className='answer' id={`answer_${i}`}>
                                                             <CKEditor
                                                                 editor={ClassicEditor}
                                                                 config={{
                                                                     toolbar: {
                                                                         shouldNotGroupWhenFull: true,
                                                                         items: [
-                                                                            "heading", '|',
                                                                             "alignment",
                                                                             'bold',
                                                                             "italic",
@@ -200,14 +204,18 @@ class QuestionCreate extends Component {
                                                                             "ChemType", '|',
                                                                         ]
                                                                     },
-                                                                    placeholder: `${msg + (i + 1)}`
+                                                                    placeholder: `${msg + (i + 1)}`,
                                                                 }}
                                                                 data={this.state[`answer_${i}`]}
                                                                 onReady={(editor) => {
+                                                                    this.onEditorReady(editor, `answer_${i}`)
                                                                 }}
                                                                 onChange={(event, editor) => {
                                                                     const data = editor.getData();
                                                                     this.onEditorStateChange(data, `answer_${i}`);
+                                                                }}
+                                                                onFocus={(event, editor) => {
+                                                                    this.onEditorFocus(event, editor, `answer_${i}`)
                                                                 }}
                                                             />
                                                         </div>
@@ -227,8 +235,31 @@ class QuestionCreate extends Component {
                         </div>
                     </div>
                 </div>
-            </div >
+            </div>
         );
+    }
+
+    onEditorReady = (editor, id, hidden = true) => {
+        let toolbar = document.getElementById(id).getElementsByClassName('ck-editor__top')[0] ? document.getElementById(id).getElementsByClassName('ck-editor__top')[0] : null;
+
+        if (hidden) toolbar.classList.add('hidden');
+        if (!this.editorList.includes(toolbar)) {
+            toolbar.id = id + '-toolbar';
+            this.editorList.push(toolbar);
+        }
+    }
+
+    onEditorFocus = (event, editor, id) => {
+        this.editorList.forEach(element => {
+            if (element.id == `${id}-toolbar`)
+                element.classList.remove('hidden');
+            else
+                element.classList.add('hidden');
+        });
+    }
+
+    onEditorBlur = (event, editor, id) => {
+        document.getElementById(id).getElementsByClassName('ck-editor__top')[0].classList.add('hidden');
     }
 
     onEditorStateChange = (newValue, id) => {
@@ -265,8 +296,6 @@ class QuestionCreate extends Component {
             if (!this.state[arrCheck[i]]) {
                 isValid = false;
                 alert('This input is required');
-                console.log(document.getElementById(arrCheck[i]));
-                console.log(document.getElementById(arrCheck[i]).getElementsByClassName('ck-content'));
                 document.getElementById(arrCheck[i]).getElementsByClassName('ck-content')[0].focus();
 
                 break;
@@ -316,7 +345,7 @@ class QuestionCreate extends Component {
     resetForm = () => {
         let newState = { ...this.state }
         newState.type = this.state.types[0].codeKey;
-        newState.content = '';
+        newState.question = '';
         newState.choiceNumber = CONFIG.DEFAULT_MULTIPLE_CHOICES;
         newState.subject = this.state.subjects[0].codeKey;
         newState.grade = this.state.grades[0].codeKey;
