@@ -5,9 +5,6 @@ import { ConnectedRouter as Router } from 'connected-react-router';
 import { history } from '../redux'
 import { ToastContainer } from 'react-toastify';
 
-
-import { userIsAuthenticated, userIsNotAuthenticated } from '../hoc/authentication';
-
 import { PATH } from '../utils'
 
 import Home from '../routes/Home';
@@ -53,8 +50,8 @@ class App extends Component {
                         <span className="content-container">
                             <Switch>
                                 <Route path={PATH.HOME} exact component={Home} />
-                                <Route path={PATH.LOGIN} component={userIsNotAuthenticated(Login)} />
-                                <Route path={PATH.SYSTEM} component={userIsAuthenticated(System)} />
+                                <Route path={PATH.LOGIN} component={Login} />
+                                <Route path={PATH.SYSTEM} component={System} />
                                 <Route path={PATH.HOME_PAGE} component={HomePage} />
                                 <Route path={PATH.EXAM} component={Exam} />
                                 <Route path={PATH.MANAGE_USER} component={UserManage} />
