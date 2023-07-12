@@ -31,7 +31,6 @@
     "react-toastify": "^8.2.0",
     "reactstrap": "^8.10.1",
     "redux": "^4.2.1",
-    "redux-auth-wrapper": "^2.1.0",
     "redux-logger": "^3.0.6",
     "redux-persist": "^5.10.0",
     "redux-state-sync": "^2.1.0",
