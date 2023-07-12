@@ -33,6 +33,10 @@ table {
                 input {
                     margin-right: 5px;
                 }
+
+                input[disabled]:checked {
+                    background-color: green;
+                }
             }
         }
 

@@ -140,9 +140,6 @@ class QuestionCreate extends Component {
                                                     'outdent',
                                                     'indent', '|',
                                                     "insertTable", '|',
-                                                    "blockQuote", '|',
-                                                    "undo",
-                                                    "redo", "|",
                                                     "MathType",
                                                     "ChemType", '|',
                                                 ]
@@ -197,9 +194,6 @@ class QuestionCreate extends Component {
                                                                             'outdent',
                                                                             'indent', '|',
                                                                             "insertTable", '|',
-                                                                            "blockQuote", '|',
-                                                                            "undo",
-                                                                            "redo", "|",
                                                                             "MathType",
                                                                             "ChemType", '|',
                                                                         ]
