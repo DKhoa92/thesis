@@ -153,7 +153,7 @@ class QuestionCreate extends Component {
                                         }}
                                         onChange={(event, editor) => {
                                             const data = editor.getData();
-                                            this.onEditorStateChange(data);
+                                            this.onEditorStateChange(data, 'question');
                                         }}
                                     />
                                 </div>
@@ -202,7 +202,7 @@ class QuestionCreate extends Component {
                                                                     },
                                                                     placeholder: `${msg + (i + 1)}`
                                                                 }}
-                                                                data={question}
+                                                                data={this.state[`answer_${i}`]}
                                                                 onReady={(editor) => {
                                                                 }}
                                                                 onChange={(event, editor) => {
