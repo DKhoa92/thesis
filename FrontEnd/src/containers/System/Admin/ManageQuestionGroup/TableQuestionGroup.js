@@ -56,7 +56,7 @@ class TableQuestionGroup extends Component {
                                     <td>{item.title}</td>
                                     <td><FormattedMessage id={`allCode.${item.status}`} /></td>
                                     <td>{item.approvedDate}</td>
-                                    <td>{item.creator}</td>
+                                    <td>{`${item.user.firstName} ${item.user.lastName}`}</td>
                                     <td className={((!showEditBtn && !showDeleteBtn) ? "hidden" : "")}>
                                         <button className={'btn-edit' + (!showEditBtn ? " hidden" : "")} onClick={() => { this.onClickEdit(item) }}>
                                             <i className="fas fa-edit"></i>
