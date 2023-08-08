@@ -23,6 +23,8 @@ class QuestionEdit extends Component {
             choice_0: false, choice_1: false, choice_2: false, choice_3: false, choice_4: false,
             answer_0: '', answer_1: '', answer_2: '', answer_3: '', answer_4: '',
         }
+
+        this.editorList = [];
     }
 
     async componentDidMount() {
@@ -144,40 +146,45 @@ class QuestionEdit extends Component {
                         <div className='type-multiple-choice col-12'>
                             <div className='col-12 my-2'>
                                 <label><FormattedMessage id='system.question.question' /></label>
-                                <CKEditor
-                                    id='question'
-                                    editor={ClassicEditor}
-                                    config={{
-                                        toolbar: {
-                                            shouldNotGroupWhenFull: true,
-                                            items: [
-                                                "heading", '|',
-                                                "alignment",
-                                                'bold',
-                                                "italic",
-                                                'underline',
-                                                'strikethrough', '|',
-                                                'bulletedList',
-                                                'numberedList',
-                                                'outdent',
-                                                'indent', '|',
-                                                "insertTable", '|',
-                                                "blockQuote", '|',
-                                                "undo",
-                                                "redo", "|",
-                                                "MathType",
-                                                "ChemType", '|',
-                                            ]
-                                        }
-                                    }}
-                                    data={question}
-                                    onReady={(editor) => {
-                                    }}
-                                    onChange={(event, editor) => {
-                                        const data = editor.getData();
-                                        this.onEditorStateChange(data);
-                                    }}
-                                />
+                                <div id='question-edit-question'>
+                                    <CKEditor
+                                        editor={ClassicEditor}
+                                        config={{
+                                            toolbar: {
+                                                shouldNotGroupWhenFull: true,
+                                                items: [
+                                                    "heading", '|',
+                                                    "alignment",
+                                                    'bold',
+                                                    "italic",
+                                                    'underline',
+                                                    'strikethrough', '|',
+                                                    'bulletedList',
+                                                    'numberedList',
+                                                    'outdent',
+                                                    'indent', '|',
+                                                    "insertTable", '|',
+                                                    "blockQuote", '|',
+                                                    "undo",
+                                                    "redo", "|",
+                                                    "MathType",
+                                                    "ChemType", '|',
+                                                ]
+                                            }
+                                        }}
+                                        data={question}
+                                        onReady={(editor) => {
+                                            this.onEditorReady(editor, 'question-edit-question', false)
+                                        }}
+                                        onChange={(event, editor) => {
+                                            const data = editor.getData();
+                                            this.onEditorStateChange(data, 'question');
+                                        }}
+                                        onFocus={(event, editor) => {
+                                            this.onEditorFocus(event, editor, 'question')
+                                        }}
+                                    />
+                                </div>
                             </div>
                             <div className='col-2'>
                                 <label><FormattedMessage id='system.question.choiceNumber' /></label>
@@ -212,6 +219,37 @@ class QuestionEdit extends Component {
                 </div>
             </div >
         );
+    }
+
+    onEditorReady = (editor, id, hidden = true) => {
+        let toolbar = document.getElementById(id).getElementsByClassName('ck-editor__top')[0] ? document.getElementById(id).getElementsByClassName('ck-editor__top')[0] : null;
+
+        if (hidden) toolbar.classList.add('hidden');
+        if (!this.editorList.includes(toolbar)) {
+            toolbar.id = id + '-toolbar';
+            this.editorList.push(toolbar);
+        }
+    }
+
+    onEditorFocus = (event, editor, id) => {
+        this.editorList.forEach(element => {
+            if (element.id == `${id}-toolbar`)
+                element.classList.remove('hidden');
+            else
+                element.classList.add('hidden');
+        });
+    }
+
+    onEditorBlur = (event, editor, id) => {
+        document.getElementById(id).getElementsByClassName('ck-editor__top')[0].classList.add('hidden');
+    }
+
+    onEditorStateChange = (newValue, id) => {
+        let newState = { ...this.state };
+        newState[id] = newValue;
+        this.setState({
+            ...newState,
+        }, () => { console.log(this.state.question); });
     }
 
     onChangeInput(event, id, isArray = false) {
