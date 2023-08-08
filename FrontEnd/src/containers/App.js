@@ -53,7 +53,7 @@ class App extends Component {
                                 <Route path={PATH.LOGIN} component={Login} />
                                 <Route path={PATH.SYSTEM} component={System} />
                                 <Route path={PATH.HOME_PAGE} component={HomePage} />
-                                <Route path={PATH.EXAM} component={Exam} />
+                                <Route path={`${PATH.EXAM}/:questionGroupId`} component={Exam} />
                                 <Route path={PATH.MANAGE_USER} component={UserManage} />
                                 <Route path={PATH.MANAGE_QUESTION} component={ManageQuestion} />
                                 <Route path={PATH.CREATE_QUESTION_GROUP} component={CreateQuestionGroup} />

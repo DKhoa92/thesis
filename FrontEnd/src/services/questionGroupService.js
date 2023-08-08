@@ -19,7 +19,7 @@ const deleteQuestionGroupService = (questionGroupId) => {
 }
 
 const getQuestionUsingsService = (ids) => {
-    return axios.get(`/api/get-question-usings?id=${ids}`);
+    return axios.get(`api/get-question-usings?id=${ids}`);
 }
 
 const createQuestionUsingService = (questionUsingData) => {
@@ -36,6 +36,10 @@ const deleteQuestionUsingService = (questionUsingId) => {
     });
 }
 
+const getQuestionsByGroupIdService = (questionGroupId) => {
+    return axios.get(`api/get-questions-by-group-id?id=${questionGroupId}`);
+}
+
 export {
     getQuestionGroupsService,
     createQuestionGroupService,
@@ -45,5 +49,6 @@ export {
     getQuestionUsingsService,
     createQuestionUsingService,
     editQuestionUsingService,
-    deleteQuestionUsingService
+    deleteQuestionUsingService,
+    getQuestionsByGroupIdService
 }

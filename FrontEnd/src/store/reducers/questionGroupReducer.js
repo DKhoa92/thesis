@@ -13,13 +13,13 @@ const questionGroupReducer = (state = initialState, action) => {
                 ...state,
                 questionGroups: action.data,
             }
-        case actionTypes.ADD_QUESTION:
-            let newQuestions = [...state.questions];
-            newQuestions.push(action.data);
-            return {
-                ...state,
-                questions: newQuestions,
-            }
+        // case actionTypes.ADD_QUESTION:
+        //     let newQuestions = [...state.questions];
+        //     newQuestions.push(action.data);
+        //     return {
+        //         ...state,
+        //         questions: newQuestions,
+        //     }
         case actionTypes.CHANGE_QUESTION:
             return {
                 ...state,
@@ -31,6 +31,11 @@ const questionGroupReducer = (state = initialState, action) => {
                 questions: action.data,
             }
         case actionTypes.SET_QUESTIONS:
+            return {
+                ...state,
+                questions: action.data,
+            }
+        case actionTypes.FETCH_QUESTIONS_BY_GROUP_ID_SUCCESS:
             return {
                 ...state,
                 questions: action.data,

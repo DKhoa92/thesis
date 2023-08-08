@@ -1,5 +1,5 @@
 import { toast } from "react-toastify";
-import { createQuestionGroupService, createQuestionUsingService, getQuestionGroupsService } from "../../services/questionGroupService";
+import { createQuestionGroupService, createQuestionUsingService, getQuestionGroupsService, getQuestionsByGroupIdService } from "../../services/questionGroupService";
 import actionTypes from "./actionTypes";
 
 export const addQuestion = (question) => ({
@@ -72,6 +72,8 @@ export const createQuestionGroupFailed = () => ({
     type: actionTypes.CREATE_QUESTION_GROUP_FAILED,
 })
 
+// =========================================================================================================
+
 export const createQuestionUsing = (data, successCallback = null) => {
     return async (dispatch, getState) => {
         try {
@@ -99,3 +101,28 @@ export const createQuestionUsingFailed = () => ({
     type: actionTypes.CREATE_QUESTION_GROUP_FAILED,
 })
 
+// =========================================================================================================
+
+export const fetchQuestionsByGroupId = (questionGroupId) => {
+    return async (dispatch, getState) => {
+        try {
+            let res = await getQuestionsByGroupIdService(questionGroupId);
+            if (res && res.errCode === 0) {
+                dispatch(fetchQuestionsByGroupIdSuccess(res.data));
+            } else {
+                console.log(res.errMessage);
+                dispatch(fetchQuestionsByGroupIdFailed());
+            }
+        } catch (error) {
+            console.log(error);
+            dispatch(fetchQuestionsByGroupIdFailed());
+        }
+    }
+}
+export const fetchQuestionsByGroupIdSuccess = (dataQuestionGroups) => ({
+    type: actionTypes.FETCH_QUESTIONS_BY_GROUP_ID_SUCCESS,
+    data: dataQuestionGroups
+})
+export const fetchQuestionsByGroupIdFailed = () => ({
+    type: actionTypes.FETCH_QUESTIONS_BY_GROUP_ID_FAILED,
+})

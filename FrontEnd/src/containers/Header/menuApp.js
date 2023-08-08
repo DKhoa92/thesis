@@ -13,6 +13,7 @@ export const adminMenu = [
             { name: 'menu.system.manage-user', link: '/manage-user' },
             { name: 'menu.system.manage-question', link: '/manage-question' },
             { name: 'menu.system.manage-question-group', link: '/manage-question-group' },
+            { name: 'menu.system.exam', link: '/exam' }
         ]
     },
 ];

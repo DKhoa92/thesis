@@ -81,7 +81,8 @@
             },
             "manage-user": "Quản lý người dùng",
             "manage-question": "Quản lý câu hỏi",
-            "manage-question-group": "Quản lý bộ đề"
+            "manage-question-group": "Quản lý bộ đề",
+            "exam": "Thi"
         }
     },
     "allCode": {

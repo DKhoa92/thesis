@@ -81,7 +81,8 @@
             },
             "manage-user": "User manage",
             "manage-question": "Question manage",
-            "manage-question-group": "Question group manage"
+            "manage-question-group": "Question group manage",
+            "exam": "Exam"
         }
     },
     "allCode": {

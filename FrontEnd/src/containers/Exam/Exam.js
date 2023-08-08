@@ -10,9 +10,6 @@ class Exam extends Component {
     constructor(props) {
         super(props);
 
-        // const questionTemplates = {
-        //     T1: 
-        // }
         this.testQuestion = {
             data: JSON.stringify({
                 question: "question",
@@ -24,23 +21,25 @@ class Exam extends Component {
             grade: "grade",
             difficulty: "difficulty"
         };
-
         this.state = {
             questions: [this.testQuestion, this.testQuestion, this.testQuestion, this.testQuestion],
         }
     }
 
     componentDidMount() {
-        this.props.setQuestions(this.state.questions);
+        let { match } = this.props;
+        if (match && match.params) {
+            this.props.fetchQuestionsByGroupId(match.params.questionGroupId);
+        }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.userInfo !== this.props.userInfo) {
+        if (prevProps.questions !== this.props.questions) {
+            console.log(this.props.questions);
             this.setState({
                 questions: this.props.questions,
             });
         };
-
     }
 
     render() {
@@ -62,12 +61,14 @@ const mapStateToProps = state => {
     return {
         isLoggedIn: state.user.isLoggedIn,
         userInfo: state.user.userInfo,
+        questions: state.questionGroup.questions
     };
 };
 
 const mapDispatchToProps = dispatch => {
     return {
         setQuestions: (questions) => dispatch(actions.setQuestions(questions)),
+        fetchQuestionsByGroupId: (questionGroupId) => dispatch(actions.fetchQuestionsByGroupId(questionGroupId))
     };
 };
 
