@@ -102,9 +102,37 @@ let deleteQuestionGroup = (id) => {
     })
 }
 
+let getQuestionsByGroupId = (questionGroupId) => {
+    return new Promise(async (resolve, reject) => {
+        try {
+            let res = {};
+            let questions = [];
+            questions = await db.question_using.findAll({
+                where: { questionGroupId: questionGroupId },
+                include: { model: db.question },
+                raw: true,
+                nest: true,
+            })
+            if (questions.length > 0) {
+                res.errCode = 0;
+                res.errMessage = "Get getQuestionsByGroupId sucessfully";
+                res.data = questions;
+            } else {
+                res.errCode = 1;
+                res.errMessage = "Error while getQuestionsByGroupId on server";
+            }
+            resolve(res);
+        } catch (error) {
+            console.log(error);
+            reject(error);
+        }
+    })
+}
+
 module.exports = {
     getQuestionGroups,
     createQuestionGroup,
     editQuestionGroup,
     deleteQuestionGroup,
+    getQuestionsByGroupId,
 }

@@ -18,8 +18,15 @@ let handleEditQuestionGroup = async (req, res) => {
 }
 
 let handleDeleteQuestionGroup = async (req, res) => {
-    let response = await questionGroupGroupService.deleteQuestionGroup(req.body.id);
+    let response = await questionGroupService.deleteQuestionGroup(req.body.id);
     return res.status(200).json(response)
+}
+
+let handleGetQuestionByGroupId = async (req, res) => {
+    let questionGroupId = req.query.id;
+    let response = await questionGroupService.getQuestionsByGroupId(questionGroupId);
+
+    return res.status(200).json(response);
 }
 
 module.exports = {
@@ -27,4 +34,5 @@ module.exports = {
     handleCreateQuestionGroup,
     handleEditQuestionGroup,
     handleDeleteQuestionGroup,
+    handleGetQuestionByGroupId,
 }
