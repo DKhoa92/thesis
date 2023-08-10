@@ -35,9 +35,12 @@ class Exam extends Component {
 
     componentDidUpdate(prevProps, prevState, snapshot) {
         if (prevProps.questions !== this.props.questions) {
-            console.log(this.props.questions);
+            let questions = [];
+            this.props.questions.forEach(item => {
+                questions.push(JSON.parse(item.question.data))
+            });
             this.setState({
-                questions: this.props.questions,
+                questions: questions,
             });
         };
     }
@@ -48,7 +51,7 @@ class Exam extends Component {
             <div className='exam-background'>
                 <ExamHeader />
                 <div className='exam-container'>
-                    <ExamBody></ExamBody>
+                    <ExamBody questions={questions}></ExamBody>
                 </div>
                 <ExamFooter showExamBtns={true} questionNumber={questions ? questions.length : 0} />
             </div>

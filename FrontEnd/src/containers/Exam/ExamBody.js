@@ -18,7 +18,7 @@ class Exam extends Component {
             type: QUESTION_TYPE.MULTIPLE_CHOICES,
         };
         this.state = {
-            questions: [],
+            questions: this.props.questions ? this.props.questions : this.defaultQuestion,
             currentIdx: 0,
         }
     }
@@ -42,11 +42,11 @@ class Exam extends Component {
             <>
                 {questions && questions.length > 0 &&
                     questions.map((item, index) => {
-                        switch (item.type) {
+                        switch (item.question.type) {
                             case QUESTION_TYPE.MULTIPLE_CHOICES:
                                 return (
                                     <div className={`question ${currentIdx == index ? '' : 'hidden'}`} key={index}>
-                                        <MultipleChoice question={item} />
+                                        <MultipleChoice question={item.question} />
                                     </div>
                                 )
                             default:
