@@ -106,14 +106,14 @@ let getQuestionsByGroupId = (questionGroupId) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};
-            let questions = [];
-            questions = await db.question_using.findAll({
+            let questions = await db.question_using.findAll({
                 where: { questionGroupId: questionGroupId },
-                include: { model: db.question },
+                attributes: [],
+                include: { model: db.question, attributes: ['data', 'type'] },
                 raw: true,
                 nest: true,
             })
-            if (questions.length > 0) {
+            if (questions) {
                 res.errCode = 0;
                 res.errMessage = "Get getQuestionsByGroupId sucessfully";
                 res.data = questions;
