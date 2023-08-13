@@ -234,8 +234,9 @@ class QuestionCreate extends Component {
     }
 
     onEditorReady = (editor, id, hidden = true) => {
-        let toolbar = document.getElementById(id).getElementsByClassName('ck-editor__top')[0] ? document.getElementById(id).getElementsByClassName('ck-editor__top')[0] : null;
-
+        let toolbar = document.getElementById(id) &&
+            (document.getElementById(id).getElementsByClassName('ck-editor__top')[0] ? document.getElementById(id).getElementsByClassName('ck-editor__top')[0] : null);
+        if (!toolbar) return;
         if (hidden) toolbar.classList.add('hidden');
         if (!this.editorList.includes(toolbar)) {
             toolbar.id = id + '-toolbar';
