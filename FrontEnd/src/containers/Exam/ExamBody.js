@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import ExamHeader from './ExamHeader';
 import './ExamBody.scss';
-import { FormattedMessage } from 'react-intl';
 import MultipleChoice from './QuestionTemplates/MultipleChoice';
 import { QUESTION_TYPE } from '../../utils';
-class Exam extends Component {
+class ExamBody extends Component {
     constructor(props) {
         super(props);
 
@@ -18,17 +16,11 @@ class Exam extends Component {
             type: QUESTION_TYPE.MULTIPLE_CHOICES,
         };
         this.state = {
-            questions: this.props.questions ? this.props.questions : this.defaultQuestion,
             currentIdx: 0,
         }
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.questions !== this.props.questions) {
-            this.setState({
-                questions: this.props.questions,
-            });
-        };
         if (prevProps.currentIdx !== this.props.currentIdx) {
             this.setState({
                 currentIdx: this.props.currentIdx,
@@ -37,16 +29,19 @@ class Exam extends Component {
     }
 
     render() {
-        let { questions, currentIdx } = this.state;
+        let { questions } = this.props;
+        let { currentIdx } = this.state;
+        if (!questions) questions = this.defaultQuestion;
+
         return (
             <>
                 {questions && questions.length > 0 &&
                     questions.map((item, index) => {
-                        switch (item.question.type) {
+                        switch (item.type) {
                             case QUESTION_TYPE.MULTIPLE_CHOICES:
                                 return (
                                     <div className={`question ${currentIdx == index ? '' : 'hidden'}`} key={index}>
-                                        <MultipleChoice question={item.question} />
+                                        <MultipleChoice question={item} idx={index} />
                                     </div>
                                 )
                             default:
@@ -56,7 +51,6 @@ class Exam extends Component {
             </>
         );
     }
-
 }
 
 const mapStateToProps = state => {
@@ -71,4 +65,4 @@ const mapDispatchToProps = dispatch => {
     };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Exam);
+export default connect(mapStateToProps, mapDispatchToProps)(ExamBody);

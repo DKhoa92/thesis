@@ -12,8 +12,6 @@ let getHomePage = async (req, res) => {
 }
 
 let getCRUD = async (req, res) => {
-    // let message = await CRUDService.createNewUser()
-    // console.log(message);
     return res.render("crud.ejs");
 }
 
@@ -39,7 +37,6 @@ let postAllCode = async (req, res) => {
         valueEn: "Grade 5",
         valueVi: "Lớp 5",
     }
-    console.log(testobj);
     let message = await CRUDService.createAllCode(testobj);
     return res.send('POST CRUD from Server');
 }

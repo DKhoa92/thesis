@@ -30,7 +30,6 @@ let getQuestionUsings = (id) => {
 
 let createQuestionUsing = (data) => {
     return new Promise(async (resolve, reject) => {
-        console.log("ABCD", data.questionGroupId);
         try {
 
             let res = {};

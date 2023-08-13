@@ -22,7 +22,6 @@ let handleLogin = async (req, res) => {
 
 let handleGoogleLogin = async (req, res) => {
     let email = req.body.email;
-    console.log(email);
     let response = await userService.getUsersByEmail(req.body);
     if (response.errCode != 0)
         response = await userService.createUser(req.body);

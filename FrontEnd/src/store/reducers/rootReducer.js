@@ -10,6 +10,7 @@ import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
 import storage from 'redux-persist/lib/storage';
 import { persistReducer } from 'redux-persist';
 import questionGroupReducer from './questionGroupReducer';
+import answerReducer from './answerReducer';
 
 const persistCommonConfig = {
     storage: storage,
@@ -35,4 +36,5 @@ export default (history) => combineReducers({
     admin: adminReducer,
     exam: examReducer,
     questionGroup: questionGroupReducer,
+    answer: answerReducer,
 })

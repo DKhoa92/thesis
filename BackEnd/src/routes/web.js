@@ -4,6 +4,7 @@ import userController from "../controllers/userController";
 import questionController from "../controllers/questionController";
 import questionGroupController from "../controllers/questionGroupController";
 import questionUsingController from "../controllers/questionUsingController";
+import answerController from "../controllers/answer-controller";
 let router = express.Router();
 
 let initWebRoutes = (app) => {
@@ -37,6 +38,8 @@ let initWebRoutes = (app) => {
     router.get('/api/get-question-using', questionUsingController.handleGetQuestionUsings);
     router.post('/api/edit-question-using', questionUsingController.handleEditQuestionUsing);
     router.delete('/api/delete-question-using', questionUsingController.handleDeleteQuestionUsing);
+
+    router.post('/api/create-answers', answerController.handleCreateMany);
 
     return app.use("/", router);
 }

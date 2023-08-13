@@ -1,6 +1,7 @@
 import { toast } from "react-toastify";
 import { createQuestionGroupService, createQuestionUsingService, getQuestionGroupsService, getQuestionsByGroupIdService } from "../../services/questionGroupService";
 import actionTypes from "./actionTypes";
+import { ModelUtils } from "../../utils";
 
 export const addQuestion = (question) => ({
     type: actionTypes.ADD_QUESTION,
@@ -108,7 +109,8 @@ export const fetchQuestionsByGroupId = (questionGroupId) => {
         try {
             let res = await getQuestionsByGroupIdService(questionGroupId);
             if (res && res.errCode === 0) {
-                dispatch(fetchQuestionsByGroupIdSuccess(res.data));
+                let data = ModelUtils.ConvertDataToMCQuestions(res.data);
+                dispatch(fetchQuestionsByGroupIdSuccess(data));
             } else {
                 console.log(res.errMessage);
                 dispatch(fetchQuestionsByGroupIdFailed());

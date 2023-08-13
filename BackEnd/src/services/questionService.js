@@ -61,7 +61,6 @@ let getQuestionsWithoutAnswer = (id) => {
 let createQuestion = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
             let res = {};
             await db.question.create({
                 data: data.data,

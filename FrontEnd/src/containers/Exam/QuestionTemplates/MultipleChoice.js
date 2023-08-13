@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './MultipleChoice.scss';
-import { FormattedMessage } from 'react-intl';
+import * as actions from '../../../store/actions';
+import { MultipleChoiceAnswerModel } from '../../../models';
+
 class MultipleChoice extends Component {
     constructor(props) {
         super(props);
-        let question, answers;
-        if (props.question && props.question.data) {
-            this.questionData = JSON.parse(props.question.data);
-            question = this.questionData.question;
-            answers = this.questionData.answers
-        }
+
+        let { question, updateReduxAnswer, idx } = props
+        let numberOfQuestion = question.answers.length;
+
         this.state = {
-            question: question ? question : '',
-            answers: answers ? answers : '',
+            choices: []
+        }
+        for (let i = 0; i < numberOfQuestion; i++) {
+            this.state['choices'][i] = false;
         }
 
-        for (let i = 0; i < this.state.answers.length; i++) {
-            this.state[`choice_${i}`] = false;
-        }
+        let answer = new MultipleChoiceAnswerModel(
+            question.id,
+            this.state.choices
+        );
+        updateReduxAnswer(answer, idx);
+    }
+
+    componentDidMount() {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
@@ -26,12 +33,16 @@ class MultipleChoice extends Component {
     }
 
     render() {
-        let { question, answers } = this.state;
+        let { choices } = this.state;
+        let { idx, question } = this.props;
+        let questionContent = question.question;
+        let answers = question.answers;
+
         return (
             <div className='exam-content'>
                 <div className='question-section'>
                     <div className='media'></div>
-                    <div className='text'>{question}
+                    <div className='text'>{questionContent}
                     </div>
                 </div>
                 <div className='answer-section'>
@@ -40,13 +51,13 @@ class MultipleChoice extends Component {
                             return (
                                 <div className={'answer col-auto'} key={index} >
 
-                                    <label htmlFor={`answer_${index}`} >
-                                        <div className={'button' + (this.state[`choice_${index}`] ? ' active' : '')}>
+                                    <label htmlFor={`answer_${idx}_${index}`} >
+                                        <div className={'button' + (choices[index] ? ' active' : '')}>
                                             <div className='answer-text'>{item}</div>
                                         </div>
                                     </label>
-                                    <input id={`answer_${index}`} type='checkbox' checked={this.state[`choice_${index}`]}
-                                        onChange={(event) => { this.onChangeAnswer(event, `choice_${index}`) }}></input>
+                                    <input id={`answer_${idx}_${index}`} type='checkbox' checked={choices[index]}
+                                        onChange={(event) => { this.onChangeAnswer(event, index) }}></input>
                                 </div>)
                         })}
                 </div>
@@ -55,8 +66,15 @@ class MultipleChoice extends Component {
     }
 
     onChangeAnswer(event, id) {
+        let { updateReduxAnswer, question } = this.props;
+
         let newState = { ...this.state };
-        newState[id] = event.target.checked;
+        newState['choices'][id] = event.target.checked;
+        let answer = new MultipleChoiceAnswerModel(
+            question.id,
+            newState.choices
+        );
+        updateReduxAnswer(answer);
         this.setState({
             ...newState
         })
@@ -71,6 +89,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
+        updateReduxAnswer: (answer, idx) => dispatch(actions.updateAnswer(answer, idx)),
     };
 };
 

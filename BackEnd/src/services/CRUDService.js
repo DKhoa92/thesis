@@ -4,7 +4,6 @@ import db from '../models/index';
 let createNewUser = async (data = true) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data.password);
             let hashPassword = await hashUserPassword(data.password);
             await db.user.create({
                 userName: data.userName,

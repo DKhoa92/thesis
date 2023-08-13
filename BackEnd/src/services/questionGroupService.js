@@ -40,7 +40,6 @@ let createQuestionGroup = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
             let res = {};
-            console.log(data);
             let questionGroup = await db.question_group.create({
                 title: data.title,
                 creatorId: data.creatorId,
@@ -109,7 +108,7 @@ let getQuestionsByGroupId = (questionGroupId) => {
             let questions = await db.question_using.findAll({
                 where: { questionGroupId: questionGroupId },
                 attributes: [],
-                include: { model: db.question, attributes: ['data', 'type'] },
+                include: { model: db.question, attributes: ['id', 'data', 'type'] },
                 raw: true,
                 nest: true,
             })

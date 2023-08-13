@@ -6,6 +6,7 @@ import ExamFooter from './ExamFooter';
 import { QUESTION_TYPE } from '../../utils';
 import ExamBody from './ExamBody';
 import * as actions from "../../store/actions";
+
 class Exam extends Component {
     constructor(props) {
         super(props);
@@ -34,24 +35,21 @@ class Exam extends Component {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        if (prevProps.questions !== this.props.questions) {
-            let questions = [];
-            this.props.questions.forEach(item => {
-                questions.push(JSON.parse(item.question.data))
-            });
-            this.setState({
-                questions: questions,
-            });
-        };
+        // if (prevProps.questions !== this.props.questions) {
+        //     this.setState({
+        //         questions: this.props.questions,
+        //     });
+        // };
     }
 
     render() {
-        let { questions } = this.state;
+        let { questions } = this.props;
+
         return (
             <div className='exam-background'>
                 <ExamHeader />
                 <div className='exam-container'>
-                    <ExamBody questions={questions}></ExamBody>
+                    <ExamBody></ExamBody>
                 </div>
                 <ExamFooter showExamBtns={true} questionNumber={questions ? questions.length : 0} />
             </div>

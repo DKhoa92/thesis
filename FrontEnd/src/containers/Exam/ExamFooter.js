@@ -44,6 +44,7 @@ class Exam extends Component {
 
     render() {
         let { currentIdx, showExamBtns, questions } = this.state
+        let { submitAnswers } = this.props
         return (
             <div className='exam-footer-container'>
                 <div className='page col-12'>
@@ -66,7 +67,7 @@ class Exam extends Component {
                     </div>
                     <div className={'right-content col-6 h-100' + ((!showExamBtns) ? " hidden" : "")}>
                         <div className='apply btn btn-primary'><FormattedMessage id='exam.apply' /></div>
-                        <div className='submit btn btn-success'><FormattedMessage id='exam.submit' /></div>
+                        <div className='submit btn btn-success' onClick={submitAnswers}><FormattedMessage id='exam.submit' /></div>
                     </div>
                 </div>
             </div>
@@ -93,6 +94,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         changeQuestion: (index) => dispatch(actions.changeQuestion(index)),
+        submitAnswers: () => dispatch(actions.pushAnswers())
     };
 };
 

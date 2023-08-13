@@ -88,7 +88,6 @@ let getUsersByEmail = (data) => {
                 })
             };
             if (user) {
-                console.log(user);
                 res.errCode = 0;
                 res.errMessage = "Get user sucessfully";
                 res.data = user;
@@ -142,7 +141,6 @@ let getAllCode = (type) => {
 let createUser = (data) => {
     return new Promise(async (resolve, reject) => {
         try {
-            console.log(data);
             let res = {};
             let hashPassword = data.password && await hashUserPassword(data.password);
             await db.user.create({
