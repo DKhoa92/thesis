@@ -8,12 +8,14 @@ import './Navigator.scss';
 class MenuGroup extends Component {
 
     render() {
-        const { name, children } = this.props;
+        const { name, children, onClickShow, onClickHide, isShowing } = this.props;
+        console.log(isShowing);
         return (
-            <li className="menu-group">
+            <li className="menu-group" onClick={onClickShow}>
                 <div className="menu-group-name">
-                    <FormattedMessage id={name} />
+                    {name}
                 </div>
+                <div className={`menu-background ${isShowing ? 'active' : ''}`} onClick={onClickHide}></div>
                 <ul className="menu-list list-unstyled">
                     {children}
                 </ul>
@@ -48,10 +50,12 @@ class Menu extends Component {
                         </div>
                     </Fragment>
                 ) : (
-                        <Link to={link} className="menu-link" onClick={onLinkClick}>
+                    <Link to={link} className="menu-link" onClick={onLinkClick}>
+                        <div className='link-container'>
                             <FormattedMessage id={name} />
-                        </Link>
-                    )}
+                        </div>
+                    </Link>
+                )}
             </li>
         );
     }
@@ -97,7 +101,8 @@ const withRouterInnerRef = (WrappedComponent) => {
 
 class Navigator extends Component {
     state = {
-        expandedMenu: {}
+        expandedMenu: {},
+        isShowing: false
     };
 
     toggle = (groupIndex, menuIndex) => {
@@ -185,7 +190,8 @@ class Navigator extends Component {
     };
 
     render() {
-        const { menus, location, onLinkClick } = this.props;
+        const { menus, location, onLinkClick, text } = this.props;
+        const { isShowing } = this.state;
         return (
             <Fragment>
                 <ul className="navigator-menu list-unstyled">
@@ -193,12 +199,17 @@ class Navigator extends Component {
                         menus.map((group, groupIndex) => {
                             return (
                                 <Fragment key={groupIndex}>
-                                    <MenuGroupWithRouter name={group.name}>
+                                    <MenuGroupWithRouter
+                                        name={text ? text : group.name}
+                                        onClickShow={this.onClickShow}
+                                        onClickHide={this.onClickHide}
+                                        isShowing={isShowing}
+                                    >
                                         {group.menus ? (
                                             group.menus.map((menu, menuIndex) => {
                                                 const isMenuHasSubMenuActive = this.isMenuHasSubMenuActive(location, menu.subMenus, menu.link);
                                                 const isSubMenuOpen = this.state.expandedMenu[groupIndex + '_' + menuIndex] === true;
-                                                return (
+                                                if (isShowing) return (
                                                     <MenuWithRouter
                                                         key={menuIndex}
                                                         active={isMenuHasSubMenuActive}
@@ -208,6 +219,7 @@ class Navigator extends Component {
                                                         isOpen={isSubMenuOpen}
                                                         onClick={() => this.toggle(groupIndex, menuIndex)}
                                                         onLinkClick={onLinkClick}
+
                                                     >
                                                         {menu.subMenus && menu.subMenus.map((subMenu, subMenuIndex) => (
                                                             <SubMenuWithRouter
@@ -227,9 +239,18 @@ class Navigator extends Component {
                             );
                         })
                     }
-                </ul>
-            </Fragment>
+                </ul >
+            </Fragment >
         );
+    }
+
+    onClickShow = () => {
+        this.setState({ ...this.state, isShowing: true })
+    }
+
+    onClickHide = (event) => {
+        this.setState({ ...this.state, isShowing: false })
+        event.stopPropagation();
     }
 }
 

@@ -19,6 +19,7 @@ import ManageQuestion from './System/Admin/ManageQuestion/QuestionManage';
 import CreateQuestionGroup from './System/Admin/ManageQuestionGroup/CreateQuestionGroup';
 import ManageQuestionGroup from './System/Admin/ManageQuestionGroup/ManageQuestionGroup';
 import TableQuestionGroup from './System/Admin/ManageQuestionGroup/TableQuestionGroup';
+import HomePageHeader from './HomePage/HomePageHeader';
 
 class App extends Component {
 
@@ -45,8 +46,16 @@ class App extends Component {
             <Fragment>
                 <Router history={history}>
                     <div className="main-container">
-                        {this.props.isLoggedIn && <Header />}
-
+                        {/* {this.props.isLoggedIn && <HomePageHeader />} */}
+                        <Switch>
+                            <Route path={PATH.HOME} exact component={HomePageHeader} />
+                            <Route path={PATH.HOME_PAGE} component={HomePageHeader} />
+                            <Route path={PATH.MANAGE_USER} component={HomePageHeader} />
+                            <Route path={PATH.MANAGE_QUESTION} component={HomePageHeader} />
+                            <Route path={PATH.CREATE_QUESTION_GROUP} component={HomePageHeader} />
+                            <Route path={PATH.MANAGE_QUESTION_GROUP} component={HomePageHeader} />
+                            <Route path={PATH.TABLE_QUESTION_GROUP} component={HomePageHeader} />
+                        </Switch>
                         <span className="content-container">
                             <Switch>
                                 <Route path={PATH.HOME} exact component={Home} />

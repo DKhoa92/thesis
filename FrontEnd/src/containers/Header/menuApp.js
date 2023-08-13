@@ -1,3 +1,5 @@
+import { PATH } from "../../utils";
+
 export const adminMenu = [
     { //hệ thống
         name: 'menu.system.header', menus: [
@@ -10,10 +12,10 @@ export const adminMenu = [
             //     ]
             // },
             // { name: 'menu.system.system-parameter.header', link: '/system/system-parameter' },
-            { name: 'menu.system.manage-user', link: '/manage-user' },
-            { name: 'menu.system.manage-question', link: '/manage-question' },
-            { name: 'menu.system.manage-question-group', link: '/manage-question-group' },
-            { name: 'menu.system.exam', link: '/exam' }
+            { name: 'menu.system.manage-user', link: `${PATH.MANAGE_USER}` },
+            { name: 'menu.system.manage-question', link: `${PATH.MANAGE_QUESTION}` },
+            { name: 'menu.system.manage-question-group', link: `${PATH.MANAGE_QUESTION_GROUP}` },
+            { name: 'menu.system.exam', link: `${PATH.EXAM}` }
         ]
     },
 ];

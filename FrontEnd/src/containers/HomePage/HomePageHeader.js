@@ -5,8 +5,9 @@ import { FormattedMessage } from 'react-intl';
 import { LANGUAGES } from '../../utils';
 import { changeLanguage } from '../../store/actions';
 import { PATH } from '../../utils';
-import { Redirect } from 'react-router-dom/cjs/react-router-dom';
 import { withRouter } from 'react-router';
+import Navigator from '../../components/Navigator';
+import { adminMenu } from '../Header/menuApp';
 
 class HomePageHeader extends Component {
 
@@ -39,7 +40,8 @@ class HomePageHeader extends Component {
                         </div>
                         <div className={'user-info' + (isLoggedIn ? '' : ' hide')}>
                             <div className='welcome'>{userInfo && userInfo.firstName ? userInfo.firstName : ''}</div>
-                            <div className='btn-setting'><i className="fas fa-bars"></i></div>
+                            <div className='btn-setting'>
+                                <Navigator menus={adminMenu} text={<i className="fas fa-bars"></i>} /></div>
                         </div>
                     </div>
                 </div>
