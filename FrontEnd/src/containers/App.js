@@ -20,6 +20,8 @@ import CreateQuestionGroup from './System/Admin/ManageQuestionGroup/CreateQuesti
 import ManageQuestionGroup from './System/Admin/ManageQuestionGroup/ManageQuestionGroup';
 import TableQuestionGroup from './System/Admin/ManageQuestionGroup/TableQuestionGroup';
 import HomePageHeader from './HomePage/HomePageHeader';
+import Test from './System/Admin/ManageExam/Test';
+import ExamManage from './System/Admin/ManageExam/ExamManage';
 
 class App extends Component {
 
@@ -68,6 +70,8 @@ class App extends Component {
                                 <Route path={PATH.CREATE_QUESTION_GROUP} component={CreateQuestionGroup} />
                                 <Route path={PATH.MANAGE_QUESTION_GROUP} component={ManageQuestionGroup} />
                                 <Route path={PATH.TABLE_QUESTION_GROUP} component={TableQuestionGroup} />
+                                <Route path='/test' component={Test} />
+                                <Route path={PATH.EXAM_MANAGE} component={ExamManage} />
                             </Switch>
                         </span>
 
