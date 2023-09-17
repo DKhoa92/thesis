@@ -53,7 +53,9 @@ class QuestionTable extends Component {
                     </thead>
                     <tbody>
                         {questions && questions.map((item, index) => {
-                            let data = item && item.data ? JSON.parse(item.data) : null;
+                            if (!(item && item.data)) return;
+
+                            let data = JSON.parse(item.data);
                             let correctAnswers = item && item.correctAnswer ? JSON.parse(item.correctAnswer).data : null;
                             let answersData, questionData;
                             if (data) {
