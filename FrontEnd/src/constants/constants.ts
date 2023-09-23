@@ -1,0 +1,1 @@
+export const defaultAvatar = "/images/default-avatar.png"

@@ -1,1 +1,0 @@
-export { MultipleChoiceQuestionModel, MultipleChoiceAnswerModel } from './MultipleChoiceModel';
