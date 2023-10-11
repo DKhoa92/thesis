@@ -65,12 +65,14 @@ class QuestionEdit extends Component {
         }
         if (prevProps.question !== this.props.question) {
             let question = this.props.question;
-            let data = JSON.parse(question.data);
-            let correctChoice = JSON.parse(question.correctAnswer);
+            let data = question.data;
+            console.log(data);
+            let correctChoice = question.correctAnswer;
             if (question) {
                 let newState = { ...this.state }
                 for (let i = 0; i < this.state.choiceNumber; i++) {
                     newState[`choice_${i}`] = correctChoice.data[i];
+                    console.log(data.answers[i].__html);
                     newState[`answer_${i}`] = data.answers[i];
                 }
                 newState.type = question.type;

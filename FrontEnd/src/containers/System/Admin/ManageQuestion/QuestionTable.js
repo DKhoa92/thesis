@@ -55,8 +55,8 @@ class QuestionTable extends Component {
                         {questions && questions.map((item, index) => {
                             if (!(item && item.data)) return;
 
-                            let data = JSON.parse(item.data);
-                            let correctAnswers = item && item.correctAnswer ? JSON.parse(item.correctAnswer).data : null;
+                            let data = item.data;
+                            let correctAnswers = item && item.correctAnswer ? item.correctAnswer.data : null;
                             let answersData, questionData;
                             if (data) {
                                 questionData = data.question ? data.question : '';

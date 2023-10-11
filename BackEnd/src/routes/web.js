@@ -6,6 +6,13 @@ import questionGroupController from "../controllers/questionGroupController";
 import questionUsingController from "../controllers/questionUsingController";
 import answerController from "../controllers/answer-controller";
 let router = express.Router();
+import InputInvalidError from "../errors/inputInvalid";
+import errorHandlingMiddleware from "../middlewares/errorHandlingMiddleware";
+import authMiddleware from "../middlewares/authMiddleware";
+
+import authRoute from "../controllers/v1/authController";
+import userRoute from "../controllers/v1/userController";
+
 
 let initWebRoutes = (app) => {
     router.get('/', homeController.getHomePage);
@@ -41,7 +48,16 @@ let initWebRoutes = (app) => {
 
     router.post('/api/create-answers', answerController.handleCreateMany);
 
-    return app.use("/", router);
+    app.use("/", router);
+
+    app.use('/api/v1/auth', authRoute);
+    app.use('/api/v1/users', authMiddleware, userRoute);
+
+    /**
+     * Xử lý các lỗi tập trung
+     * Lưu ý: Middleware này phải luôn được đặt sau cùng để đảm bảo bắt được các error từ các controller
+     * */
+    app.use(errorHandlingMiddleware);
 }
 
 module.exports = initWebRoutes;
