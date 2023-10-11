@@ -65,8 +65,7 @@ let getUserInfoById = (userId) => {
 let hashUserPassword = async (password) => {
     return new Promise(async (resolve, reject) => {
         try {
-            let saltRounds = 10;
-            bcrypt.hash(password, saltRounds).then(function (hash) {
+            bcrypt.hash(password, parseInt(process.env.BCRYPT_PASSWORD_SALT)).then(function (hash) {
                 resolve(hash);
             });
         } catch (e) {
