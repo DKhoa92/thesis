@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2023 at 04:13 PM
+-- Generation Time: Sep 23, 2023 at 12:45 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -175,16 +175,9 @@ CREATE TABLE `exam_participations` (
 
 CREATE TABLE `questions` (
   `id` int(11) NOT NULL,
-  `data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`data`)),
-  `correctAnswer` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`correctAnswer`)),
-  `type` varchar(255) DEFAULT NULL,
-  `subject` varchar(255) DEFAULT NULL,
-  `grade` varchar(255) DEFAULT NULL,
-  `score` int(11) DEFAULT NULL,
-  `difficulty` varchar(255) DEFAULT NULL,
-  `media` blob DEFAULT NULL,
-  `creatorId` int(11) DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `content` varchar(255) DEFAULT NULL,
+  `mediaLinks` varchar(255) DEFAULT NULL,
+  `isCorrect` tinyint(1) DEFAULT NULL,
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -197,11 +190,11 @@ CREATE TABLE `questions` (
 
 CREATE TABLE `question_groups` (
   `id` int(11) NOT NULL,
-  `name` varchar(255) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
   `creatorId` int(11) DEFAULT NULL,
   `questionSubmissionId` int(11) DEFAULT NULL,
   `approvedDate` datetime DEFAULT NULL,
-  `status` varchar(255) DEFAULT NULL,
+  `status` varchar(255) DEFAULT 'S1',
   `createdAt` datetime NOT NULL,
   `updatedAt` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -269,6 +262,7 @@ CREATE TABLE `sequelizemeta` (
 
 INSERT INTO `sequelizemeta` (`name`) VALUES
 ('migration-create-all_code.js'),
+('migration-create-answer.js'),
 ('migration-create-class_distribution.js'),
 ('migration-create-class_room.js'),
 ('migration-create-exam_answer.js'),
