@@ -1,6 +1,7 @@
 import questionService from "../services/questionService";
+import {ne} from "@faker-js/faker";
 
-let handleGetQuestions = async (req, res) => {
+let handleGetQuestions = async (req, res, next) => {
     let response;
     let id = req.query.id != 'undefined' ? [req.query.id] : null;
     if (req.query.hasAnswer)
