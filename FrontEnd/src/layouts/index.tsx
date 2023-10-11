@@ -8,7 +8,6 @@ import Breadcrumb from "./Breadcrumb";
 import { selectAuth, getMyProfileAsync } from "store/auth/authSlice";
 import BtnScrollToTop from "./BtnScrollToTop";
 import useResponsive from "hooks/useResponsive";
-import { initFirebaseAppAsync } from "store/app/app.slice";
 import Loading from "components/Loading";
 
 const { Content } = Layout;
@@ -39,12 +38,6 @@ const DefaultLayout = () => {
   useEffect(() => {
     if (auth) {
       dispatch(getMyProfileAsync());
-      dispatch(initFirebaseAppAsync());
-      // Modal.info({
-      //   title: translate("Allow messages sound"),
-      //   content: translate("Please press OK"),
-      //   maskClosable: true,
-      // });
     }
   }, [auth, dispatch]);
 

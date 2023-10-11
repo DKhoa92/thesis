@@ -24,6 +24,4 @@ export const { setLoadingPage } =
 
 export const selectLoadingPage = (state: RootState) => state.app.loadingPage;
 
-export const initFirebaseAppAsync = createAction("app/initFirebaseAppAsync");
-
 export default appSlice.reducer;

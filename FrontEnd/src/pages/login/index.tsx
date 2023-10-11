@@ -85,7 +85,7 @@ export default function Login() {
                 className="md:h-11"
                 onBlur={() => validateField("username")}
               />
-              <p className="text-red-500">{errors.username} /</p>
+              <span className="text-red-500">{errors.username}</span>
             </div>
             <div className="mb-3 md:mb-5">
               <Input.Password
@@ -99,7 +99,7 @@ export default function Login() {
                 onChange={handleChange}
                 onBlur={() => validateField("password")}
               />
-              <p className="text-red-500">{errors.password} /</p>
+              <span className="text-red-500">{errors.password}</span>
             </div>
             <Row>
               <Button
