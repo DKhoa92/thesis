@@ -28,12 +28,14 @@ export class AuthService {
       sub: user.userName,
       userName: user.userName,
       email: user.email,
+      avatar: user.avatar,
       firstName: user.firstName,
       lastName: user.lastName,
       roles: user.roles.map((role) => role.code as RoleEnum),
     };
 
     return {
+      authInfo,
       accessToken: await this.jwtService.signAsync(authInfo),
     };
   }

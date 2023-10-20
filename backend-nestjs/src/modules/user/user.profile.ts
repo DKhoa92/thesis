@@ -1,8 +1,8 @@
 import { AutomapperProfile, InjectMapper } from '@automapper/nestjs';
 import { createMap, Mapper } from '@automapper/core';
 import { User } from './user.entity';
-import { UserRspDto } from './user-rsp.dto';
 import { Injectable } from '@nestjs/common';
+import { UserRspDto } from './user.dto';
 
 @Injectable()
 export class UserProfile extends AutomapperProfile {

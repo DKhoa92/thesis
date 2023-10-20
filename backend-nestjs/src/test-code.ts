@@ -1,3 +1,9 @@
-import { range } from 'lodash';
+import { createAvatar } from '@dicebear/core';
+import { lorelei } from '@dicebear/collection';
 
-console.log(range(10, 5, -1));
+const avatar = createAvatar(lorelei, {
+  seed: 'John Doe',
+});
+
+const svg = avatar.toDataUri();
+console.log(svg);
