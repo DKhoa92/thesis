@@ -1,12 +1,10 @@
 import { DataSource, DataSourceOptions } from 'typeorm';
 import { config } from 'dotenv';
 import { resolve } from 'path';
-import { SeederOptions } from 'typeorm-extension';
-import { MainSeeder } from './seeding/seeders/main-seeder';
 
 config({ path: resolve(__dirname, '../../.env') });
 
-const options: DataSourceOptions & SeederOptions = {
+const options: DataSourceOptions = {
   type: 'mysql',
   host: process.env.DB_HOST,
   port: Number(process.env.DB_PORT),
@@ -16,9 +14,6 @@ const options: DataSourceOptions & SeederOptions = {
   entities: ['src/**/*.entity.ts'],
   migrations: ['src/database/migrations/*.ts'],
   migrationsTableName: 'typeorm_migrations',
-  seeds: [MainSeeder],
-  seedTableName: 'typeorm_seeds',
-  // factories: ['./seeding/factories/**/*{.ts,.js}'],
   extra: {
     charset: 'utf8mb4',
   },

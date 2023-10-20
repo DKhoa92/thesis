@@ -20,24 +20,16 @@ import { Client } from 'minio';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AppConfig, Config, MediaConfig } from '../../config/environment-variables';
 import { ConfigService } from '@nestjs/config';
-import { FileDto, FolderDto, FolderOrFileDto } from './media.type';
 import { FileNameValidator } from '../base/validator/file-name.validator';
 import { BucketItemWithMetadata } from 'minio/src/internal/type';
-import { MediaUploadReqDto } from './media-upload-req.dto';
-import {
-  ApiExtraModels,
-  ApiOkResponse,
-  ApiOperation,
-  ApiQuery,
-  ApiTags,
-  getSchemaPath,
-} from '@nestjs/swagger';
+import { ApiBody, ApiConsumes, ApiOperation, ApiQuery, ApiTags } from '@nestjs/swagger';
+import { SwaggerControllerTag } from '../base/swagger.constant';
+import { FileDto, FolderOrFileDto, MediaUploadReqDto } from './media.dto';
 
 const BASE_CONTROLLER_PATH = 'api/v1/medias';
 const UPLOAD_PATH = 'upload';
 
-@ApiTags('Medias')
-@ApiExtraModels(FolderDto, FileDto)
+@ApiTags(SwaggerControllerTag.MEDIAS.tag)
 @Controller(BASE_CONTROLLER_PATH)
 export class MediaController {
   private readonly appCfg: AppConfig;
@@ -58,24 +50,15 @@ export class MediaController {
   @ApiOperation({ summary: 'Danh sách các folder và file đã upload' })
   @ApiQuery({
     name: 'prefixPath',
-    description: 'Dùng để chỉ định prefix path (đường dẫn thư mục) muốn lấy',
+    required: false,
+    description: 'Dùng để chỉ định prefix path (đường dẫn thư mục) muốn lấy. Mặc định là "/"',
     example: '"foo/bar/" để lấy danh sách tất cả thư mục và file bên trong "foo/bar/"',
-  })
-  @ApiOkResponse({
-    description: 'List of folders and files',
-    schema: {
-      type: 'array',
-      items: {
-        oneOf: [{ $ref: getSchemaPath(FolderDto) }, { $ref: getSchemaPath(FileDto) }],
-      },
-    },
   })
   @Get('/')
   async list(
-    @Req() req: Request,
     @Query('prefixPath')
     prefixPath: string = '',
-  ): Promise<Array<FolderOrFileDto>> {
+  ): Promise<FolderOrFileDto[]> {
     const stream = this.minioClient.extensions.listObjectsV2WithMetadata(
       this.bucketName,
       prefixPath,
@@ -89,23 +72,23 @@ export class MediaController {
     });
 
     const items = await promise;
-    console.log(items);
 
     return items.map((item) => {
-      if (item.prefix) {
-        return { prefix: item.prefix } satisfies FolderDto;
-      } else {
-        return {
-          etag: item.etag,
-          versionId: null,
-          fileName: item.name.split('/').pop(),
-          prefixPath,
-          byteSize: item.size,
-          mimeType: item.metadata['content-type'],
-          link: this.getLinkFromObjectName(item.name),
-          lastModifiedAt: item.lastModified,
-        } satisfies FileDto;
-      }
+      return {
+        folder: item.prefix ? { prefix: item.prefix } : null,
+        file: item.prefix
+          ? null
+          : {
+              etag: item.etag,
+              versionId: null,
+              fileName: item.name.split('/').pop(),
+              prefixPath,
+              byteSize: item.size,
+              mimeType: item.metadata['content-type'],
+              link: this.getLinkFromObjectName(item.name),
+              lastModifiedAt: item.lastModified,
+            },
+      } satisfies FolderOrFileDto;
     });
   }
 
@@ -130,10 +113,22 @@ export class MediaController {
     summary: 'Upload media',
     description: 'Gọi API này để upload media lên server',
   })
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        prefixPath: { type: 'string', description: 'Đường dẫn thư mục upload file' },
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
   @Post(UPLOAD_PATH)
   @UseInterceptors(FileInterceptor('file'))
   async uploadFile(
-    @Req() req: Request,
     @Body() dto: MediaUploadReqDto,
     @UploadedFile(
       new ParseFilePipe({

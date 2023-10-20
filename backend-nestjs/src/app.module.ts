@@ -4,7 +4,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import env, { Config, DatabaseConfig } from './config/environment-variables';
-import { AllCodeModule } from './modules/all-code/all-code.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { UserModule } from './modules/user/user.module';
 import { AutomapperModule } from '@automapper/nestjs';
@@ -45,7 +44,6 @@ import { UserRoleModule } from './modules/user-role/user-role.module';
     AutomapperModule.forRoot({
       strategyInitializer: classes(),
     }),
-    AllCodeModule,
     UserModule,
     AuthModule,
     SchoolYearModule,

@@ -65,22 +65,29 @@ export class CreateUsers1697340574853 implements MigrationInterface {
           {
             name: 'birthDate',
             type: 'date',
-            isNullable: false,
+            isNullable: true,
             comment: 'The birth date',
           },
           {
             name: 'phoneNumber',
             type: 'varchar',
             length: '100',
-            isNullable: false,
+            isNullable: true,
             comment: 'The phone number',
           },
           {
             name: 'address',
             type: 'varchar',
             length: '250',
-            isNullable: false,
+            isNullable: true,
             comment: 'The address',
+          },
+          {
+            name: 'avatar',
+            type: 'varchar',
+            length: '1000',
+            isNullable: true,
+            comment: 'The avatar url',
           },
           {
             name: 'createdAt',

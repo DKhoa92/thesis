@@ -1,13 +1,7 @@
 import { Body, Controller, Get, Post, Request } from '@nestjs/common';
 import { AuthService } from './auth.service';
-import {
-  ApiExtraModels,
-  ApiOkResponse,
-  ApiOperation,
-  ApiTags,
-  getSchemaPath,
-} from '@nestjs/swagger';
-import { JwtPayload, LoginReqDto } from './auth.type';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
+import { JwtPayload, LoginReqDto, LoginRspDto } from './auth.type';
 import { MustAuthAndHasAnyRoleIn } from './auth.decorator';
 import { SwaggerControllerTag } from '../base/swagger.constant';
 
@@ -18,20 +12,14 @@ export class AuthController {
 
   @ApiOperation({ summary: 'Đăng nhập', description: 'Đăng nhập để lấy token' })
   @Post('/login')
-  login(@Body() dto: LoginReqDto): any {
+  login(@Body() dto: LoginReqDto): Promise<LoginRspDto> {
     return this.service.login(dto.username, dto.password);
   }
 
   @MustAuthAndHasAnyRoleIn()
-  @ApiExtraModels(JwtPayload)
   @ApiOperation({ summary: 'Lấy thông tin người dùng đang đăng nhập' })
-  @ApiOkResponse({
-    schema: {
-      $ref: getSchemaPath(JwtPayload),
-    },
-  })
   @Get('/info')
-  info(@Request() req): Promise<JwtPayload> {
+  info(@Request() req: Request & { authInfo: JwtPayload }): JwtPayload {
     return req.authInfo;
   }
 }
