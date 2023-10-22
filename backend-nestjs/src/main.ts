@@ -23,11 +23,14 @@ async function bootstrap() {
       transform: true,
     }),
   );
+  app.enableCors();
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Online Exam API')
     .setDescription('The Online Exam API')
     .setVersion('v1.0')
+    .addServer('http://localhost:8080', 'Local server')
+    .addServer('https://api.bkthesis.site', 'Dev server')
     .addBearerAuth()
     .addTag(SCT.AUTH.tag, SCT.AUTH.description)
     .addTag(SCT.MEDIAS.tag, SCT.MEDIAS.description)

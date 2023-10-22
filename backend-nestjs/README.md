@@ -17,7 +17,7 @@ FLUSH PRIVILEGES;
 
 ### Cài các thư viện cần thiết
 
-Chạy lệnh `npm install` để tải về các thư viện JS
+Chạy lệnh `npm install --legacy-peer-deps` để tải về các thư viện JS
 
 ### Chạy migrate database (tạo các bảng trong cơ sở dữ liệu)
 
