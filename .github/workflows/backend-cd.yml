@@ -1,9 +1,11 @@
-name: Backend CD
+name: Trigger Build And Deploy Backend
 
 on:
   push:
     branches:
       - backend
+    paths:
+      - backend-nestjs/**
 
 jobs:
   say-hello:
