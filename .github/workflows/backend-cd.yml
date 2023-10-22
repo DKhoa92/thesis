@@ -4,8 +4,8 @@ on:
   push:
     branches:
       - backend
-    paths:
-      - backend-nestjs/**
+#    paths:
+#      - backend-nestjs/**
 
 jobs:
   say-hello:
