@@ -15,7 +15,6 @@ export class AppController {
   @Get()
   getHello(): string {
     const appConfig = this.configService.get<AppConfig>('app');
-    console.log(appConfig.host);
     return this.appService.getAppInfo();
   }
 }

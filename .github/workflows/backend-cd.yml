@@ -3,7 +3,7 @@ name: Backend CD
 on:
   push:
     branches:
-      - backend
+      - main
 
 jobs:
   say-hello:
