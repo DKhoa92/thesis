@@ -4,8 +4,9 @@ on:
   push:
     branches:
       - backend
-#    paths:
-#      - backend-nestjs/**
+    paths:
+      - 'backend-nestjs/**'
+  workflow_dispatch:
 
 jobs:
   say-hello:
