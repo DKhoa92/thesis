@@ -9,7 +9,21 @@ on:
   workflow_dispatch:
 
 jobs:
-  say-hello:
+  deploy:
     runs-on: ubuntu-latest
     steps:
-      - run: echo "Hello World"
+      - name: Executing remote ssh commands
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: 202.92.4.131
+          username: root
+          password: pG5s@OItYwm*
+          port: 24700
+          script: |
+            cd thesis/backend-nestjs/
+            pwd
+            git checkout backend
+            git pull
+            docker compose build --build-arg GIT_BRANCH=$(git rev-parse --abbrev-ref HEAD) --build-arg GIT_COMMIT=$(git rev-parse --short HEAD)
+            docker compose up -d --remove-orphans
+            docker image prune -f

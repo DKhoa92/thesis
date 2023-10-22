@@ -1,7 +1,13 @@
 export interface AppConfig {
+  name: string;
   protocol: string;
   host: string;
   port: number;
+}
+
+export interface GitConfig {
+  branch: string;
+  commit: string;
 }
 
 export interface DatabaseConfig {
@@ -35,6 +41,7 @@ export interface EncryptConfig {
 
 export interface Config {
   app: AppConfig;
+  git: GitConfig;
   database: DatabaseConfig;
   minio: MinioConfig;
   media: MediaConfig;
@@ -45,9 +52,14 @@ export interface Config {
 export default () =>
   ({
     app: {
+      name: process.env.APP_NAME,
       protocol: process.env.APP_PROTOCOL || 'http',
       host: process.env.APP_HOST || 'localhost',
       port: +process.env.APP_PORT || 3000,
+    },
+    git: {
+      branch: process.env.GIT_BRANCH,
+      commit: process.env.GIT_COMMIT,
     },
     database: {
       host: process.env.DB_HOST || 'localhost',

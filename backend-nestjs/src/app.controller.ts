@@ -9,12 +9,10 @@ import { ApiTags } from '@nestjs/swagger';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly configService: ConfigService<Config>,
   ) {}
 
   @Get()
   getHello(): string {
-    const appConfig = this.configService.get<AppConfig>('app');
     return this.appService.getAppInfo();
   }
 }

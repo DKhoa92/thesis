@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 
 services:
 
@@ -28,19 +28,28 @@ services:
       MINIO_HTTP_TRACE: /dev/stdout
     command: server --console-address ":9001" /data
 
-  online-exam-api:
-    hostname: online-exam-api
-    image: online-exam-api
-    restart: always
+  backend-app:
+    hostname: backend-app
+    build:
+      context: ./backend-nestjs
+      dockerfile: Dockerfile
+    image: backend-app:latest
+    environment:
+      - DB_HOST=mysql
+      - DB_PORT=3306
+      - MINIO_HOST=minio
+      - MINIO_PORT=9000
     ports:
       - '8080:8080'
-    volumes:
-      - ./docker/online-exam-api/.env:/usr/src/app/.env
+    depends_on:
+      - mysql
+      - minio
+    # volumes:
+    #   - ./docker/backend-app/.env:/usr/src/app/.env
 
   nginx:
     hostname: nginx
     image: nginx:alpine3.18-slim
-    restart: always
     ports:
       - '80:80'
       - '443:443'
@@ -48,13 +57,6 @@ services:
       - ./docker/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./docker/certbot/www:/var/www/certbot/:ro
       - ./docker/certbot/conf/:/etc/nginx/ssl/:ro
-
-  certbot:
-    image: certbot/certbot:latest
-    volumes:
-      - ./docker/certbot/www/:/var/www/certbot/:rw
-      - ./docker/certbot/conf/:/etc/letsencrypt/:rw
-    command: certonly --webroot -w /var/www/certbot --force-renewal --email admin@bkthesis.site -d bkthesis.site -d www.bkthesis.site -d api.bkthesis.site --agree-tos
 
 volumes:
   mysql-data:
