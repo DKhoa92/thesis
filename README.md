@@ -23,7 +23,7 @@
 
 * nginx:
   * File cấu hình ở `docker/nginx/nginx.conf`.
-  * Hiện tại đã cấu hình nginx trỏ sub domain `api.bkthesis.site` vế backend app.
+  * Hiện tại đã cấu hình nginx trỏ sub domain `api.bkthesis.site` về backend app.
   * Frontend có thể cấu hình trỏ sub domain `www.bkthesis.site` về frontend app.
 
 ## Backend
