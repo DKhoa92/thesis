@@ -1,29 +1,25 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
-import { AutoMap } from '@automapper/classes';
+import { TrackingTimeEntity } from '../base/entities/tracking-time.entity';
 
 @Entity('roles')
-export class Role {
-  @PrimaryGeneratedColumn()
-  @AutoMap()
-  id: number;
+export class Role extends TrackingTimeEntity {
+    /**
+     * Mã
+     * @example 'ADMIN'
+     */
+    @Column()
+    code: string;
 
-  @Column()
-  @AutoMap()
-  code: string;
+    /**
+     * Tên hiển thị
+     * @example 'Quản trị viên'
+     */
+    @Column()
+    title: string;
 
-  @Column()
-  @AutoMap()
-  title: string;
-
-  @Column()
-  @AutoMap()
-  description: string;
-
-  @Column()
-  @AutoMap()
-  createdAt: Date;
-
-  @Column()
-  @AutoMap()
-  lastUpdatedAt: Date;
+    /**
+     * Mô tả
+     */
+    @Column()
+    description: string;
 }

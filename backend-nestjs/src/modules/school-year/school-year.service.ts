@@ -5,7 +5,7 @@ import { TypeOrmCrudService } from '@dataui/crud-typeorm';
 
 @Injectable()
 export class SchoolYearService extends TypeOrmCrudService<SchoolYear> {
-  constructor(@InjectRepository(SchoolYear) repo) {
-    super(repo);
-  }
+    constructor(@InjectRepository(SchoolYear) repo) {
+        super(repo);
+    }
 }

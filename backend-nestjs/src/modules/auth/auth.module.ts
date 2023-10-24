@@ -7,25 +7,26 @@ import { Config, JwtConfig } from '../../config/environment-variables';
 import { UserModule } from '../user/user.module';
 
 @Module({
-  imports: [
-    UserModule,
-    JwtModule.registerAsync({
-      imports: [ConfigModule],
-      inject: [ConfigService],
-      useFactory: (configService: ConfigService<Config>) => {
-        const jwtCfg = configService.get<JwtConfig>('jwt');
-        return {
-          global: true,
-          secret: jwtCfg.secret,
-          signOptions: {
-            algorithm: 'HS256',
-            expiresIn: `${jwtCfg.expireInSeconds}s`,
-          },
-        };
-      },
-    }),
-  ],
-  controllers: [AuthController],
-  providers: [AuthService],
+    imports: [
+        UserModule,
+        JwtModule.registerAsync({
+            imports: [ConfigModule],
+            inject: [ConfigService],
+            useFactory: (configService: ConfigService<Config>) => {
+                const jwtCfg = configService.get<JwtConfig>('jwt');
+                return {
+                    global: true,
+                    secret: jwtCfg.secret,
+                    signOptions: {
+                        algorithm: 'HS256',
+                        expiresIn: `${jwtCfg.expireInSeconds}s`,
+                    },
+                };
+            },
+        }),
+    ],
+    controllers: [AuthController],
+    providers: [AuthService],
+    exports: [AuthService, JwtModule],
 })
 export class AuthModule {}
