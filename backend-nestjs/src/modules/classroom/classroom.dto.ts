@@ -36,4 +36,13 @@ export class ClassroomRspDto extends PickType(Classroom, [
     lastUpdatedBy: UserShortRspDto;
 }
 
-export class ClassroomShortRspDto extends PickType(Classroom, ['id', 'section'] as const) {}
+export class ClassroomShortRspDto extends PickType(Classroom, ['id', 'section'] as const) {
+    static fields(): string[] {
+        return ['id', 'section'];
+    }
+
+    /**
+     * Bậc học
+     */
+    grade: GradeShortRspDto;
+}

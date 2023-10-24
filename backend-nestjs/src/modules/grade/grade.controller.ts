@@ -20,12 +20,6 @@ import { GradeRspDto } from './grade.dto';
     },
     query: {
         sort: [{ field: 'id', order: 'ASC' }],
-        join: {
-            duration: {
-                eager: true,
-                allow: ['id', 'code', 'title'],
-            },
-        },
     },
 })
 @ApiTags(SwaggerControllerTag.GRADES.tag)

@@ -19,6 +19,7 @@ import { SubjectModule } from './modules/subject/subject.module';
 import { SchoolYearModule } from './modules/school-year/school-year.module';
 import { SemesterModule } from './modules/semester/semester.module';
 import { ClassroomModule } from './modules/classroom/classroom.module';
+import { ClassroomStudentModule } from './modules/classroom-student/classroom-student.module';
 
 @Module({
     imports: [
@@ -60,6 +61,7 @@ import { ClassroomModule } from './modules/classroom/classroom.module';
         SchoolYearModule,
         SemesterModule,
         ClassroomModule,
+        ClassroomStudentModule,
     ],
     controllers: [AppController],
     providers: [AppService],

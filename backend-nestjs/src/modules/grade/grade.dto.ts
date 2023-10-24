@@ -8,12 +8,7 @@ export class GradeRspDto extends PickType(Grade, [
     'title',
     'createdAt',
     'lastUpdatedAt',
-] as const) {
-    /**
-     * Thời lượng
-     */
-    duration: DurationShortRspDto;
-}
+] as const) {}
 
 export class GradeShortRspDto extends PickType(Grade, ['id', 'code', 'title'] as const) {
     static fields(): string[] {
